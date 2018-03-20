@@ -6,9 +6,9 @@
 out
 
 */bin/
-*/target/
 
 # Eclipse Project files
+/target/
 .classpath
 .project
-.settings/
+/.settings/
