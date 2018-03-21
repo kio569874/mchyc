@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<configuration>
+	<!-- ch.qos.logback.core.ConsoleAppender 控制台输出 -->
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>[%-5level] %d{HH:mm:ss.SSS} [%thread] %logger{36} - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+
+	<!-- ch.qos.logback.core.rolling.RollingFileAppender 文件日志输出 -->
+	<appender name="outFile"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<Encoding>UTF-8</Encoding>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>logs/xiandaojia.out.%d{yyyy-MM-dd}.log
+			</FileNamePattern>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{80} -
+				%msg%n
+			</pattern>
+		</layout>
+	</appender>
+
+	<!-- 异步输出，异步的log片段必须在同步段后面，否则不起作用 -->
+	<appender name="asyncOutFile" class="ch.qos.logback.classic.AsyncAppender">
+		<discardingThreshold>0</discardingThreshold>
+		<appender-ref ref="outFile" />
+	</appender>
+
+	<appender name="errFile"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<Encoding>UTF-8</Encoding>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>logs/xiandaojia.err.%d{yyyy-MM-dd}.log
+			</FileNamePattern>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{80} -
+				%msg%n
+			</pattern>
+		</layout>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>WARN</level>
+		</filter>
+	</appender>
+
+	<logger name="com.xiandaojia.controller" level="INFO" addtivity="true">
+		<appender-ref ref="asyncOutFile" />
+		<appender-ref ref="errFile" />
+	</logger>
+
+	<!-- <logger name="org.fone.ctf.governor"> <level value="DEBUG"/> </logger> -->
+
+	<logger name="com.xiandaojia" level="DEBUG" addtivity="true">
+	</logger>
+
+	<!-- 日志级别 -->
+	<root>
+		<!-- 定义了ERROR和INFO级别的日志，分别在FILE文件和控制台输出 -->
+		<level value="error" />
+		<level value="info" />
+		<level value="debug" />
+		<appender-ref ref="console" />
+	</root>
+</configuration>   
