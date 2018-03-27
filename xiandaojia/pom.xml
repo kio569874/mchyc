@@ -21,6 +21,7 @@
 		<alipaysdkjava.version>1.0.0</alipaysdkjava.version>
 		<javaee-api.version>7.0</javaee-api.version>
 		<junit.version>4.11</junit.version>
+		<yunpian.version>1.0.0</yunpian.version>
 		<!-- log4j日志文件管理包版本  -->
 	</properties>
 	<dependencies>
@@ -122,6 +123,13 @@
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
 			<version>${fastjson.version}</version>
+		</dependency>
+		
+		<!-- 云片平台短信验证码实现 -->
+		<dependency>
+			<groupId>com.yunpian</groupId>
+			<artifactId>yunpiansmssdk</artifactId>
+			<version>${yunpian.version}</version>
 		</dependency>
 
 		<!-- 支付宝支付 start 
