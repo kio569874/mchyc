@@ -1,5 +1,5 @@
 package com.xiandaojia.service;
 
-public interface AService {
+public interface BaseService {
 
 }

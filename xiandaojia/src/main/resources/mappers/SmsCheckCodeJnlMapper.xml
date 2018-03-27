@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xiandaojia.mapper.sms.SmsCheckCodeJnlMapper" >
+  <resultMap id="BaseResultMap" type="com.xiandaojia.common.domain.SmsCheckCodeJnl" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="phone_no" property="phoneNo" jdbcType="VARCHAR" />
+    <result column="check_code" property="checkCode" jdbcType="VARCHAR" />
+    <result column="sms_token" property="smsToken" jdbcType="VARCHAR" />
+    <result column="checkcode_type" property="checkcodeType" jdbcType="CHAR" />
+    <result column="app_key" property="appKey" jdbcType="VARCHAR" />
+    <result column="valid_duration" property="validDuration" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="check_result" property="checkResult" jdbcType="CHAR" />
+    <result column="check_error_num" property="checkErrorNum" jdbcType="INTEGER" />
+    <result column="check_pass_time" property="checkPassTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, phone_no, check_code, sms_token, checkcode_type, app_key, valid_duration, create_time, 
+    check_result, check_error_num, check_pass_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_sms_checkcode_jnl
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_sms_checkcode_jnl
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.xiandaojia.common.domain.SmsCheckCodeJnl" >
+    insert into t_sms_checkcode_jnl (id, phone_no, check_code, 
+      sms_token, checkcode_type, app_key, 
+      valid_duration, create_time, check_result, 
+      check_error_num, check_pass_time, update_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{phoneNo,jdbcType=VARCHAR}, #{checkCode,jdbcType=VARCHAR}, 
+      #{smsToken,jdbcType=VARCHAR}, #{checkcodeType,jdbcType=CHAR}, #{appKey,jdbcType=VARCHAR}, 
+      #{validDuration,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{checkResult,jdbcType=CHAR}, 
+      #{checkErrorNum,jdbcType=INTEGER}, #{checkPassTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xiandaojia.common.domain.SmsCheckCodeJnl" >
+    insert into t_sms_checkcode_jnl
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="phoneNo != null" >
+        phone_no,
+      </if>
+      <if test="checkCode != null" >
+        check_code,
+      </if>
+      <if test="smsToken != null" >
+        sms_token,
+      </if>
+      <if test="checkcodeType != null" >
+        checkcode_type,
+      </if>
+      <if test="appKey != null" >
+        app_key,
+      </if>
+      <if test="validDuration != null" >
+        valid_duration,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="checkResult != null" >
+        check_result,
+      </if>
+      <if test="checkErrorNum != null" >
+        check_error_num,
+      </if>
+      <if test="checkPassTime != null" >
+        check_pass_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="phoneNo != null" >
+        #{phoneNo,jdbcType=VARCHAR},
+      </if>
+      <if test="checkCode != null" >
+        #{checkCode,jdbcType=VARCHAR},
+      </if>
+      <if test="smsToken != null" >
+        #{smsToken,jdbcType=VARCHAR},
+      </if>
+      <if test="checkcodeType != null" >
+        #{checkcodeType,jdbcType=CHAR},
+      </if>
+      <if test="appKey != null" >
+        #{appKey,jdbcType=VARCHAR},
+      </if>
+      <if test="validDuration != null" >
+        #{validDuration,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkResult != null" >
+        #{checkResult,jdbcType=CHAR},
+      </if>
+      <if test="checkErrorNum != null" >
+        #{checkErrorNum,jdbcType=INTEGER},
+      </if>
+      <if test="checkPassTime != null" >
+        #{checkPassTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xiandaojia.common.domain.SmsCheckCodeJnl" >
+    update t_sms_checkcode_jnl
+    <set >
+      <if test="phoneNo != null" >
+        phone_no = #{phoneNo,jdbcType=VARCHAR},
+      </if>
+      <if test="checkCode != null" >
+        check_code = #{checkCode,jdbcType=VARCHAR},
+      </if>
+      <if test="smsToken != null" >
+        sms_token = #{smsToken,jdbcType=VARCHAR},
+      </if>
+      <if test="checkcodeType != null" >
+        checkcode_type = #{checkcodeType,jdbcType=CHAR},
+      </if>
+      <if test="appKey != null" >
+        app_key = #{appKey,jdbcType=VARCHAR},
+      </if>
+      <if test="validDuration != null" >
+        valid_duration = #{validDuration,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkResult != null" >
+        check_result = #{checkResult,jdbcType=CHAR},
+      </if>
+      <if test="checkErrorNum != null" >
+        check_error_num = #{checkErrorNum,jdbcType=INTEGER},
+      </if>
+      <if test="checkPassTime != null" >
+        check_pass_time = #{checkPassTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xiandaojia.common.domain.SmsCheckCodeJnl" >
+    update t_sms_checkcode_jnl
+    set phone_no = #{phoneNo,jdbcType=VARCHAR},
+      check_code = #{checkCode,jdbcType=VARCHAR},
+      sms_token = #{smsToken,jdbcType=VARCHAR},
+      checkcode_type = #{checkcodeType,jdbcType=CHAR},
+      app_key = #{appKey,jdbcType=VARCHAR},
+      valid_duration = #{validDuration,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      check_result = #{checkResult,jdbcType=CHAR},
+      check_error_num = #{checkErrorNum,jdbcType=INTEGER},
+      check_pass_time = #{checkPassTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <select id="querySmsCheckCodeList" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_sms_checkcode_jnl
+		where app_key = #{arg0} and phone_no = #{arg1}  and sms_token = #{arg2}
+	</select>
+</mapper>

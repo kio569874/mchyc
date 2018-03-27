@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xiandaojia.mapper.sms.SmsSendJnlMapper" >
+  <resultMap id="BaseResultMap" type="com.xiandaojia.common.domain.SmsSendJnl" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="sms_send_id" property="smsSendId" jdbcType="VARCHAR" />
+    <result column="send_phone" property="sendPhone" jdbcType="VARCHAR" />
+    <result column="sms_context" property="smsContext" jdbcType="VARCHAR" />
+    <result column="send_sms_type" property="sendSmsType" jdbcType="CHAR" />
+    <result column="send_count" property="sendCount" jdbcType="INTEGER" />
+    <result column="send_fee" property="sendFee" jdbcType="DECIMAL" />
+    <result column="fee_unit" property="feeUnit" jdbcType="VARCHAR" />
+    <result column="send_return_code" property="sendReturnCode" jdbcType="VARCHAR" />
+    <result column="send_return_message" property="sendReturnMessage" jdbcType="VARCHAR" />
+    <result column="send_id" property="sendId" jdbcType="VARCHAR" />
+    <result column="send_time" property="sendTime" jdbcType="TIMESTAMP" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, sms_send_id, send_phone, sms_context, send_sms_type, send_count, send_fee, fee_unit, 
+    send_return_code, send_return_message, send_id, send_time, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_sms_send_jnl
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_sms_send_jnl
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.xiandaojia.common.domain.SmsSendJnl" >
+    insert into t_sms_send_jnl (id, sms_send_id, send_phone, 
+      sms_context, send_sms_type, send_count, 
+      send_fee, fee_unit, send_return_code, 
+      send_return_message, send_id, send_time, 
+      create_time, update_time)
+    values (#{id,jdbcType=BIGINT}, #{smsSendId,jdbcType=VARCHAR}, #{sendPhone,jdbcType=VARCHAR}, 
+      #{smsContext,jdbcType=VARCHAR}, #{sendSmsType,jdbcType=CHAR}, #{sendCount,jdbcType=INTEGER}, 
+      #{sendFee,jdbcType=DECIMAL}, #{feeUnit,jdbcType=VARCHAR}, #{sendReturnCode,jdbcType=VARCHAR}, 
+      #{sendReturnMessage,jdbcType=VARCHAR}, #{sendId,jdbcType=VARCHAR}, #{sendTime,jdbcType=TIMESTAMP}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xiandaojia.common.domain.SmsSendJnl" >
+    insert into t_sms_send_jnl
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="smsSendId != null" >
+        sms_send_id,
+      </if>
+      <if test="sendPhone != null" >
+        send_phone,
+      </if>
+      <if test="smsContext != null" >
+        sms_context,
+      </if>
+      <if test="sendSmsType != null" >
+        send_sms_type,
+      </if>
+      <if test="sendCount != null" >
+        send_count,
+      </if>
+      <if test="sendFee != null" >
+        send_fee,
+      </if>
+      <if test="feeUnit != null" >
+        fee_unit,
+      </if>
+      <if test="sendReturnCode != null" >
+        send_return_code,
+      </if>
+      <if test="sendReturnMessage != null" >
+        send_return_message,
+      </if>
+      <if test="sendId != null" >
+        send_id,
+      </if>
+      <if test="sendTime != null" >
+        send_time,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="smsSendId != null" >
+        #{smsSendId,jdbcType=VARCHAR},
+      </if>
+      <if test="sendPhone != null" >
+        #{sendPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="smsContext != null" >
+        #{smsContext,jdbcType=VARCHAR},
+      </if>
+      <if test="sendSmsType != null" >
+        #{sendSmsType,jdbcType=CHAR},
+      </if>
+      <if test="sendCount != null" >
+        #{sendCount,jdbcType=INTEGER},
+      </if>
+      <if test="sendFee != null" >
+        #{sendFee,jdbcType=DECIMAL},
+      </if>
+      <if test="feeUnit != null" >
+        #{feeUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="sendReturnCode != null" >
+        #{sendReturnCode,jdbcType=VARCHAR},
+      </if>
+      <if test="sendReturnMessage != null" >
+        #{sendReturnMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="sendId != null" >
+        #{sendId,jdbcType=VARCHAR},
+      </if>
+      <if test="sendTime != null" >
+        #{sendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xiandaojia.common.domain.SmsSendJnl" >
+    update t_sms_send_jnl
+    <set >
+      <if test="smsSendId != null" >
+        sms_send_id = #{smsSendId,jdbcType=VARCHAR},
+      </if>
+      <if test="sendPhone != null" >
+        send_phone = #{sendPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="smsContext != null" >
+        sms_context = #{smsContext,jdbcType=VARCHAR},
+      </if>
+      <if test="sendSmsType != null" >
+        send_sms_type = #{sendSmsType,jdbcType=CHAR},
+      </if>
+      <if test="sendCount != null" >
+        send_count = #{sendCount,jdbcType=INTEGER},
+      </if>
+      <if test="sendFee != null" >
+        send_fee = #{sendFee,jdbcType=DECIMAL},
+      </if>
+      <if test="feeUnit != null" >
+        fee_unit = #{feeUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="sendReturnCode != null" >
+        send_return_code = #{sendReturnCode,jdbcType=VARCHAR},
+      </if>
+      <if test="sendReturnMessage != null" >
+        send_return_message = #{sendReturnMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="sendId != null" >
+        send_id = #{sendId,jdbcType=VARCHAR},
+      </if>
+      <if test="sendTime != null" >
+        send_time = #{sendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xiandaojia.common.domain.SmsSendJnl" >
+    update t_sms_send_jnl
+    set sms_send_id = #{smsSendId,jdbcType=VARCHAR},
+      send_phone = #{sendPhone,jdbcType=VARCHAR},
+      sms_context = #{smsContext,jdbcType=VARCHAR},
+      send_sms_type = #{sendSmsType,jdbcType=CHAR},
+      send_count = #{sendCount,jdbcType=INTEGER},
+      send_fee = #{sendFee,jdbcType=DECIMAL},
+      fee_unit = #{feeUnit,jdbcType=VARCHAR},
+      send_return_code = #{sendReturnCode,jdbcType=VARCHAR},
+      send_return_message = #{sendReturnMessage,jdbcType=VARCHAR},
+      send_id = #{sendId,jdbcType=VARCHAR},
+      send_time = #{sendTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
