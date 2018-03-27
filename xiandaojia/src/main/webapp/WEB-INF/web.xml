@@ -64,7 +64,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>SpringMVC1</servlet-name>
-		<url-pattern>*.htm</url-pattern>
+		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>DruidStatView</servlet-name>
