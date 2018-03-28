@@ -1,4 +1,4 @@
-package com.xiandaojia.mapper.systemuser;
+package com.xiandaojia.mapper.usercenter;
 
 import com.xiandaojia.common.domain.SystemUser;
 

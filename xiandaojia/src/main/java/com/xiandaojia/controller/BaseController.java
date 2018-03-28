@@ -25,6 +25,17 @@ public class BaseController {
 	 * @param json
 	 * @return
 	 */
+	protected String getSuccessResultMsg() {
+		return getSuccessResultMsg(null, Contants.RET_CODE_SUCCESS, Contants.RET_MSG_SUCCESS);
+
+	}
+
+	/**
+	 * 成功结果
+	 * 
+	 * @param json
+	 * @return
+	 */
 	protected String getSuccessResultMsg(String data) {
 		return getSuccessResultMsg(data, Contants.RET_CODE_SUCCESS, Contants.RET_MSG_SUCCESS);
 
@@ -39,11 +50,13 @@ public class BaseController {
 	 * @return
 	 */
 	protected String getSuccessResultMsg(String data, String retCode, String retMsg) {
-		JSONObject dataJson = JSONObject.parseObject(data);
 		JSONObject resultJson = new JSONObject();
 		resultJson.put(Contants.RET_CODE, retCode);
 		resultJson.put(Contants.RET_MSG, retMsg);
-		resultJson.put(Contants.DATA, dataJson);
+		if (data != null) {
+			JSONObject dataJson = JSONObject.parseObject(data);
+			resultJson.put(Contants.DATA, dataJson);
+		}
 		return resultJson.toJSONString();
 
 	}

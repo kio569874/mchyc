@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xiandaojia.mapper.product.ProductBigTypeInfoMapper">
+	<resultMap id="BaseResultMap"
+		type="com.xiandaojia.common.domain.ProductBigTypeInfo">
+		<id column="bigtype_id" property="bigtypeId" jdbcType="BIGINT" />
+		<result column="bigtype_name" property="bigtypeName" jdbcType="VARCHAR" />
+		<result column="bigtype_seqno" property="bigtypeSeqno"
+			jdbcType="SMALLINT" />
+		<result column="status" property="status" jdbcType="CHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+		<result column="operator" property="operator" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		bigtype_id, bigtype_name, bigtype_seqno, status, create_time, update_time,
+		operator
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from t_product_bigtype_info
+		where bigtype_id = #{bigtypeId,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from t_product_bigtype_info
+		where bigtype_id = #{bigtypeId,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert" parameterType="com.xiandaojia.common.domain.ProductBigTypeInfo">
+		insert into t_product_bigtype_info (bigtype_id, bigtype_name,
+		bigtype_seqno,
+		status, create_time, update_time,
+		operator)
+		values (#{bigtypeId,jdbcType=BIGINT}, #{bigtypeName,jdbcType=VARCHAR},
+		#{bigtypeSeqno,jdbcType=SMALLINT},
+		#{status,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
+		#{operator,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.xiandaojia.common.domain.ProductBigTypeInfo">
+		insert into t_product_bigtype_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="bigtypeId != null">
+				bigtype_id,
+			</if>
+			<if test="bigtypeName != null">
+				bigtype_name,
+			</if>
+			<if test="bigtypeSeqno != null">
+				bigtype_seqno,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="updateTime != null">
+				update_time,
+			</if>
+			<if test="operator != null">
+				operator,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="bigtypeId != null">
+				#{bigtypeId,jdbcType=BIGINT},
+			</if>
+			<if test="bigtypeName != null">
+				#{bigtypeName,jdbcType=VARCHAR},
+			</if>
+			<if test="bigtypeSeqno != null">
+				#{bigtypeSeqno,jdbcType=SMALLINT},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=CHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="operator != null">
+				#{operator,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.xiandaojia.common.domain.ProductBigTypeInfo">
+		update t_product_bigtype_info
+		<set>
+			<if test="bigtypeName != null">
+				bigtype_name = #{bigtypeName,jdbcType=VARCHAR},
+			</if>
+			<if test="bigtypeSeqno != null">
+				bigtype_seqno = #{bigtypeSeqno,jdbcType=SMALLINT},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=CHAR},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				update_time = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="operator != null">
+				operator = #{operator,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where bigtype_id = #{bigtypeId,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.xiandaojia.common.domain.ProductBigTypeInfo">
+		update t_product_bigtype_info
+		set bigtype_name = #{bigtypeName,jdbcType=VARCHAR},
+		bigtype_seqno = #{bigtypeSeqno,jdbcType=SMALLINT},
+		status = #{status,jdbcType=CHAR},
+		create_time = #{createTime,jdbcType=TIMESTAMP},
+		update_time = #{updateTime,jdbcType=TIMESTAMP},
+		operator = #{operator,jdbcType=VARCHAR}
+		where bigtype_id = #{bigtypeId,jdbcType=BIGINT}
+	</update>
+
+	<select id="getTotalCount" resultType="int">
+		select count(1) from
+		t_product_bigtype_info
+	</select>
+
+	<select id="queryListByPage" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_product_bigtype_info
+		where status = '0'
+		ORDER BY bigtype_seqno
+		ASC
+		limit
+		#{arg0}, #{arg1}
+	</select>
+
+</mapper>

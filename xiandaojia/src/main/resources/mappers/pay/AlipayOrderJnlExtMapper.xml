@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xiandaojia.mapper.pay.AlipayOrderJnlExtMapper" >
+  <resultMap id="BaseResultMap" type="com.xiandaojia.common.domain.AlipayOrderJnlExt" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="order_pay_id" property="orderPayId" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.xiandaojia.common.domain.AlipayOrderJnlExt" extends="BaseResultMap" >
+    <result column="notify_info" property="notifyInfo" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, order_pay_id, create_time
+  </sql>
+  <sql id="Blob_Column_List" >
+    notify_info
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_alipay_order_jnl_ext
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_alipay_order_jnl_ext
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.xiandaojia.common.domain.AlipayOrderJnlExt" >
+    insert into t_alipay_order_jnl_ext (id, order_pay_id, create_time, 
+      notify_info)
+    values (#{id,jdbcType=BIGINT}, #{orderPayId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{notifyInfo,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xiandaojia.common.domain.AlipayOrderJnlExt" >
+    insert into t_alipay_order_jnl_ext
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="orderPayId != null" >
+        order_pay_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="notifyInfo != null" >
+        notify_info,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="orderPayId != null" >
+        #{orderPayId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="notifyInfo != null" >
+        #{notifyInfo,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xiandaojia.common.domain.AlipayOrderJnlExt" >
+    update t_alipay_order_jnl_ext
+    <set >
+      <if test="orderPayId != null" >
+        order_pay_id = #{orderPayId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="notifyInfo != null" >
+        notify_info = #{notifyInfo,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.xiandaojia.common.domain.AlipayOrderJnlExt" >
+    update t_alipay_order_jnl_ext
+    set order_pay_id = #{orderPayId,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      notify_info = #{notifyInfo,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xiandaojia.common.domain.AlipayOrderJnlExt" >
+    update t_alipay_order_jnl_ext
+    set order_pay_id = #{orderPayId,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

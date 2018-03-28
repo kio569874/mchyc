@@ -5,11 +5,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *  @author zjw
+ * 
+ * @author mchyc
+ *
+ * @param <T>
  */
 public class PaginationDto<T> implements Serializable {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
      * 总记录数
      */
     private int totalCount;

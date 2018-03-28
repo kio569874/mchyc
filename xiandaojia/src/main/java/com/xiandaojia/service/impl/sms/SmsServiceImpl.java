@@ -21,7 +21,7 @@ import com.xiandaojia.mapper.sms.CheckCodeConfigMapper;
 import com.xiandaojia.mapper.sms.SmsCheckCodeJnlMapper;
 import com.xiandaojia.mapper.sms.SmsConfigMapper;
 import com.xiandaojia.mapper.sms.SmsSendJnlMapper;
-import com.xiandaojia.service.impl.AbstractService;
+import com.xiandaojia.service.impl.AbstractBaseService;
 import com.xiandaojia.service.sms.SmsService;
 import com.xiandaojia.spi.SmsServiceManager;
 
@@ -32,7 +32,7 @@ import com.xiandaojia.spi.SmsServiceManager;
  *
  */
 @Service("smsService")
-public class SmsServiceImpl extends AbstractService implements SmsService {
+public class SmsServiceImpl extends AbstractBaseService implements SmsService {
 
 	@Resource
 	private SmsConfigMapper smsConfigMapper;

@@ -1,7 +1,7 @@
 package com.xiandaojia.service.deliverycenter;
 
-import com.xiandaojia.service.BaseService;
+import com.xiandaojia.service.IBaseService;
 
-public interface DeliveryCenterService extends BaseService {
+public interface DeliveryCenterService extends IBaseService {
 
 }

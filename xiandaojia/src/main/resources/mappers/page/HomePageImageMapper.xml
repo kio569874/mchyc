@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xiandaojia.mapper.page.HomePageImageMapper" >
+  <resultMap id="BaseResultMap" type="com.xiandaojia.common.domain.HomePageImage" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="image_id" property="imageId" jdbcType="VARCHAR" />
+    <result column="content_name" property="contentName" jdbcType="VARCHAR" />
+    <result column="content_desc" property="contentDesc" jdbcType="VARCHAR" />
+    <result column="img_url" property="imgUrl" jdbcType="VARCHAR" />
+    <result column="image_seqno" property="imageSeqno" jdbcType="SMALLINT" />
+    <result column="to_url" property="toUrl" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="CHAR" />
+    <result column="status" property="status" jdbcType="CHAR" />
+    <result column="operator" property="operator" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, image_id, content_name, content_desc, img_url, image_seqno, to_url, type, status, 
+    operator, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_homepage_image
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_homepage_image
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.xiandaojia.common.domain.HomePageImage" >
+    insert into t_homepage_image (id, image_id, content_name, 
+      content_desc, img_url, image_seqno, 
+      to_url, type, status, operator, 
+      create_time, update_time)
+    values (#{id,jdbcType=BIGINT}, #{imageId,jdbcType=VARCHAR}, #{contentName,jdbcType=VARCHAR}, 
+      #{contentDesc,jdbcType=VARCHAR}, #{imgUrl,jdbcType=VARCHAR}, #{imageSeqno,jdbcType=SMALLINT}, 
+      #{toUrl,jdbcType=VARCHAR}, #{type,jdbcType=CHAR}, #{status,jdbcType=CHAR}, #{operator,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xiandaojia.common.domain.HomePageImage" >
+    insert into t_homepage_image
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="imageId != null" >
+        image_id,
+      </if>
+      <if test="contentName != null" >
+        content_name,
+      </if>
+      <if test="contentDesc != null" >
+        content_desc,
+      </if>
+      <if test="imgUrl != null" >
+        img_url,
+      </if>
+      <if test="imageSeqno != null" >
+        image_seqno,
+      </if>
+      <if test="toUrl != null" >
+        to_url,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="operator != null" >
+        operator,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="imageId != null" >
+        #{imageId,jdbcType=VARCHAR},
+      </if>
+      <if test="contentName != null" >
+        #{contentName,jdbcType=VARCHAR},
+      </if>
+      <if test="contentDesc != null" >
+        #{contentDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="imgUrl != null" >
+        #{imgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="imageSeqno != null" >
+        #{imageSeqno,jdbcType=SMALLINT},
+      </if>
+      <if test="toUrl != null" >
+        #{toUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=CHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="operator != null" >
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xiandaojia.common.domain.HomePageImage" >
+    update t_homepage_image
+    <set >
+      <if test="imageId != null" >
+        image_id = #{imageId,jdbcType=VARCHAR},
+      </if>
+      <if test="contentName != null" >
+        content_name = #{contentName,jdbcType=VARCHAR},
+      </if>
+      <if test="contentDesc != null" >
+        content_desc = #{contentDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="imgUrl != null" >
+        img_url = #{imgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="imageSeqno != null" >
+        image_seqno = #{imageSeqno,jdbcType=SMALLINT},
+      </if>
+      <if test="toUrl != null" >
+        to_url = #{toUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=CHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="operator != null" >
+        operator = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xiandaojia.common.domain.HomePageImage" >
+    update t_homepage_image
+    set image_id = #{imageId,jdbcType=VARCHAR},
+      content_name = #{contentName,jdbcType=VARCHAR},
+      content_desc = #{contentDesc,jdbcType=VARCHAR},
+      img_url = #{imgUrl,jdbcType=VARCHAR},
+      image_seqno = #{imageSeqno,jdbcType=SMALLINT},
+      to_url = #{toUrl,jdbcType=VARCHAR},
+      type = #{type,jdbcType=CHAR},
+      status = #{status,jdbcType=CHAR},
+      operator = #{operator,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

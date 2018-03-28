@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xiandaojia.mapper.pay.AlipayRefundJnlExtMapper" >
+  <resultMap id="BaseResultMap" type="com.xiandaojia.common.domain.AlipayRefundJnlExt" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="refund_id" property="refundId" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.xiandaojia.common.domain.AlipayRefundJnlExt" extends="BaseResultMap" >
+    <result column="notify_info" property="notifyInfo" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, refund_id, create_time
+  </sql>
+  <sql id="Blob_Column_List" >
+    notify_info
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_alipay_refund_jnl_ext
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_alipay_refund_jnl_ext
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.xiandaojia.common.domain.AlipayRefundJnlExt" >
+    insert into t_alipay_refund_jnl_ext (id, refund_id, create_time, 
+      notify_info)
+    values (#{id,jdbcType=BIGINT}, #{refundId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{notifyInfo,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xiandaojia.common.domain.AlipayRefundJnlExt" >
+    insert into t_alipay_refund_jnl_ext
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="refundId != null" >
+        refund_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="notifyInfo != null" >
+        notify_info,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="refundId != null" >
+        #{refundId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="notifyInfo != null" >
+        #{notifyInfo,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xiandaojia.common.domain.AlipayRefundJnlExt" >
+    update t_alipay_refund_jnl_ext
+    <set >
+      <if test="refundId != null" >
+        refund_id = #{refundId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="notifyInfo != null" >
+        notify_info = #{notifyInfo,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.xiandaojia.common.domain.AlipayRefundJnlExt" >
+    update t_alipay_refund_jnl_ext
+    set refund_id = #{refundId,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      notify_info = #{notifyInfo,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xiandaojia.common.domain.AlipayRefundJnlExt" >
+    update t_alipay_refund_jnl_ext
+    set refund_id = #{refundId,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
