@@ -46,6 +46,10 @@ const questionDetail = r => require.ensure([], () => r(require('../page/service/
 const find = r => require.ensure([], () => r(require('../page/find/find')), 'find')
 const download = r => require.ensure([], () => r(require('../page/download/download')), 'download')
 
+//xiandaojia router
+const xdj_home = r => require.ensure([], () => r(require('../page/xdj_home/xdj_home')), 'xdj_home')
+const xdj_product_detail = r => require.ensure([], () => r(require('../page/xdj_home/children/xdj_product_detail')), 'xdj_product_detail')
+
 
 
 
@@ -56,7 +60,7 @@ export default [{
         //地址为空时跳转home页面
         {
             path: '',
-            redirect: '/home'
+            redirect: '/xdj_home'
         },
         //首页城市列表页
         {
@@ -249,5 +253,15 @@ export default [{
                 component: pointsDetail,
             }, ]
         },
+        //鲜到家首页
+        {
+            path: 'xdj_home',
+            component: xdj_home,
+            children: [{
+                path: 'detail', //产品详情
+                component: xdj_product_detail,
+            }, ]
+        },
+
     ]
 }]

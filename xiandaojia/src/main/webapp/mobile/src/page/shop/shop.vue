@@ -471,7 +471,7 @@
                 const wrapMenuHeight = this.$refs.wrapperMenu.clientHeight;
                 this.foodScroll.on('scroll', (pos) => {
                     if (!this.$refs.wrapperMenu) {
-                        return 
+                        return
                     }
                     this.shopListTop.forEach((item, index) => {
                         if (this.menuIndexChange && Math.abs(Math.round(pos.y)) >= item) {
