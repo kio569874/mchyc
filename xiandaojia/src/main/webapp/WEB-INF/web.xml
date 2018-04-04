@@ -71,7 +71,7 @@
 		<url-pattern>/druid/*</url-pattern>
 	</servlet-mapping>
 	<welcome-file-list>
-		<welcome-file>/mobile/index.html</welcome-file>
+		<welcome-file>/mobile/elm/index.html</welcome-file>
 	</welcome-file-list>
 	<!-- 配置SESSION超时，单位是分钟 -->
 	<session-config>
