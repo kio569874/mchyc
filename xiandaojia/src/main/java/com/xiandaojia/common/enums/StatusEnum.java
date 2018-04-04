@@ -1,6 +1,6 @@
 package com.xiandaojia.common.enums;
 
-public enum SmsStatusEnum {
+public enum StatusEnum {
 	/**
 	 * 启动
 	 */
@@ -13,7 +13,7 @@ public enum SmsStatusEnum {
 
 	String status = "";
 
-	private SmsStatusEnum(String status) {
+	private StatusEnum(String status) {
 		this.status = status;
 	}
 

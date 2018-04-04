@@ -4,6 +4,7 @@ import java.util.UUID;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.xiandaojia.common.enums.StatusEnum;
 import com.xiandaojia.test.SendHttp;
 
 public class ProductTest {
@@ -19,7 +20,7 @@ public class ProductTest {
 		JSONObject json = new JSONObject();
 		json.put("bigtypeName", "果蔬到家");
 		json.put("bigtypeSeqno", 0);
-		json.put("status", "0");
+		json.put("status", StatusEnum.START.getStatus());
 		json.put("operator", "杨超");
 		System.out.println(json);
 		String re = SendHttp.getInstance()
