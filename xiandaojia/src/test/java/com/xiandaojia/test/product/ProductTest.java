@@ -4,8 +4,6 @@ import java.util.UUID;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.xiandaojia.common.dto.ProductDto;
-import com.xiandaojia.common.utils.JsonBeanUtil;
 import com.xiandaojia.test.SendHttp;
 
 public class ProductTest {
