@@ -90,7 +90,7 @@ public class ProductController extends BaseController {
 			Long smalltypeId = jsonObj.getLong("smalltypeId");
 			int page = jsonObj.getInteger("page");
 			int pageSize = jsonObj.getInteger("pageSize");
-			PaginationDto<ProductDto> paginationDto = productInfoService.queryOrderListByPage(page, pageSize, null,
+			PaginationDto<ProductDto> paginationDto = productInfoService.queryProductListByPage(page, pageSize, null,
 					smalltypeId);
 			List<ProductDto> productInfoList = paginationDto.getData();
 			if (productInfoList != null && productInfoList.size() > 0) {
@@ -179,7 +179,7 @@ public class ProductController extends BaseController {
 			JSONObject jsonObj = JSONObject.parseObject(content);
 			int page = jsonObj.getInteger("page");
 			int pageSize = jsonObj.getInteger("pageSize");
-			PaginationDto<ProductBigTypeInfo> paginationDto = productBigTypeInfoService.queryOrderListByPage(page,
+			PaginationDto<ProductBigTypeInfo> paginationDto = productBigTypeInfoService.queryProductListByPage(page,
 					pageSize, null, null);
 			List<ProductBigTypeInfo> productBigTypeInfoList = paginationDto.getData();
 			if (productBigTypeInfoList != null && productBigTypeInfoList.size() > 0) {
@@ -247,7 +247,7 @@ public class ProductController extends BaseController {
 			Long bigtypeId = jsonObj.getLong("bigtypeId");
 			int page = jsonObj.getInteger("page");
 			int pageSize = jsonObj.getInteger("pageSize");
-			PaginationDto<ProductSmallTypeInfo> paginationDto = productSmallTypeInfoService.queryOrderListByPage(page,
+			PaginationDto<ProductSmallTypeInfo> paginationDto = productSmallTypeInfoService.queryProductListByPage(page,
 					pageSize, null, bigtypeId);
 			List<ProductSmallTypeInfo> productSmallTypeInfoList = paginationDto.getData();
 			if (productSmallTypeInfoList != null && productSmallTypeInfoList.size() > 0) {

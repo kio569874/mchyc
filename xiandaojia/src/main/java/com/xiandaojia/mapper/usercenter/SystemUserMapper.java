@@ -1,5 +1,7 @@
 package com.xiandaojia.mapper.usercenter;
 
+import java.util.List;
+
 import com.xiandaojia.common.domain.SystemUser;
 
 public interface SystemUserMapper {
@@ -14,4 +16,10 @@ public interface SystemUserMapper {
     int updateByPrimaryKeySelective(SystemUser record);
 
     int updateByPrimaryKey(SystemUser record);
+    
+    int getTotalCount();
+
+	List<SystemUser> queryListByPage(int offset, int pageSize);
+	
+	SystemUser checkSystemUser(String userCode,String userPassword);
 }

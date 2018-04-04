@@ -51,12 +51,12 @@ public class ProductInfoServiceImpl extends AbstractBaseService implements IProd
 		ProductDto productDto = (ProductDto) t;
 		ProductInfo productInfo = productDto.getProductInfo();
 		productInfo.setUpdateTime(new Date());
-		productInfoMapper.updateByPrimaryKey(productInfo);
+		productInfoMapper.updateByPrimaryKeySelective(productInfo);
 		List<ProductInformation> list = productDto.getProductInformationList();
 		if (list != null && list.size() > 0) {
 			for (ProductInformation productInformation : list) {
 				productInformation.setUpdateTime(new Date());
-				productInformationMapper.updateByPrimaryKey(productInformation);
+				productInformationMapper.updateByPrimaryKeySelective(productInformation);
 			}
 		}
 	}
@@ -69,7 +69,7 @@ public class ProductInfoServiceImpl extends AbstractBaseService implements IProd
 	}
 
 	@Override
-	public PaginationDto<ProductInfo> queryOrderListByPage(int page, int pageSize, Integer totalCount, Long smalltypeId)
+	public PaginationDto<ProductInfo> queryProductListByPage(int page, int pageSize, Integer totalCount, Long smalltypeId)
 			throws SysException {
 		PaginationDto<ProductInfo> paginationDto = new PaginationDto<ProductInfo>();
 		// 分页参数校验

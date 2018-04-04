@@ -30,7 +30,7 @@ public class ProductBigTypeInfoServiceImpl extends AbstractBaseService implement
 	@Override
 	public void update(ProductBigTypeInfo t) {
 		t.setUpdateTime(new Date());
-		productBigTypeInfoMapper.updateByPrimaryKey(t);
+		productBigTypeInfoMapper.updateByPrimaryKeySelective(t);
 	}
 
 	@Override
@@ -39,7 +39,7 @@ public class ProductBigTypeInfoServiceImpl extends AbstractBaseService implement
 	}
 
 	@Override
-	public PaginationDto<ProductBigTypeInfo> queryOrderListByPage(int page, int pageSize, Integer totalCount,
+	public PaginationDto<ProductBigTypeInfo> queryProductListByPage(int page, int pageSize, Integer totalCount,
 			Long smalltypeId) throws SysException {
 		PaginationDto<ProductBigTypeInfo> paginationDto = new PaginationDto<ProductBigTypeInfo>();
 		// 分页参数校验

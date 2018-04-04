@@ -174,4 +174,25 @@
       update_time = #{updateTime,jdbcType=DATE}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  <select id="getTotalCount" resultType="int">
+		select count(1) from
+		t_system_user
+		where user_status = '0'
+  </select>
+
+  <select id="queryListByPage" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_system_user
+		where user_status = '0' 
+		limit
+		#{arg0}, #{arg1}
+  </select>
+  <select id="checkSystemUser" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_system_user
+		where user_code = #{arg0} and user_password =  #{arg1}
+  </select>
+  
 </mapper>

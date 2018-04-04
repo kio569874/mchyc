@@ -178,7 +178,7 @@
         status = #{status,jdbcType=CHAR},
       </if>
       <if test="version != null" >
-        version = #{version,jdbcType=BIGINT},
+       version = version+1,
       </if>
       <if test="productDesc != null" >
         product_desc = #{productDesc,jdbcType=VARCHAR},
@@ -190,7 +190,7 @@
         update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where product_id = #{productId,jdbcType=BIGINT}
+    where product_id = #{productId,jdbcType=BIGINT} and version = #{version,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.xiandaojia.common.domain.ProductInfo" >
     update t_product_info

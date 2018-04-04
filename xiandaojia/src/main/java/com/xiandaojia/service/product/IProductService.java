@@ -14,6 +14,6 @@ public interface IProductService<T> extends IBaseService<T> {
 	 * @param userId
 	 * @return
 	 */
-	PaginationDto<T> queryOrderListByPage(int page, int pageSize, Integer totalCount, Long smalltypeId)
+	PaginationDto<T> queryProductListByPage(int page, int pageSize, Integer totalCount, Long smalltypeId)
 			throws SysException;
 }
