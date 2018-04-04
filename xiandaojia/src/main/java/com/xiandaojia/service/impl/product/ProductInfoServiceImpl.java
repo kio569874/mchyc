@@ -78,8 +78,8 @@ public class ProductInfoServiceImpl extends AbstractBaseService implements IProd
 		if (totalCount == null || totalCount <= 0) {
 			paginationDto.setTotalCount(productInfoMapper.getTotalCount(smalltypeId));
 		}
-		List<ProductInfo> userEntityList = productInfoMapper.queryListByPage(offset, pageSize, smalltypeId);
-		paginationDto.setData(userEntityList);
+		List<ProductInfo> list = productInfoMapper.queryListByPage(offset, pageSize, smalltypeId);
+		paginationDto.setData(list);
 		return paginationDto;
 	}
 

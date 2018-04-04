@@ -48,8 +48,8 @@ public class ProductBigTypeInfoServiceImpl extends AbstractBaseService implement
 		if (totalCount == null || totalCount <= 0) {
 			paginationDto.setTotalCount(productBigTypeInfoMapper.getTotalCount());
 		}
-		List<ProductBigTypeInfo> userEntityList = productBigTypeInfoMapper.queryListByPage(offset, pageSize);
-		paginationDto.setData(userEntityList);
+		List<ProductBigTypeInfo> list = productBigTypeInfoMapper.queryListByPage(offset, pageSize);
+		paginationDto.setData(list);
 		return paginationDto;
 	}
 

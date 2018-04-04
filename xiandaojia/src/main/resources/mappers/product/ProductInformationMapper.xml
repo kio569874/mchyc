@@ -149,5 +149,6 @@
 		from t_product_information
 		where product_id =
 		#{productId,jdbcType=BIGINT}
+		order by information_seqno ASC
 	</select>
 </mapper>

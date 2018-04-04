@@ -1,9 +1,15 @@
 package com.xiandaojia.common.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class HomePageImage {
-    private Long id;
+public class HomePageImage implements Serializable {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Long id;
 
     private String imageId;
 

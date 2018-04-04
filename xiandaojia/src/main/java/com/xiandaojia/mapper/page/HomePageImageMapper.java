@@ -1,5 +1,7 @@
 package com.xiandaojia.mapper.page;
 
+import java.util.List;
+
 import com.xiandaojia.common.domain.HomePageImage;
 
 public interface HomePageImageMapper {
@@ -14,4 +16,8 @@ public interface HomePageImageMapper {
     int updateByPrimaryKeySelective(HomePageImage record);
 
     int updateByPrimaryKey(HomePageImage record);
+    
+    int getTotalCount();
+
+  	List<HomePageImage> queryListByPage(int offset, int pageSize);
 }

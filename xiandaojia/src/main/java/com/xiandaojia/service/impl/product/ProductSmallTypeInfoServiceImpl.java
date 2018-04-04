@@ -49,9 +49,9 @@ public class ProductSmallTypeInfoServiceImpl extends AbstractBaseService impleme
 		if (totalCount == null || totalCount <= 0) {
 			paginationDto.setTotalCount(productSmallTypeInfoMapper.getTotalCount(bigtypeId));
 		}
-		List<ProductSmallTypeInfo> userEntityList = productSmallTypeInfoMapper.queryListByPage(offset, pageSize,
+		List<ProductSmallTypeInfo> list = productSmallTypeInfoMapper.queryListByPage(offset, pageSize,
 				bigtypeId);
-		paginationDto.setData(userEntityList);
+		paginationDto.setData(list);
 		return paginationDto;
 	}
 

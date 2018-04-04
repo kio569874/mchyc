@@ -172,4 +172,19 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  <select id="getTotalCount" resultType="int">
+		select count(1) from
+		t_homepage_image
+		where status = '0'
+  </select>
+
+  <select id="queryListByPage" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_homepage_image
+		where status = '0' 
+		order by image_seqno ASC
+		limit
+		#{arg0}, #{arg1}
+  </select>
 </mapper>

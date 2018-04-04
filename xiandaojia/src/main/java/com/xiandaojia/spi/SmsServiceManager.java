@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 import com.xiandaojia.common.Contants;
 import com.xiandaojia.common.domain.SmsConfig;
 import com.xiandaojia.common.domain.SmsSendJnl;
-import com.xiandaojia.common.enums.SmsStatusEnum;
+import com.xiandaojia.common.enums.StatusEnum;
 import com.xiandaojia.common.enums.SmsTypeEnum;
 import com.xiandaojia.common.exception.SmsException;
 import com.xiandaojia.spi.sms.ISmsHandle;
@@ -79,7 +79,7 @@ public class SmsServiceManager {
 		if (smsConfigList != null && smsConfigList.size() > 0) {
 			for (SmsConfig smsConfig : smsConfigList) {
 				if (smsType.equals(smsConfig.getSmsType())
-						&& SmsStatusEnum.START.getStatus().equals(smsConfig.getStatus())) {
+						&& StatusEnum.START.getStatus().equals(smsConfig.getStatus())) {
 					return smsConfig;
 				}
 			}

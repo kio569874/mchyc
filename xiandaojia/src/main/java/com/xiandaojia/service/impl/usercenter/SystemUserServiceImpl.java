@@ -47,8 +47,8 @@ public class SystemUserServiceImpl implements ISystemUserService {
 		if (totalCount == null || totalCount <= 0) {
 			paginationDto.setTotalCount(systemUserMapper.getTotalCount());
 		}
-		List<SystemUser> userEntityList = systemUserMapper.queryListByPage(offset, pageSize);
-		paginationDto.setData(userEntityList);
+		List<SystemUser> list = systemUserMapper.queryListByPage(offset, pageSize);
+		paginationDto.setData(list);
 		return paginationDto;
 	}
 

@@ -1,9 +1,15 @@
 package com.xiandaojia.common.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class NoticeInfo {
-    private Long id;
+public class NoticeInfo implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Long id;
 
     private String noticeTitle;
 
