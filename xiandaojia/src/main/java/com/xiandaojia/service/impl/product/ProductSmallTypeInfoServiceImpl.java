@@ -1,5 +1,6 @@
 package com.xiandaojia.service.impl.product;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +22,14 @@ public class ProductSmallTypeInfoServiceImpl extends AbstractBaseService impleme
 
 	@Override
 	public void insert(ProductSmallTypeInfo t) {
+		t.setCreateTime(new Date());
 		productSmallTypeInfoMapper.insert(t);
 
 	}
 
 	@Override
 	public void update(ProductSmallTypeInfo t) {
+		t.setUpdateTime(new Date());
 		productSmallTypeInfoMapper.updateByPrimaryKey(t);
 
 	}

@@ -1,9 +1,11 @@
 package com.xiandaojia.service.product;
 
-import com.xiandaojia.common.domain.PaginationDto;
-import com.xiandaojia.common.domain.ProductInfo;
-import com.xiandaojia.common.exception.SysException;
+import java.util.List;
 
-public interface IProductInfoService extends IProductService<ProductInfo> {
+import com.xiandaojia.common.domain.ProductInformation;
+
+public interface IProductInfoService extends IProductService {
+	
+	List<ProductInformation> queryListByProductId(Long productId);
 
 }

@@ -1,7 +1,5 @@
 package com.xiandaojia.service.sms;
 
-import com.xiandaojia.common.domain.SmsCheckCodeJnl;
-import com.xiandaojia.common.domain.SmsSendJnl;
 
 public interface SmsService {
 

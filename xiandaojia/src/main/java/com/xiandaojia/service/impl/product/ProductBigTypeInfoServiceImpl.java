@@ -1,5 +1,6 @@
 package com.xiandaojia.service.impl.product;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -22,11 +23,13 @@ public class ProductBigTypeInfoServiceImpl extends AbstractBaseService implement
 
 	@Override
 	public void insert(ProductBigTypeInfo t) {
+		t.setCreateTime(new Date());
 		productBigTypeInfoMapper.insert(t);
 	}
 
 	@Override
 	public void update(ProductBigTypeInfo t) {
+		t.setUpdateTime(new Date());
 		productBigTypeInfoMapper.updateByPrimaryKey(t);
 	}
 

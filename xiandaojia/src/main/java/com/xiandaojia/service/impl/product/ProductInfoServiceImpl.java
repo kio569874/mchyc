@@ -1,15 +1,20 @@
 package com.xiandaojia.service.impl.product;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import com.xiandaojia.common.domain.PaginationDto;
 import com.xiandaojia.common.domain.ProductInfo;
+import com.xiandaojia.common.domain.ProductInformation;
+import com.xiandaojia.common.dto.ProductDto;
 import com.xiandaojia.common.exception.SysException;
 import com.xiandaojia.common.utils.PaginationUtil;
 import com.xiandaojia.mapper.product.ProductInfoMapper;
+import com.xiandaojia.mapper.product.ProductInformationMapper;
 import com.xiandaojia.service.impl.AbstractBaseService;
 import com.xiandaojia.service.product.IProductInfoService;
 
@@ -18,22 +23,48 @@ public class ProductInfoServiceImpl extends AbstractBaseService implements IProd
 
 	@Autowired
 	ProductInfoMapper productInfoMapper;
+	@Autowired
+	ProductInformationMapper productInformationMapper;
 
 	@Override
-	public void insert(ProductInfo t) {
-		productInfoMapper.insert(t);
+	public void insert(Object t) {
+		ProductDto productDto = (ProductDto) t;
+		ProductInfo productInfo = productDto.getProductInfo();
+		productInfo.setCreateTime(new Date());
+		productInfo.setVersion(0L);
+		productInfoMapper.insert(productInfo);
+		List<ProductInformation> list = productDto.getProductInformationList();
+		if (list != null && list.size() > 0) {
+			for (ProductInformation productInformation : list) {
+				productInformation.setCreateTime(new Date());
+				if (StringUtils.isEmpty(productInformation.getProductId())) {
+					productInformation.setProductId(productInfo.getProductId());
+				}
+				productInformationMapper.insert(productInformation);
+			}
+		}
 
 	}
 
 	@Override
-	public void update(ProductInfo t) {
-		productInfoMapper.updateByPrimaryKey(t);
-
+	public void update(Object t) {
+		ProductDto productDto = (ProductDto) t;
+		ProductInfo productInfo = productDto.getProductInfo();
+		productInfo.setUpdateTime(new Date());
+		productInfoMapper.updateByPrimaryKey(productInfo);
+		List<ProductInformation> list = productDto.getProductInformationList();
+		if (list != null && list.size() > 0) {
+			for (ProductInformation productInformation : list) {
+				productInformation.setUpdateTime(new Date());
+				productInformationMapper.updateByPrimaryKey(productInformation);
+			}
+		}
 	}
 
 	@Override
 	public void delete(Long id) {
 		productInfoMapper.deleteByPrimaryKey(id);
+		productInformationMapper.deleteByProductId(id);
 
 	}
 
@@ -52,4 +83,8 @@ public class ProductInfoServiceImpl extends AbstractBaseService implements IProd
 		return paginationDto;
 	}
 
+	@Override
+	public List<ProductInformation> queryListByProductId(Long productId) {
+		return productInformationMapper.queryListByProductId(productId);
+	}
 }

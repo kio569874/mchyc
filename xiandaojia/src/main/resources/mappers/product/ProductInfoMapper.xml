@@ -12,10 +12,6 @@
     <result column="product_num" property="productNum" jdbcType="INTEGER" />
     <result column="is_discount" property="isDiscount" jdbcType="CHAR" />
     <result column="product_discount" property="productDiscount" jdbcType="DECIMAL" />
-    <result column="product_content" property="productContent" jdbcType="VARCHAR" />
-    <result column="nutrient_content" property="nutrientContent" jdbcType="VARCHAR" />
-    <result column="people_suitble" property="peopleSuitble" jdbcType="VARCHAR" />
-    <result column="product_information" property="productInformation" jdbcType="VARCHAR" />
     <result column="status" property="status" jdbcType="CHAR" />
     <result column="version" property="version" jdbcType="BIGINT" />
     <result column="product_desc" property="productDesc" jdbcType="VARCHAR" />
@@ -24,9 +20,8 @@
   </resultMap>
   <sql id="Base_Column_List" >
     product_id, product_name, smalltype_id, product_price, product_url, product_seqno, 
-    price_unit, product_num, is_discount, product_discount, product_content, nutrient_content, 
-    people_suitble, product_information, status, version, product_desc, create_time, 
-    update_time
+    price_unit, product_num, is_discount, product_discount, status, version, product_desc, 
+    create_time, update_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -38,23 +33,21 @@
     delete from t_product_info
     where product_id = #{productId,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.xiandaojia.common.domain.ProductInfo" >
+  <insert id="insert" parameterType="com.xiandaojia.common.domain.ProductInfo" useGeneratedKeys="true" keyProperty="productId">
     insert into t_product_info (product_id, product_name, smalltype_id, 
       product_price, product_url, product_seqno, 
       price_unit, product_num, is_discount, 
-      product_discount, product_content, nutrient_content, 
-      people_suitble, product_information, status, 
-      version, product_desc, create_time, 
-      update_time)
+      product_discount, status, version, 
+      product_desc, create_time, update_time
+      )
     values (#{productId,jdbcType=BIGINT}, #{productName,jdbcType=VARCHAR}, #{smalltypeId,jdbcType=BIGINT}, 
       #{productPrice,jdbcType=DECIMAL}, #{productUrl,jdbcType=VARCHAR}, #{productSeqno,jdbcType=INTEGER}, 
       #{priceUnit,jdbcType=VARCHAR}, #{productNum,jdbcType=INTEGER}, #{isDiscount,jdbcType=CHAR}, 
-      #{productDiscount,jdbcType=DECIMAL}, #{productContent,jdbcType=VARCHAR}, #{nutrientContent,jdbcType=VARCHAR}, 
-      #{peopleSuitble,jdbcType=VARCHAR}, #{productInformation,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
-      #{version,jdbcType=BIGINT}, #{productDesc,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP})
+      #{productDiscount,jdbcType=DECIMAL}, #{status,jdbcType=CHAR}, #{version,jdbcType=BIGINT}, 
+      #{productDesc,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="com.xiandaojia.common.domain.ProductInfo" >
+  <insert id="insertSelective" parameterType="com.xiandaojia.common.domain.ProductInfo" useGeneratedKeys="true" keyProperty="product_id">
     insert into t_product_info
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="productId != null" >
@@ -86,18 +79,6 @@
       </if>
       <if test="productDiscount != null" >
         product_discount,
-      </if>
-      <if test="productContent != null" >
-        product_content,
-      </if>
-      <if test="nutrientContent != null" >
-        nutrient_content,
-      </if>
-      <if test="peopleSuitble != null" >
-        people_suitble,
-      </if>
-      <if test="productInformation != null" >
-        product_information,
       </if>
       <if test="status != null" >
         status,
@@ -146,18 +127,6 @@
       <if test="productDiscount != null" >
         #{productDiscount,jdbcType=DECIMAL},
       </if>
-      <if test="productContent != null" >
-        #{productContent,jdbcType=VARCHAR},
-      </if>
-      <if test="nutrientContent != null" >
-        #{nutrientContent,jdbcType=VARCHAR},
-      </if>
-      <if test="peopleSuitble != null" >
-        #{peopleSuitble,jdbcType=VARCHAR},
-      </if>
-      <if test="productInformation != null" >
-        #{productInformation,jdbcType=VARCHAR},
-      </if>
       <if test="status != null" >
         #{status,jdbcType=CHAR},
       </if>
@@ -205,18 +174,6 @@
       <if test="productDiscount != null" >
         product_discount = #{productDiscount,jdbcType=DECIMAL},
       </if>
-      <if test="productContent != null" >
-        product_content = #{productContent,jdbcType=VARCHAR},
-      </if>
-      <if test="nutrientContent != null" >
-        nutrient_content = #{nutrientContent,jdbcType=VARCHAR},
-      </if>
-      <if test="peopleSuitble != null" >
-        people_suitble = #{peopleSuitble,jdbcType=VARCHAR},
-      </if>
-      <if test="productInformation != null" >
-        product_information = #{productInformation,jdbcType=VARCHAR},
-      </if>
       <if test="status != null" >
         status = #{status,jdbcType=CHAR},
       </if>
@@ -246,24 +203,20 @@
       product_num = #{productNum,jdbcType=INTEGER},
       is_discount = #{isDiscount,jdbcType=CHAR},
       product_discount = #{productDiscount,jdbcType=DECIMAL},
-      product_content = #{productContent,jdbcType=VARCHAR},
-      nutrient_content = #{nutrientContent,jdbcType=VARCHAR},
-      people_suitble = #{peopleSuitble,jdbcType=VARCHAR},
-      product_information = #{productInformation,jdbcType=VARCHAR},
       status = #{status,jdbcType=CHAR},
-      version = #{version,jdbcType=BIGINT},
+      version = version+1,
       product_desc = #{productDesc,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}
-    where product_id = #{productId,jdbcType=BIGINT}
+    where product_id = #{productId,jdbcType=BIGINT} and version = #{version,jdbcType=BIGINT}
   </update>
   <select id="getTotalCount" resultType="int">
 		select count(1) from
 		t_product_info
-		where smalltype_id = #{arg0}
-	</select>
+		where status = '0' and smalltype_id = #{arg0} 
+  </select>
 
-	<select id="queryListByPage" resultMap="BaseResultMap">
+  <select id="queryListByPage" resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />
 		from t_product_info
@@ -272,5 +225,5 @@
 		ASC
 		limit
 		#{arg0}, #{arg1}
-	</select>
+  </select>
 </mapper>
