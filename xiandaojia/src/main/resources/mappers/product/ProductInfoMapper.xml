@@ -3,11 +3,10 @@
 <mapper namespace="com.xiandaojia.mapper.product.ProductInfoMapper" >
   <resultMap id="BaseResultMap" type="com.xiandaojia.common.domain.ProductInfo" >
     <id column="product_id" property="productId" jdbcType="BIGINT" />
+    <result column="bigtype_id" property="bigtypeId" jdbcType="BIGINT" />
     <result column="product_name" property="productName" jdbcType="VARCHAR" />
-    <result column="smalltype_id" property="smalltypeId" jdbcType="BIGINT" />
     <result column="product_price" property="productPrice" jdbcType="DECIMAL" />
     <result column="product_url" property="productUrl" jdbcType="VARCHAR" />
-    <result column="product_seqno" property="productSeqno" jdbcType="INTEGER" />
     <result column="price_unit" property="priceUnit" jdbcType="VARCHAR" />
     <result column="product_num" property="productNum" jdbcType="INTEGER" />
     <result column="is_discount" property="isDiscount" jdbcType="CHAR" />
@@ -19,9 +18,8 @@
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    product_id, product_name, smalltype_id, product_price, product_url, product_seqno, 
-    price_unit, product_num, is_discount, product_discount, status, version, product_desc, 
-    create_time, update_time
+    product_id, bigtype_id, product_name, product_price, product_url, price_unit, product_num, 
+    is_discount, product_discount, status, version, product_desc, create_time, update_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -34,39 +32,34 @@
     where product_id = #{productId,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.xiandaojia.common.domain.ProductInfo" useGeneratedKeys="true" keyProperty="productId">
-    insert into t_product_info (product_id, product_name, smalltype_id, 
-      product_price, product_url, product_seqno, 
-      price_unit, product_num, is_discount, 
-      product_discount, status, version, 
-      product_desc, create_time, update_time
-      )
-    values (#{productId,jdbcType=BIGINT}, #{productName,jdbcType=VARCHAR}, #{smalltypeId,jdbcType=BIGINT}, 
-      #{productPrice,jdbcType=DECIMAL}, #{productUrl,jdbcType=VARCHAR}, #{productSeqno,jdbcType=INTEGER}, 
-      #{priceUnit,jdbcType=VARCHAR}, #{productNum,jdbcType=INTEGER}, #{isDiscount,jdbcType=CHAR}, 
-      #{productDiscount,jdbcType=DECIMAL}, #{status,jdbcType=CHAR}, #{version,jdbcType=BIGINT}, 
-      #{productDesc,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
-      )
+    insert into t_product_info (product_id, bigtype_id, product_name, 
+      product_price, product_url, price_unit, 
+      product_num, is_discount, product_discount, 
+      status, version, product_desc, 
+      create_time, update_time)
+    values (#{productId,jdbcType=BIGINT}, #{bigtypeId,jdbcType=BIGINT}, #{productName,jdbcType=VARCHAR}, 
+      #{productPrice,jdbcType=DECIMAL}, #{productUrl,jdbcType=VARCHAR}, #{priceUnit,jdbcType=VARCHAR}, 
+      #{productNum,jdbcType=INTEGER}, #{isDiscount,jdbcType=CHAR}, #{productDiscount,jdbcType=DECIMAL}, 
+      #{status,jdbcType=CHAR}, #{version,jdbcType=BIGINT}, #{productDesc,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.xiandaojia.common.domain.ProductInfo" useGeneratedKeys="true" keyProperty="product_id">
+  <insert id="insertSelective" parameterType="com.xiandaojia.common.domain.ProductInfo" useGeneratedKeys="true" keyProperty="productId">
     insert into t_product_info
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="productId != null" >
         product_id,
       </if>
+      <if test="bigtypeId != null" >
+        bigtype_id,
+      </if>
       <if test="productName != null" >
         product_name,
-      </if>
-      <if test="smalltypeId != null" >
-        smalltype_id,
       </if>
       <if test="productPrice != null" >
         product_price,
       </if>
       <if test="productUrl != null" >
         product_url,
-      </if>
-      <if test="productSeqno != null" >
-        product_seqno,
       </if>
       <if test="priceUnit != null" >
         price_unit,
@@ -100,20 +93,17 @@
       <if test="productId != null" >
         #{productId,jdbcType=BIGINT},
       </if>
+      <if test="bigtypeId != null" >
+        #{bigtypeId,jdbcType=BIGINT},
+      </if>
       <if test="productName != null" >
         #{productName,jdbcType=VARCHAR},
-      </if>
-      <if test="smalltypeId != null" >
-        #{smalltypeId,jdbcType=BIGINT},
       </if>
       <if test="productPrice != null" >
         #{productPrice,jdbcType=DECIMAL},
       </if>
       <if test="productUrl != null" >
         #{productUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="productSeqno != null" >
-        #{productSeqno,jdbcType=INTEGER},
       </if>
       <if test="priceUnit != null" >
         #{priceUnit,jdbcType=VARCHAR},
@@ -147,20 +137,17 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.xiandaojia.common.domain.ProductInfo" >
     update t_product_info
     <set >
+      <if test="bigtypeId != null" >
+        bigtype_id = #{bigtypeId,jdbcType=BIGINT},
+      </if>
       <if test="productName != null" >
         product_name = #{productName,jdbcType=VARCHAR},
-      </if>
-      <if test="smalltypeId != null" >
-        smalltype_id = #{smalltypeId,jdbcType=BIGINT},
       </if>
       <if test="productPrice != null" >
         product_price = #{productPrice,jdbcType=DECIMAL},
       </if>
       <if test="productUrl != null" >
         product_url = #{productUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="productSeqno != null" >
-        product_seqno = #{productSeqno,jdbcType=INTEGER},
       </if>
       <if test="priceUnit != null" >
         price_unit = #{priceUnit,jdbcType=VARCHAR},
@@ -178,7 +165,7 @@
         status = #{status,jdbcType=CHAR},
       </if>
       <if test="version != null" >
-       version = version+1,
+      	 version = version+1,
       </if>
       <if test="productDesc != null" >
         product_desc = #{productDesc,jdbcType=VARCHAR},
@@ -194,11 +181,10 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.xiandaojia.common.domain.ProductInfo" >
     update t_product_info
-    set product_name = #{productName,jdbcType=VARCHAR},
-      smalltype_id = #{smalltypeId,jdbcType=BIGINT},
+    set bigtype_id = #{bigtypeId,jdbcType=BIGINT},
+      product_name = #{productName,jdbcType=VARCHAR},
       product_price = #{productPrice,jdbcType=DECIMAL},
       product_url = #{productUrl,jdbcType=VARCHAR},
-      product_seqno = #{productSeqno,jdbcType=INTEGER},
       price_unit = #{priceUnit,jdbcType=VARCHAR},
       product_num = #{productNum,jdbcType=INTEGER},
       is_discount = #{isDiscount,jdbcType=CHAR},
@@ -210,20 +196,44 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where product_id = #{productId,jdbcType=BIGINT} and version = #{version,jdbcType=BIGINT}
   </update>
-  <select id="getTotalCount" resultType="int">
+  
+  <select id="getTotalCount" parameterType="java.util.HashMap" resultType="int">
 		select count(1) from
-		t_product_info
-		where status = '0' and smalltype_id = #{arg0} 
+		t_product_info A
+		<if test="smalltypeId != null" >
+       	 	JOIN t_small_product_relation B ON  A.product_id = B.product_id
+        </if>
+		where status = '0' 
+		<if test="bigtypeId != null" >
+       	 	and bigtype_id = #{bigtypeId,jdbcType=BIGINT}
+        </if>
+		<if test="productName != null" >
+       	 	and product_name = concat('%',#{productName,jdbcType=VARCHAR},'%') 
+        </if>
+        <if test="smalltypeId != null" >
+       	 	and B.smalltype_id = #{smalltypeId,jdbcType=VARCHAR}
+        </if>
   </select>
 
-  <select id="queryListByPage" resultMap="BaseResultMap">
+  <select id="queryListByPage" parameterType="java.util.HashMap" resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />
-		from t_product_info
-		where status = '0' and smalltype_id = #{arg2}
-		ORDER BY product_seqno
-		ASC
+		from t_product_info A
+		<if test="smalltypeId != null" >
+       	 	JOIN t_small_product_relation B ON  A.product_id = B.product_id
+        </if>
+		where A.status = '0' 
+		<if test="bigtypeId != null" >
+       	 	and A.bigtype_id = #{bigtypeId,jdbcType=BIGINT}
+        </if>
+		<if test="productName != null" >
+       	 	and A.product_name = concat('%',#{productName,jdbcType=VARCHAR},'%') 
+        </if>
+        <if test="smalltypeId != null" >
+       	 	and B.smalltype_id = #{smalltypeId,jdbcType=BIGINT}
+        </if>
+		ORDER BY create_time DESC
 		limit
-		#{arg0}, #{arg1}
+		#{offset}, #{pageSize}
   </select>
 </mapper>

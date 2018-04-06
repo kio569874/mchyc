@@ -1,150 +1,130 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.xiandaojia.mapper.product.ProductSmallTypeInfoMapper">
-	<resultMap id="BaseResultMap"
-		type="com.xiandaojia.common.domain.ProductSmallTypeInfo">
-		<id column="smalltype_id" property="smalltypeId" jdbcType="BIGINT" />
-		<result column="smalltype_name" property="smalltypeName"
-			jdbcType="VARCHAR" />
-		<result column="bigtype_id" property="bigtypeId" jdbcType="BIGINT" />
-		<result column="small_seqno" property="smallSeqno" jdbcType="SMALLINT" />
-		<result column="status" property="status" jdbcType="CHAR" />
-		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
-		<result column="operator" property="operator" jdbcType="VARCHAR" />
-	</resultMap>
-	<sql id="Base_Column_List">
-		smalltype_id, smalltype_name, bigtype_id, small_seqno, status, create_time,
-		update_time,
-		operator
-	</sql>
-	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
-		parameterType="java.lang.Long">
-		select
-		<include refid="Base_Column_List" />
-		from t_product_smalltype_info
-		where smalltype_id = #{smalltypeId,jdbcType=BIGINT}
-	</select>
-	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-		delete from t_product_smalltype_info
-		where smalltype_id = #{smalltypeId,jdbcType=BIGINT}
-	</delete>
-	<insert id="insert" parameterType="com.xiandaojia.common.domain.ProductSmallTypeInfo">
-		insert into t_product_smalltype_info (smalltype_id, smalltype_name,
-		bigtype_id,
-		small_seqno, status, create_time,
-		update_time, operator)
-		values (#{smalltypeId,jdbcType=BIGINT}, #{smalltypeName,jdbcType=VARCHAR},
-		#{bigtypeId,jdbcType=BIGINT},
-		#{smallSeqno,jdbcType=SMALLINT}, #{status,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP},
-		#{updateTime,jdbcType=TIMESTAMP}, #{operator,jdbcType=VARCHAR})
-	</insert>
-	<insert id="insertSelective" parameterType="com.xiandaojia.common.domain.ProductSmallTypeInfo">
-		insert into t_product_smalltype_info
-		<trim prefix="(" suffix=")" suffixOverrides=",">
-			<if test="smalltypeId != null">
-				smalltype_id,
-			</if>
-			<if test="smalltypeName != null">
-				smalltype_name,
-			</if>
-			<if test="bigtypeId != null">
-				bigtype_id,
-			</if>
-			<if test="smallSeqno != null">
-				small_seqno,
-			</if>
-			<if test="status != null">
-				status,
-			</if>
-			<if test="createTime != null">
-				create_time,
-			</if>
-			<if test="updateTime != null">
-				update_time,
-			</if>
-			<if test="operator != null">
-				operator,
-			</if>
-		</trim>
-		<trim prefix="values (" suffix=")" suffixOverrides=",">
-			<if test="smalltypeId != null">
-				#{smalltypeId,jdbcType=BIGINT},
-			</if>
-			<if test="smalltypeName != null">
-				#{smalltypeName,jdbcType=VARCHAR},
-			</if>
-			<if test="bigtypeId != null">
-				#{bigtypeId,jdbcType=BIGINT},
-			</if>
-			<if test="smallSeqno != null">
-				#{smallSeqno,jdbcType=SMALLINT},
-			</if>
-			<if test="status != null">
-				#{status,jdbcType=CHAR},
-			</if>
-			<if test="createTime != null">
-				#{createTime,jdbcType=TIMESTAMP},
-			</if>
-			<if test="updateTime != null">
-				#{updateTime,jdbcType=TIMESTAMP},
-			</if>
-			<if test="operator != null">
-				#{operator,jdbcType=VARCHAR},
-			</if>
-		</trim>
-	</insert>
-	<update id="updateByPrimaryKeySelective" parameterType="com.xiandaojia.common.domain.ProductSmallTypeInfo">
-		update t_product_smalltype_info
-		<set>
-			<if test="smalltypeName != null">
-				smalltype_name = #{smalltypeName,jdbcType=VARCHAR},
-			</if>
-			<if test="bigtypeId != null">
-				bigtype_id = #{bigtypeId,jdbcType=BIGINT},
-			</if>
-			<if test="smallSeqno != null">
-				small_seqno = #{smallSeqno,jdbcType=SMALLINT},
-			</if>
-			<if test="status != null">
-				status = #{status,jdbcType=CHAR},
-			</if>
-			<if test="createTime != null">
-				create_time = #{createTime,jdbcType=TIMESTAMP},
-			</if>
-			<if test="updateTime != null">
-				update_time = #{updateTime,jdbcType=TIMESTAMP},
-			</if>
-			<if test="operator != null">
-				operator = #{operator,jdbcType=VARCHAR},
-			</if>
-		</set>
-		where smalltype_id = #{smalltypeId,jdbcType=BIGINT}
-	</update>
-	<update id="updateByPrimaryKey" parameterType="com.xiandaojia.common.domain.ProductSmallTypeInfo">
-		update t_product_smalltype_info
-		set smalltype_name = #{smalltypeName,jdbcType=VARCHAR},
-		bigtype_id = #{bigtypeId,jdbcType=BIGINT},
-		small_seqno = #{smallSeqno,jdbcType=SMALLINT},
-		status = #{status,jdbcType=CHAR},
-		create_time = #{createTime,jdbcType=TIMESTAMP},
-		update_time = #{updateTime,jdbcType=TIMESTAMP},
-		operator = #{operator,jdbcType=VARCHAR}
-		where smalltype_id = #{smalltypeId,jdbcType=BIGINT}
-	</update>
-
-	<select id="getTotalCount" resultType="int">
+<mapper namespace="com.xiandaojia.mapper.product.ProductSmallTypeInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.xiandaojia.common.domain.ProductSmallTypeInfo" >
+    <id column="smalltype_id" property="smalltypeId" jdbcType="BIGINT" />
+    <result column="smalltype_name" property="smalltypeName" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="CHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="operator" property="operator" jdbcType="VARCHAR" />
+    <result column="small_seqno" property="smallSeqno" jdbcType="SMALLINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    smalltype_id, smalltype_name, status, create_time, update_time, operator, small_seqno
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_product_smalltype_info
+    where smalltype_id = #{smalltypeId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_product_smalltype_info
+    where smalltype_id = #{smalltypeId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.xiandaojia.common.domain.ProductSmallTypeInfo" >
+    insert into t_product_smalltype_info (smalltype_id, smalltype_name, status, 
+      create_time, update_time, operator, 
+      small_seqno)
+    values (#{smalltypeId,jdbcType=BIGINT}, #{smalltypeName,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{operator,jdbcType=VARCHAR}, 
+      #{smallSeqno,jdbcType=SMALLINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xiandaojia.common.domain.ProductSmallTypeInfo" >
+    insert into t_product_smalltype_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="smalltypeId != null" >
+        smalltype_id,
+      </if>
+      <if test="smalltypeName != null" >
+        smalltype_name,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="operator != null" >
+        operator,
+      </if>
+      <if test="smallSeqno != null" >
+        small_seqno,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="smalltypeId != null" >
+        #{smalltypeId,jdbcType=BIGINT},
+      </if>
+      <if test="smalltypeName != null" >
+        #{smalltypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operator != null" >
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="smallSeqno != null" >
+        #{smallSeqno,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xiandaojia.common.domain.ProductSmallTypeInfo" >
+    update t_product_smalltype_info
+    <set >
+      <if test="smalltypeName != null" >
+        smalltype_name = #{smalltypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operator != null" >
+        operator = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="smallSeqno != null" >
+        small_seqno = #{smallSeqno,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where smalltype_id = #{smalltypeId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xiandaojia.common.domain.ProductSmallTypeInfo" >
+    update t_product_smalltype_info
+    set smalltype_name = #{smalltypeName,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      operator = #{operator,jdbcType=VARCHAR},
+      small_seqno = #{smallSeqno,jdbcType=SMALLINT}
+    where smalltype_id = #{smalltypeId,jdbcType=BIGINT}
+  </update>
+  <select id="getTotalCount" resultType="int">
 		select count(1) from
 		t_product_smalltype_info
-		where status = '0' and bigtype_id = #{arg0}
+		where status = '0' 
 	</select>
 
 	<select id="queryListByPage" resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />
 		from t_product_smalltype_info
-		where status = '0' and bigtype_id =
-		#{arg2}
+		where status = '0'
 		ORDER BY small_seqno
 		ASC
 		limit

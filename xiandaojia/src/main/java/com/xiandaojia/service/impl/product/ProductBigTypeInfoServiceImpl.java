@@ -39,8 +39,7 @@ public class ProductBigTypeInfoServiceImpl extends AbstractBaseService implement
 	}
 
 	@Override
-	public PaginationDto<ProductBigTypeInfo> queryProductListByPage(int page, int pageSize, Integer totalCount,
-			Long smalltypeId) throws SysException {
+	public PaginationDto<ProductBigTypeInfo> queryProductListByPage(int page, int pageSize, Integer totalCount) throws SysException {
 		PaginationDto<ProductBigTypeInfo> paginationDto = new PaginationDto<ProductBigTypeInfo>();
 		// 分页参数校验
 		PaginationUtil.checkPaginationArgs(page, pageSize);

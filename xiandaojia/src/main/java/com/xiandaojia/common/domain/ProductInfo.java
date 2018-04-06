@@ -1,26 +1,18 @@
 package com.xiandaojia.common.domain;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class ProductInfo implements Serializable{
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class ProductInfo {
+    private Long productId;
 
-	private Long productId;
+    private Long bigtypeId;
 
     private String productName;
-
-    private Long smalltypeId;
 
     private BigDecimal productPrice;
 
     private String productUrl;
-
-    private Integer productSeqno;
 
     private String priceUnit;
 
@@ -48,20 +40,20 @@ public class ProductInfo implements Serializable{
         this.productId = productId;
     }
 
+    public Long getBigtypeId() {
+        return bigtypeId;
+    }
+
+    public void setBigtypeId(Long bigtypeId) {
+        this.bigtypeId = bigtypeId;
+    }
+
     public String getProductName() {
         return productName;
     }
 
     public void setProductName(String productName) {
         this.productName = productName == null ? null : productName.trim();
-    }
-
-    public Long getSmalltypeId() {
-        return smalltypeId;
-    }
-
-    public void setSmalltypeId(Long smalltypeId) {
-        this.smalltypeId = smalltypeId;
     }
 
     public BigDecimal getProductPrice() {
@@ -78,14 +70,6 @@ public class ProductInfo implements Serializable{
 
     public void setProductUrl(String productUrl) {
         this.productUrl = productUrl == null ? null : productUrl.trim();
-    }
-
-    public Integer getProductSeqno() {
-        return productSeqno;
-    }
-
-    public void setProductSeqno(Integer productSeqno) {
-        this.productSeqno = productSeqno;
     }
 
     public String getPriceUnit() {

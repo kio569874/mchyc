@@ -2,7 +2,6 @@ package com.xiandaojia.mapper.product;
 
 import java.util.List;
 
-import com.xiandaojia.common.domain.ProductInfo;
 import com.xiandaojia.common.domain.ProductSmallTypeInfo;
 
 public interface ProductSmallTypeInfoMapper {
@@ -18,7 +17,7 @@ public interface ProductSmallTypeInfoMapper {
 
     int updateByPrimaryKey(ProductSmallTypeInfo record);
     
-	int getTotalCount(Long bigtypeId);
+	int getTotalCount();
 
-	List<ProductSmallTypeInfo> queryListByPage(int offset, int pageSize, Long bigtypeId);
+	List<ProductSmallTypeInfo> queryListByPage(int offset, int pageSize);
 }

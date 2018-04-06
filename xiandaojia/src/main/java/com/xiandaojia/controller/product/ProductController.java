@@ -1,6 +1,7 @@
 package com.xiandaojia.controller.product;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,6 +22,7 @@ import com.xiandaojia.common.utils.JsonBeanUtil;
 import com.xiandaojia.controller.BaseController;
 import com.xiandaojia.service.product.IProductBigTypeInfoService;
 import com.xiandaojia.service.product.IProductInfoService;
+import com.xiandaojia.service.product.IProductInformationService;
 import com.xiandaojia.service.product.IProductSmallTypeInfoService;
 
 /**
@@ -39,6 +41,8 @@ public class ProductController extends BaseController {
 	private IProductBigTypeInfoService productBigTypeInfoService;
 	@Autowired
 	private IProductSmallTypeInfoService productSmallTypeInfoService;
+	@Autowired
+	private IProductInformationService productInformationService;
 
 	@RequestMapping(value = "/productInfo/insert", method = RequestMethod.POST)
 	@ResponseBody
@@ -87,37 +91,15 @@ public class ProductController extends BaseController {
 	public String productInfoQuery(@RequestBody String content) {
 		try {
 			JSONObject jsonObj = JSONObject.parseObject(content);
-			Long smalltypeId = jsonObj.getLong("smalltypeId");
 			int page = jsonObj.getInteger("page");
 			int pageSize = jsonObj.getInteger("pageSize");
-			PaginationDto<ProductDto> paginationDto = productInfoService.queryProductListByPage(page, pageSize, null,
-					smalltypeId);
-			List<ProductDto> productInfoList = paginationDto.getData();
+			Map<String, Object> paramMap = jsonObj;
+			PaginationDto<ProductInfo> paginationDto = productInfoService.queryProductListByPage(page, pageSize, null,
+					paramMap);
+			List<ProductInfo> productInfoList = paginationDto.getData();
 			if (productInfoList != null && productInfoList.size() > 0) {
 				JSONObject list = new JSONObject();
 				JSONArray jsonArr = (JSONArray) JSONArray.toJSON(productInfoList);
-				list.put("listData", jsonArr);
-				return getSuccessResultMsg(list.toJSONString());
-			} else {
-				return getSuccessResultMsg(new JSONObject().toJSONString());
-			}
-		} catch (Exception e) {
-			logger.error(e.getMessage(), e);
-			return getErrorResultMsg(e.getMessage());
-		}
-
-	}
-
-	@RequestMapping(value = "/productInfo/informationQurey", method = RequestMethod.POST)
-	@ResponseBody
-	public String productInformationQurey(@RequestBody String content) {
-		try {
-			JSONObject jsonObj = JSONObject.parseObject(content);
-			Long productId = jsonObj.getLong("productId");
-			List<ProductInformation> productInformationList = productInfoService.queryListByProductId(productId);
-			if (productInformationList != null && productInformationList.size() > 0) {
-				JSONObject list = new JSONObject();
-				JSONArray jsonArr = (JSONArray) JSONArray.toJSON(productInformationList);
 				list.put("listData", jsonArr);
 				return getSuccessResultMsg(list.toJSONString());
 			} else {
@@ -180,7 +162,7 @@ public class ProductController extends BaseController {
 			int page = jsonObj.getInteger("page");
 			int pageSize = jsonObj.getInteger("pageSize");
 			PaginationDto<ProductBigTypeInfo> paginationDto = productBigTypeInfoService.queryProductListByPage(page,
-					pageSize, null, null);
+					pageSize, null);
 			List<ProductBigTypeInfo> productBigTypeInfoList = paginationDto.getData();
 			if (productBigTypeInfoList != null && productBigTypeInfoList.size() > 0) {
 				JSONObject list = new JSONObject();
@@ -216,7 +198,7 @@ public class ProductController extends BaseController {
 	public String productSmallTypeInfoDelete(@RequestBody String content) {
 		try {
 			ProductSmallTypeInfo productSmallTypeInfo = JsonBeanUtil.stringToBean(ProductSmallTypeInfo.class, content);
-			productSmallTypeInfoService.delete(productSmallTypeInfo.getBigtypeId());
+			productSmallTypeInfoService.delete(productSmallTypeInfo.getSmalltypeId());
 			return getSuccessResultMsg();
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
@@ -244,15 +226,115 @@ public class ProductController extends BaseController {
 	public String productSmallTypeInfoQuery(@RequestBody String content) {
 		try {
 			JSONObject jsonObj = JSONObject.parseObject(content);
-			Long bigtypeId = jsonObj.getLong("bigtypeId");
 			int page = jsonObj.getInteger("page");
 			int pageSize = jsonObj.getInteger("pageSize");
 			PaginationDto<ProductSmallTypeInfo> paginationDto = productSmallTypeInfoService.queryProductListByPage(page,
-					pageSize, null, bigtypeId);
+					pageSize, null);
 			List<ProductSmallTypeInfo> productSmallTypeInfoList = paginationDto.getData();
 			if (productSmallTypeInfoList != null && productSmallTypeInfoList.size() > 0) {
 				JSONObject list = new JSONObject();
 				JSONArray jsonArr = (JSONArray) JSONArray.toJSON(productSmallTypeInfoList);
+				list.put("listData", jsonArr);
+				return getSuccessResultMsg(list.toJSONString());
+			} else {
+				return getSuccessResultMsg(new JSONObject().toJSONString());
+			}
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			return getErrorResultMsg(e.getMessage());
+		}
+
+	}
+
+	@RequestMapping(value = "/productInformation/insert", method = RequestMethod.POST)
+	@ResponseBody
+	public String productInformationInsert(@RequestBody String content) {
+		try {
+			ProductInformation productInformation = JsonBeanUtil.stringToBean(ProductInformation.class, content);
+			productInformationService.insert(productInformation);
+			return getSuccessResultMsg();
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			return getErrorResultMsg(e.getMessage());
+		}
+
+	}
+
+	@RequestMapping(value = "/productInformation/delete", method = RequestMethod.POST)
+	@ResponseBody
+	public String productInformationDelete(@RequestBody String content) {
+		try {
+			ProductInformation productInformation = JsonBeanUtil.stringToBean(ProductInformation.class, content);
+			productInformationService.delete(productInformation.getInformationId());
+			return getSuccessResultMsg();
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			return getErrorResultMsg(e.getMessage());
+		}
+
+	}
+
+	@RequestMapping(value = "/productInformation/update", method = RequestMethod.POST)
+	@ResponseBody
+	public String productInformationUpdate(@RequestBody String content) {
+		try {
+			ProductInformation productInformation = JsonBeanUtil.stringToBean(ProductInformation.class, content);
+			productInformationService.update(productInformation);
+			return getSuccessResultMsg();
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			return getErrorResultMsg(e.getMessage());
+		}
+
+	}
+
+	/**
+	 * 介绍信息本身分页查询
+	 * 
+	 * @param content
+	 * @return
+	 */
+	@RequestMapping(value = "/productInformation/query", method = RequestMethod.POST)
+	@ResponseBody
+	public String productInformationQuery(@RequestBody String content) {
+		try {
+			JSONObject jsonObj = JSONObject.parseObject(content);
+			int page = jsonObj.getInteger("page");
+			int pageSize = jsonObj.getInteger("pageSize");
+			PaginationDto<ProductInformation> paginationDto = productInformationService.queryProductListByPage(page,
+					pageSize, null);
+			List<ProductInformation> productInformationList = paginationDto.getData();
+			if (productInformationList != null && productInformationList.size() > 0) {
+				JSONObject list = new JSONObject();
+				JSONArray jsonArr = (JSONArray) JSONArray.toJSON(productInformationList);
+				list.put("listData", jsonArr);
+				return getSuccessResultMsg(list.toJSONString());
+			} else {
+				return getSuccessResultMsg(new JSONObject().toJSONString());
+			}
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			return getErrorResultMsg(e.getMessage());
+		}
+
+	}
+
+	/**
+	 * 根据产品id查询介绍等信息
+	 * 
+	 * @param content
+	 * @return
+	 */
+	@RequestMapping(value = "/productInformation/queryByProductId", method = RequestMethod.POST)
+	@ResponseBody
+	public String productInformationQureyByProductId(@RequestBody String content) {
+		try {
+			JSONObject jsonObj = JSONObject.parseObject(content);
+			Long productId = jsonObj.getLong("productId");
+			List<ProductInformation> productInformationList = productInformationService.queryListByProductId(productId);
+			if (productInformationList != null && productInformationList.size() > 0) {
+				JSONObject list = new JSONObject();
+				JSONArray jsonArr = (JSONArray) JSONArray.toJSON(productInformationList);
 				list.put("listData", jsonArr);
 				return getSuccessResultMsg(list.toJSONString());
 			} else {

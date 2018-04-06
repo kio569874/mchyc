@@ -7,10 +7,6 @@ public class ProductSmallTypeInfo {
 
     private String smalltypeName;
 
-    private Long bigtypeId;
-
-    private Short smallSeqno;
-
     private String status;
 
     private Date createTime;
@@ -18,6 +14,8 @@ public class ProductSmallTypeInfo {
     private Date updateTime;
 
     private String operator;
+
+    private Short smallSeqno;
 
     public Long getSmalltypeId() {
         return smalltypeId;
@@ -33,22 +31,6 @@ public class ProductSmallTypeInfo {
 
     public void setSmalltypeName(String smalltypeName) {
         this.smalltypeName = smalltypeName == null ? null : smalltypeName.trim();
-    }
-
-    public Long getBigtypeId() {
-        return bigtypeId;
-    }
-
-    public void setBigtypeId(Long bigtypeId) {
-        this.bigtypeId = bigtypeId;
-    }
-
-    public Short getSmallSeqno() {
-        return smallSeqno;
-    }
-
-    public void setSmallSeqno(Short smallSeqno) {
-        this.smallSeqno = smallSeqno;
     }
 
     public String getStatus() {
@@ -81,5 +63,13 @@ public class ProductSmallTypeInfo {
 
     public void setOperator(String operator) {
         this.operator = operator == null ? null : operator.trim();
+    }
+
+    public Short getSmallSeqno() {
+        return smallSeqno;
+    }
+
+    public void setSmallSeqno(Short smallSeqno) {
+        this.smallSeqno = smallSeqno;
     }
 }

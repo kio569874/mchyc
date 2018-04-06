@@ -1,23 +1,13 @@
 package com.xiandaojia.common.domain;
 
-import java.io.Serializable;
 import java.util.Date;
 
-public class ProductInformation implements Serializable {
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
-	private Long informationId;
+public class ProductInformation {
+    private Long informationId;
 
     private String informationName;
 
-    private Long productId;
-
     private String informationContent;
-
-    private Short informationSeqno;
 
     private String informationDesc;
 
@@ -41,28 +31,12 @@ public class ProductInformation implements Serializable {
         this.informationName = informationName == null ? null : informationName.trim();
     }
 
-    public Long getProductId() {
-        return productId;
-    }
-
-    public void setProductId(Long productId) {
-        this.productId = productId;
-    }
-
     public String getInformationContent() {
         return informationContent;
     }
 
     public void setInformationContent(String informationContent) {
         this.informationContent = informationContent == null ? null : informationContent.trim();
-    }
-
-    public Short getInformationSeqno() {
-        return informationSeqno;
-    }
-
-    public void setInformationSeqno(Short informationSeqno) {
-        this.informationSeqno = informationSeqno;
     }
 
     public String getInformationDesc() {

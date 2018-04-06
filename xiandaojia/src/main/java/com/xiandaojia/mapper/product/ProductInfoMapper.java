@@ -1,23 +1,24 @@
 package com.xiandaojia.mapper.product;
 
 import java.util.List;
+import java.util.Map;
 
 import com.xiandaojia.common.domain.ProductInfo;
 
 public interface ProductInfoMapper {
-	int deleteByPrimaryKey(Long productId);
+    int deleteByPrimaryKey(Long productId);
 
-	int insert(ProductInfo record);
+    int insert(ProductInfo record);
 
-	int insertSelective(ProductInfo record);
+    int insertSelective(ProductInfo record);
 
-	ProductInfo selectByPrimaryKey(Long productId);
+    ProductInfo selectByPrimaryKey(Long productId);
 
-	int updateByPrimaryKeySelective(ProductInfo record);
+    int updateByPrimaryKeySelective(ProductInfo record);
 
-	int updateByPrimaryKey(ProductInfo record);
+    int updateByPrimaryKey(ProductInfo record);
+    
+	int getTotalCount(Map<String,Object> paramMap);
 
-	int getTotalCount(Long smalltypeId);
-
-	List<ProductInfo> queryListByPage(int offset, int pageSize, Long smalltypeId);
+	List<ProductInfo> queryListByPage(Map<String,Object> paramMap);
 }

@@ -41,16 +41,14 @@ public class ProductSmallTypeInfoServiceImpl extends AbstractBaseService impleme
 	}
 
 	@Override
-	public PaginationDto<ProductSmallTypeInfo> queryProductListByPage(int page, int pageSize, Integer totalCount,
-			Long bigtypeId) throws SysException {
+	public PaginationDto<ProductSmallTypeInfo> queryProductListByPage(int page, int pageSize, Integer totalCount) throws SysException {
 		PaginationDto<ProductSmallTypeInfo> paginationDto = new PaginationDto<ProductSmallTypeInfo>();
 		PaginationUtil.checkPaginationArgs(page, pageSize);
 		int offset = (page - 1) * pageSize;
 		if (totalCount == null || totalCount <= 0) {
-			paginationDto.setTotalCount(productSmallTypeInfoMapper.getTotalCount(bigtypeId));
+			paginationDto.setTotalCount(productSmallTypeInfoMapper.getTotalCount());
 		}
-		List<ProductSmallTypeInfo> list = productSmallTypeInfoMapper.queryListByPage(offset, pageSize,
-				bigtypeId);
+		List<ProductSmallTypeInfo> list = productSmallTypeInfoMapper.queryListByPage(offset, pageSize);
 		paginationDto.setData(list);
 		return paginationDto;
 	}

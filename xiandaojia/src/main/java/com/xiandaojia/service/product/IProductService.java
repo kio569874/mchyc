@@ -5,6 +5,7 @@ import com.xiandaojia.common.exception.SysException;
 import com.xiandaojia.service.IBaseService;
 
 public interface IProductService<T> extends IBaseService<T> {
+	
 	/**
 	 * 根据小类分页查询产品信息
 	 * 
@@ -14,6 +15,7 @@ public interface IProductService<T> extends IBaseService<T> {
 	 * @param userId
 	 * @return
 	 */
-	PaginationDto<T> queryProductListByPage(int page, int pageSize, Integer totalCount, Long smalltypeId)
+	PaginationDto<T> queryProductListByPage(int page, int pageSize, Integer totalCount)
 			throws SysException;
+	
 }
