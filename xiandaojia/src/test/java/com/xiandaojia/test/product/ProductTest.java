@@ -10,18 +10,27 @@ import com.xiandaojia.test.SendHttp;
 public class ProductTest {
 
 	public static void main(String[] args) {
+		// 大类插入
 		// productBigTypeInfoInsert();
-		productSmallTypeInfoInsert();
+		// 属性插入
+		// productSmallTypeInfoInsert();
+		// 介绍信息插入
+		// productInformationInsert();
+		// 产品信息插入
 		// productInfoInsert();
+		// 产品信息分页查询
+		// queryProductInfo();
+		// 根据产品id查询介绍信息
+		productInformationQureyByProductId();
 
 	}
 
 	private static void productBigTypeInfoInsert() {
 		JSONObject json = new JSONObject();
-		json.put("bigtypeName", "果蔬到家");
-		json.put("bigtypeSeqno", 0);
+		json.put("bigtypeName", "美食推荐");
+		json.put("bigtypeSeqno", 2);
 		json.put("status", StatusEnum.START.getStatus());
-		json.put("operator", "杨超");
+		json.put("operator", "yangchao");
 		System.out.println(json);
 		String re = SendHttp.getInstance()
 				.sendPost("http://127.0.0.1:8999/xiandaojia/product/productBigTypeInfo/insert", json.toString());
@@ -30,14 +39,24 @@ public class ProductTest {
 
 	private static void productSmallTypeInfoInsert() {
 		JSONObject json = new JSONObject();
-		json.put("smalltypeName", "热销");
-		json.put("bigtypeId", 1);
-		json.put("smallSeqno", 0);
+		json.put("smalltypeName", "植被");
+		json.put("smallSeqno", 9);
 		json.put("status", "0");
 		json.put("operator", "yangchao");
 		System.out.println(json);
-		String re = SendHttp.getInstance().sendPost("http://127.0.0.1:8999/xiandaojia/product/productSmallTypeInfo/insert",
-				json.toString());
+		String re = SendHttp.getInstance()
+				.sendPost("http://127.0.0.1:8999/xiandaojia/product/productSmallTypeInfo/insert", json.toString());
+		System.out.println(re);
+	}
+
+	private static void productInformationInsert() {
+		JSONObject json = new JSONObject();
+		json.put("informationName", "产品知识");
+		json.put("informationContent", "产品很好很nice");
+		json.put("informationDesc", "备注");
+		System.out.println(json);
+		String re = SendHttp.getInstance()
+				.sendPost("http://127.0.0.1:8999/xiandaojia/product/productInformation/insert", json.toString());
 		System.out.println(re);
 	}
 
@@ -45,7 +64,7 @@ public class ProductTest {
 		JSONObject json = new JSONObject();
 		JSONObject productInfoJson = new JSONObject();
 		productInfoJson.put("productName", "亚木沟生态草莓500g");
-		productInfoJson.put("smalltypeId", 1);
+		productInfoJson.put("bigtypeId", 1);
 		productInfoJson.put("productPrice", 15.50);
 		productInfoJson.put("productUrl", "/product/" + UUID.randomUUID().toString() + ".jpg");
 		productInfoJson.put("productSeqno", 0);
@@ -55,37 +74,61 @@ public class ProductTest {
 		productInfoJson.put("productDiscount", 80);// 0-是，1-否
 		productInfoJson.put("status", "0");
 		productInfoJson.put("productDesc", "备注");
-		JSONArray jsonArr = new JSONArray();
-		JSONObject productInformationJson1 = new JSONObject();
-		productInformationJson1.put("informationName", "产品介绍");
-		productInformationJson1.put("informationContent", "来自亚木沟草莓种植基地，无公害生态种植，深山矿泉水源浇灌...");
-		productInformationJson1.put("informationSeqno", 0);
+		JSONArray productInformationRelationArr = new JSONArray();
+		JSONObject productInformationRelationJson1 = new JSONObject();
+		productInformationRelationJson1.put("informationId", 1);
+		productInformationRelationJson1.put("informationSeqno", 0);
+		JSONObject productInformationRelationJson2 = new JSONObject();
+		productInformationRelationJson2.put("informationId", 2);
+		productInformationRelationJson2.put("informationSeqno", 1);
+		JSONObject productInformationRelationJson3 = new JSONObject();
+		productInformationRelationJson3.put("informationId", 3);
+		productInformationRelationJson3.put("informationSeqno", 2);
+		JSONObject productInformationRelationJson4 = new JSONObject();
+		productInformationRelationJson4.put("informationId", 4);
+		productInformationRelationJson4.put("informationSeqno", 3);
 
-		JSONObject productInformationJson2 = new JSONObject();
-		productInformationJson2.put("informationName", "营养成分");
-		productInformationJson2.put("informationContent", "来自亚木沟草莓种植基地，无公害生态种植，深山矿泉水源浇灌...");
-		productInformationJson2.put("informationSeqno", 1);
+		productInformationRelationArr.add(productInformationRelationJson1);
+		productInformationRelationArr.add(productInformationRelationJson2);
+		productInformationRelationArr.add(productInformationRelationJson3);
+		productInformationRelationArr.add(productInformationRelationJson4);
 
-		JSONObject productInformationJson3 = new JSONObject();
-		productInformationJson3.put("informationName", "适宜人群");
-		productInformationJson3.put("informationContent", "来自亚木沟草莓种植基地，无公害生态种植，深山矿泉水源浇灌...");
-		productInformationJson3.put("informationSeqno", 2);
+		JSONArray smallProductRelationArr = new JSONArray();
+		JSONObject smallProductRelationJson1 = new JSONObject();
+		smallProductRelationJson1.put("smalltypeId", 1);
+		JSONObject smallProductRelationJson2 = new JSONObject();
+		smallProductRelationJson2.put("smalltypeId", 2);
+		smallProductRelationArr.add(smallProductRelationJson1);
+		smallProductRelationArr.add(smallProductRelationJson2);
 
-		JSONObject productInformationJson4 = new JSONObject();
-		productInformationJson4.put("informationName", "产品知识");
-		productInformationJson4.put("informationContent", "来自亚木沟草莓种植基地，无公害生态种植，深山矿泉水源浇灌...");
-		productInformationJson4.put("informationSeqno", 3);
-		jsonArr.add(productInformationJson1);
-		jsonArr.add(productInformationJson2);
-		jsonArr.add(productInformationJson3);
-		jsonArr.add(productInformationJson4);
 		json.put("productInfo", productInfoJson);
-		json.put("productInformationList", jsonArr);
+		json.put("productInformationRelationList", productInformationRelationArr);
+		json.put("smallProductRelationList", smallProductRelationArr);
 		System.out.println(json);
-		// ProductDto productDto = JsonBeanUtil.jsonToBean(ProductDto.class, json);
-		// System.out.println(productDto.getProductInfo().getProductName());
 		String re = SendHttp.getInstance().sendPost("http://127.0.0.1:8999/xiandaojia/product/productInfo/insert",
 				json.toString());
+		System.out.println(re);
+	}
+
+	private static void queryProductInfo() {
+		JSONObject json = new JSONObject();
+		json.put("page", 1);
+		json.put("pageSize", 10);
+		// json.put("smalltypeId", 1);
+		// json.put("bigtypeId", 1);
+		// json.put("productName", "草莓");
+		System.out.println(json);
+		String re = SendHttp.getInstance().sendPost("http://127.0.0.1:8999/xiandaojia/product/productInfo/query",
+				json.toString());
+		System.out.println(re);
+	}
+
+	private static void productInformationQureyByProductId() {
+		JSONObject json = new JSONObject();
+		json.put("productId", 2);
+		System.out.println(json);
+		String re = SendHttp.getInstance().sendPost(
+				"http://127.0.0.1:8999/xiandaojia/product/productInformation/queryByProductId", json.toString());
 		System.out.println(re);
 	}
 
