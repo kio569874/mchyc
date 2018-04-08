@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xiandaojia.mapper.param.CityAreaMapper">
+	<resultMap id="BaseResultMap" type="com.xiandaojia.common.domain.CityArea">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="pid" property="pid" jdbcType="VARCHAR" />
+		<result column="pcode" property="pcode" jdbcType="VARCHAR" />
+		<result column="pname" property="pname" jdbcType="VARCHAR" />
+		<result column="pshortname" property="pshortname" jdbcType="VARCHAR" />
+		<result column="plevel" property="plevel" jdbcType="CHAR" />
+		<result column="parentid" property="parentid" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, pid, pcode, pname, pshortname, plevel, parentid
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from t_city_area
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from t_city_area
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert" parameterType="com.xiandaojia.common.domain.CityArea">
+		insert into t_city_area (id, pid, pcode,
+		pname, pshortname, plevel,
+		parentid)
+		values (#{id,jdbcType=BIGINT}, #{pid,jdbcType=VARCHAR},
+		#{pcode,jdbcType=VARCHAR},
+		#{pname,jdbcType=VARCHAR}, #{pshortname,jdbcType=VARCHAR}, #{plevel,jdbcType=CHAR},
+		#{parentid,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.xiandaojia.common.domain.CityArea">
+		insert into t_city_area
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="pid != null">
+				pid,
+			</if>
+			<if test="pcode != null">
+				pcode,
+			</if>
+			<if test="pname != null">
+				pname,
+			</if>
+			<if test="pshortname != null">
+				pshortname,
+			</if>
+			<if test="plevel != null">
+				plevel,
+			</if>
+			<if test="parentid != null">
+				parentid,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="pid != null">
+				#{pid,jdbcType=VARCHAR},
+			</if>
+			<if test="pcode != null">
+				#{pcode,jdbcType=VARCHAR},
+			</if>
+			<if test="pname != null">
+				#{pname,jdbcType=VARCHAR},
+			</if>
+			<if test="pshortname != null">
+				#{pshortname,jdbcType=VARCHAR},
+			</if>
+			<if test="plevel != null">
+				#{plevel,jdbcType=CHAR},
+			</if>
+			<if test="parentid != null">
+				#{parentid,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.xiandaojia.common.domain.CityArea">
+		update t_city_area
+		<set>
+			<if test="pid != null">
+				pid = #{pid,jdbcType=VARCHAR},
+			</if>
+			<if test="pcode != null">
+				pcode = #{pcode,jdbcType=VARCHAR},
+			</if>
+			<if test="pname != null">
+				pname = #{pname,jdbcType=VARCHAR},
+			</if>
+			<if test="pshortname != null">
+				pshortname = #{pshortname,jdbcType=VARCHAR},
+			</if>
+			<if test="plevel != null">
+				plevel = #{plevel,jdbcType=CHAR},
+			</if>
+			<if test="parentid != null">
+				parentid = #{parentid,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.xiandaojia.common.domain.CityArea">
+		update t_city_area
+		set pid = #{pid,jdbcType=VARCHAR},
+		pcode = #{pcode,jdbcType=VARCHAR},
+		pname = #{pname,jdbcType=VARCHAR},
+		pshortname = #{pshortname,jdbcType=VARCHAR},
+		plevel = #{plevel,jdbcType=CHAR},
+		parentid = #{parentid,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<select id="queryListByPlevel" parameterType="java.util.HashMap"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_city_area
+		where 1= 1
+		<if test="plevel != null">
+			and plevel = #{plevel,jdbcType=CHAR}
+		</if>
+		<if test="parentid != null">
+			and parentid = #{parentid,jdbcType=VARCHAR}
+		</if>
+	</select>
+</mapper>

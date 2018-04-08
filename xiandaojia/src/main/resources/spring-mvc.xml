@@ -29,6 +29,13 @@
 	<mvc:annotation-driven />
 	<mvc:resources mapping="/mobile/**" location="/mobile/" />
 	<mvc:resources mapping="/admin/**" location="/admin/" />
+	<mvc:cors>  
+    <mvc:mapping path="/**"  
+                 allowed-origins="*"  
+                 allowed-methods="POST, GET, OPTIONS, DELETE, PUT"  
+                 allowed-headers="Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With"  
+                 allow-credentials="true" />  
+	</mvc:cors>  
 		<!-- 定义跳转的文件的前后缀 ，视图模式配置 -->
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
