@@ -20,7 +20,7 @@ public class SystemUserTest {
 		json.put("userCode", "yangchao");
 		json.put("userPassword", "123456");
 		System.out.println(json);
-		String re = SendHttp.getInstance().sendPost("http://127.0.0.1:8999/xiandaojia/systemUser/login",
+		String re = SendHttp.getInstance().sendPost("http://127.0.0.1:8999/xiandaojia/userCenter/systemUser/login",
 				json.toString());
 		System.out.println(re);
 	}
@@ -34,7 +34,7 @@ public class SystemUserTest {
 		json.put("userPosition", "码农");
 		json.put("userStatus", "0");
 		System.out.println(json);
-		String re = SendHttp.getInstance().sendPost("http://127.0.0.1:8999/xiandaojia/systemUser/insert",
+		String re = SendHttp.getInstance().sendPost("http://127.0.0.1:8999/xiandaojia/userCenter/systemUser/insert",
 				json.toString());
 		System.out.println(re);
 	}
@@ -50,7 +50,7 @@ public class SystemUserTest {
 		json.put("userPosition", "码农111");
 		json.put("userStatus", "0");
 		System.out.println(json);
-		String re = SendHttp.getInstance().sendPost("http://127.0.0.1:8999/xiandaojia/systemUser/update",
+		String re = SendHttp.getInstance().sendPost("http://127.0.0.1:8999/xiandaojia/userCenter/systemUser/update",
 				json.toString());
 		System.out.println(re);
 	}
@@ -59,7 +59,7 @@ public class SystemUserTest {
 		JSONObject json = new JSONObject();
 		json.put("id", 1);
 		System.out.println(json);
-		String re = SendHttp.getInstance().sendPost("http://127.0.0.1:8999/xiandaojia/systemUser/delete",
+		String re = SendHttp.getInstance().sendPost("http://127.0.0.1:8999/xiandaojia/userCenter/systemUser/delete",
 				json.toString());
 		System.out.println(re);
 	}
@@ -69,7 +69,7 @@ public class SystemUserTest {
 		json.put("page", 1);
 		json.put("pageSize", 10);
 		System.out.println(json);
-		String re = SendHttp.getInstance().sendPost("http://127.0.0.1:8999/xiandaojia/systemUser/queryListByPage",
+		String re = SendHttp.getInstance().sendPost("http://127.0.0.1:8999/xiandaojia/userCenter/systemUser/queryListByPage",
 				json.toString());
 		System.out.println(re);
 	}
