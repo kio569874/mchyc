@@ -1,13 +1,23 @@
 package com.xiandaojia.common.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class ShoppingCart {
-    private Long id;
+public class ShoppingCart implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Long id;
 
     private Long userId;
 
     private Long productId;
+
+    private Integer productNum;
+
+    private String isSelect;
 
     private Date createTime;
 
@@ -33,6 +43,22 @@ public class ShoppingCart {
 
     public void setProductId(Long productId) {
         this.productId = productId;
+    }
+
+    public Integer getProductNum() {
+        return productNum;
+    }
+
+    public void setProductNum(Integer productNum) {
+        this.productNum = productNum;
+    }
+
+    public String getIsSelect() {
+        return isSelect;
+    }
+
+    public void setIsSelect(String isSelect) {
+        this.isSelect = isSelect == null ? null : isSelect.trim();
     }
 
     public Date getCreateTime() {

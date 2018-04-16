@@ -7,7 +7,7 @@ import com.xiandaojia.service.IBaseService;
 
 public interface ISystemUserService extends IBaseService<SystemUser> {
 
-	PaginationDto<SystemUser> querySystemUserListByPage(int page, int pageSize, Integer totalCount) throws SysException;
+	PaginationDto<SystemUser> queryListByPage(int page, int pageSize, Integer totalCount) throws SysException;
 
 	SystemUser checkSystemUser(String userCode, String userPassword);
 }

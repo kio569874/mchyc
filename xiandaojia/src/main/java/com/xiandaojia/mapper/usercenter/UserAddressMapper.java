@@ -1,5 +1,7 @@
 package com.xiandaojia.mapper.usercenter;
 
+import java.util.List;
+
 import com.xiandaojia.common.domain.UserAddress;
 
 public interface UserAddressMapper {
@@ -14,4 +16,8 @@ public interface UserAddressMapper {
     int updateByPrimaryKeySelective(UserAddress record);
 
     int updateByPrimaryKey(UserAddress record);
+    
+    int getTotalCount(Long userId);
+
+	List<UserAddress> queryListByPage(int offset, int pageSize,Long userId);
 }

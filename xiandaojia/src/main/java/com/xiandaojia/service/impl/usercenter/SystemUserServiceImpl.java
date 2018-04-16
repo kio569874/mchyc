@@ -11,10 +11,11 @@ import com.xiandaojia.common.domain.SystemUser;
 import com.xiandaojia.common.exception.SysException;
 import com.xiandaojia.common.utils.PaginationUtil;
 import com.xiandaojia.mapper.usercenter.SystemUserMapper;
+import com.xiandaojia.service.impl.AbstractBaseService;
 import com.xiandaojia.service.usercenter.ISystemUserService;
 
 @Service("systemUserService")
-public class SystemUserServiceImpl implements ISystemUserService {
+public class SystemUserServiceImpl extends AbstractBaseService implements ISystemUserService {
 
 	@Autowired
 	private SystemUserMapper systemUserMapper;
@@ -38,7 +39,7 @@ public class SystemUserServiceImpl implements ISystemUserService {
 	}
 
 	@Override
-	public PaginationDto<SystemUser> querySystemUserListByPage(int page, int pageSize, Integer totalCount)
+	public PaginationDto<SystemUser> queryListByPage(int page, int pageSize, Integer totalCount)
 			throws SysException {
 		PaginationDto<SystemUser> paginationDto = new PaginationDto<SystemUser>();
 		// 分页参数校验

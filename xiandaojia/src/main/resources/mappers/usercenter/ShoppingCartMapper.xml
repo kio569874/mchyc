@@ -5,10 +5,12 @@
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="user_id" property="userId" jdbcType="BIGINT" />
     <result column="product_id" property="productId" jdbcType="BIGINT" />
+    <result column="product_num" property="productNum" jdbcType="INTEGER" />
+    <result column="is_select" property="isSelect" jdbcType="CHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, user_id, product_id, create_time
+    id, user_id, product_id, product_num, is_select, create_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -22,9 +24,11 @@
   </delete>
   <insert id="insert" parameterType="com.xiandaojia.common.domain.ShoppingCart" >
     insert into t_shopping_cart (id, user_id, product_id, 
-      create_time)
+      product_num, is_select, create_time
+      )
     values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{productId,jdbcType=BIGINT}, 
-      #{createTime,jdbcType=TIMESTAMP})
+      #{productNum,jdbcType=INTEGER}, #{isSelect,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.xiandaojia.common.domain.ShoppingCart" >
     insert into t_shopping_cart
@@ -37,6 +41,12 @@
       </if>
       <if test="productId != null" >
         product_id,
+      </if>
+      <if test="productNum != null" >
+        product_num,
+      </if>
+      <if test="isSelect != null" >
+        is_select,
       </if>
       <if test="createTime != null" >
         create_time,
@@ -52,6 +62,12 @@
       <if test="productId != null" >
         #{productId,jdbcType=BIGINT},
       </if>
+      <if test="productNum != null" >
+        #{productNum,jdbcType=INTEGER},
+      </if>
+      <if test="isSelect != null" >
+        #{isSelect,jdbcType=CHAR},
+      </if>
       <if test="createTime != null" >
         #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -66,6 +82,12 @@
       <if test="productId != null" >
         product_id = #{productId,jdbcType=BIGINT},
       </if>
+      <if test="productNum != null" >
+        product_num = #{productNum,jdbcType=INTEGER},
+      </if>
+      <if test="isSelect != null" >
+        is_select = #{isSelect,jdbcType=CHAR},
+      </if>
       <if test="createTime != null" >
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -76,7 +98,24 @@
     update t_shopping_cart
     set user_id = #{userId,jdbcType=BIGINT},
       product_id = #{productId,jdbcType=BIGINT},
+      product_num = #{productNum,jdbcType=INTEGER},
+      is_select = #{isSelect,jdbcType=CHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  
+  	<select id="getTotalCount" resultType="int">
+		select count(1) from
+		t_shopping_cart
+		where user_id = #{arg0}
+	</select>
+
+	<select id="queryListByPage" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_shopping_cart
+		where user_id = #{arg2}
+		limit
+		#{arg0}, #{arg1}
+	</select>
 </mapper>
