@@ -19,9 +19,9 @@ public class ProductTest {
 		// 产品信息插入
 		// productInfoInsert();
 		// 产品信息分页查询
-		// queryProductInfo();
+		 queryProductInfo();
 		// 根据产品id查询介绍信息
-		productInformationQureyByProductId();
+//		productInformationQureyByProductId();
 
 	}
 

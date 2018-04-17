@@ -17,7 +17,7 @@ public class HomePageTest {
 		// noticeInfoDelete();
 		// noticeInfoQueryListByPage();
 
-		homePageImageInsert();
+//		homePageImageInsert();
 		homePageImageQueryListByPage();
 		// homePageImageUpdate();
 		// homePageImageQueryListByPage();
