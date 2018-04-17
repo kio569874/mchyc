@@ -41,12 +41,13 @@ public class ShoppingCartServiceImpl extends AbstractBaseService implements ISho
 	@Override
 	public PaginationDto<ShoppingCart> queryListByPage(int page, int pageSize, Integer totalCount, Long userId)
 			throws SysException {
-		PaginationDto<ShoppingCart> paginationDto = new PaginationDto<ShoppingCart>();
 		PaginationUtil.checkPaginationArgs(page, pageSize);
+		PaginationDto<ShoppingCart> paginationDto = new PaginationDto<ShoppingCart>(page, pageSize);
 		int offset = (page - 1) * pageSize;
 		if (totalCount == null || totalCount <= 0) {
-			paginationDto.setTotalCount(shoppingCartMapper.getTotalCount(userId));
+			totalCount = shoppingCartMapper.getTotalCount(userId);
 		}
+		paginationDto.setTotalCount(totalCount);
 		List<ShoppingCart> list = shoppingCartMapper.queryListByPage(offset, pageSize, userId);
 		paginationDto.setData(list);
 		return paginationDto;

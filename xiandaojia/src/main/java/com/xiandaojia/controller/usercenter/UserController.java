@@ -62,7 +62,7 @@ public class UserController extends BaseController {
 				systemUser.setLoginTime(new Date());
 				systemUser.setLoginIp(getIpAddr(request));
 				systemUserService.update(systemUser);
-				return getSuccessResultMsg();
+				return getSuccessResultMsg(JSONObject.toJSONString(systemUser));
 			} else {
 				return getErrorResultMsg("用户名或密码错误");
 			}
@@ -123,15 +123,7 @@ public class UserController extends BaseController {
 			int page = jsonObj.getInteger("page");
 			int pageSize = jsonObj.getInteger("pageSize");
 			PaginationDto<SystemUser> paginationDto = systemUserService.queryListByPage(page, pageSize, null);
-			List<SystemUser> systemUserList = paginationDto.getData();
-			if (systemUserList != null && systemUserList.size() > 0) {
-				JSONObject list = new JSONObject();
-				JSONArray jsonArr = (JSONArray) JSONArray.toJSON(systemUserList);
-				list.put("listData", jsonArr);
-				return getSuccessResultMsg(list.toJSONString());
-			} else {
-				return getSuccessResultMsg(new JSONObject().toJSONString());
-			}
+			return getSuccessResultMsg(JSONObject.toJSONString(paginationDto));
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			return getErrorResultMsg(e.getMessage());
@@ -190,15 +182,7 @@ public class UserController extends BaseController {
 			Long userId = jsonObj.getLong("userId");
 			PaginationDto<ShoppingCart> paginationDto = shoppingCartService.queryListByPage(page, pageSize, null,
 					userId);
-			List<ShoppingCart> rList = paginationDto.getData();
-			if (rList != null && rList.size() > 0) {
-				JSONObject obj = new JSONObject();
-				JSONArray jsonArr = (JSONArray) JSONArray.toJSON(rList);
-				obj.put("listData", jsonArr);
-				return getSuccessResultMsg(obj.toJSONString());
-			} else {
-				return getSuccessResultMsg(new JSONObject().toJSONString());
-			}
+			return getSuccessResultMsg(JSONObject.toJSONString(paginationDto));
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			return getErrorResultMsg(e.getMessage());
@@ -224,7 +208,7 @@ public class UserController extends BaseController {
 				user.setLastLoginTime(new Date());
 				user.setLastLoginIp(getIpAddr(request));
 				userService.update(user);
-				return getSuccessResultMsg();
+				return getSuccessResultMsg(JSONObject.toJSONString(user));
 			} else {
 				return getErrorResultMsg("用户名或密码错误");
 			}
@@ -240,6 +224,7 @@ public class UserController extends BaseController {
 	public String userInsert(@RequestBody String content) {
 		try {
 			User t = JsonBeanUtil.stringToBean(User.class, content);
+			t.setUserPassword(MD5Util.createMD5(t.getUserPassword()));
 			userService.insert(t);
 			return getSuccessResultMsg();
 		} catch (Exception e) {
@@ -284,15 +269,7 @@ public class UserController extends BaseController {
 			int page = jsonObj.getInteger("page");
 			int pageSize = jsonObj.getInteger("pageSize");
 			PaginationDto<User> paginationDto = userService.queryListByPage(page, pageSize, null);
-			List<User> rList = paginationDto.getData();
-			if (rList != null && rList.size() > 0) {
-				JSONObject obj = new JSONObject();
-				JSONArray jsonArr = (JSONArray) JSONArray.toJSON(rList);
-				obj.put("listData", jsonArr);
-				return getSuccessResultMsg(obj.toJSONString());
-			} else {
-				return getSuccessResultMsg(new JSONObject().toJSONString());
-			}
+			return getSuccessResultMsg(JSONObject.toJSONString(paginationDto));
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			return getErrorResultMsg(e.getMessage());
@@ -350,15 +327,7 @@ public class UserController extends BaseController {
 			int pageSize = jsonObj.getInteger("pageSize");
 			Long userId = jsonObj.getLong("userId");
 			PaginationDto<UserAddress> paginationDto = userAddressService.queryListByPage(page, pageSize, null, userId);
-			List<UserAddress> rList = paginationDto.getData();
-			if (rList != null && rList.size() > 0) {
-				JSONObject obj = new JSONObject();
-				JSONArray jsonArr = (JSONArray) JSONArray.toJSON(rList);
-				obj.put("listData", jsonArr);
-				return getSuccessResultMsg(obj.toJSONString());
-			} else {
-				return getSuccessResultMsg(new JSONObject().toJSONString());
-			}
+			return getSuccessResultMsg(JSONObject.toJSONString(paginationDto));
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			return getErrorResultMsg(e.getMessage());

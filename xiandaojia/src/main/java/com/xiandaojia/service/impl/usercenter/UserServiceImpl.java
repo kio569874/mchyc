@@ -41,13 +41,13 @@ public class UserServiceImpl extends AbstractBaseService implements IUserService
 
 	@Override
 	public PaginationDto<User> queryListByPage(int page, int pageSize, Integer totalCount) throws SysException {
-		PaginationDto<User> paginationDto = new PaginationDto<User>();
-		// 分页参数校验
 		PaginationUtil.checkPaginationArgs(page, pageSize);
+		PaginationDto<User> paginationDto = new PaginationDto<User>(page, pageSize);
 		int offset = (page - 1) * pageSize;
 		if (totalCount == null || totalCount <= 0) {
-			paginationDto.setTotalCount(userMapper.getTotalCount());
+			totalCount = userMapper.getTotalCount();
 		}
+		paginationDto.setTotalCount(totalCount);
 		List<User> list = userMapper.queryListByPage(offset, pageSize);
 		paginationDto.setData(list);
 		return paginationDto;

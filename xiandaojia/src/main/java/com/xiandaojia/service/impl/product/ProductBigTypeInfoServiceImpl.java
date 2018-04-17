@@ -39,14 +39,15 @@ public class ProductBigTypeInfoServiceImpl extends AbstractBaseService implement
 	}
 
 	@Override
-	public PaginationDto<ProductBigTypeInfo> queryProductListByPage(int page, int pageSize, Integer totalCount) throws SysException {
-		PaginationDto<ProductBigTypeInfo> paginationDto = new PaginationDto<ProductBigTypeInfo>();
-		// 分页参数校验
+	public PaginationDto<ProductBigTypeInfo> queryProductListByPage(int page, int pageSize, Integer totalCount)
+			throws SysException {
 		PaginationUtil.checkPaginationArgs(page, pageSize);
+		PaginationDto<ProductBigTypeInfo> paginationDto = new PaginationDto<ProductBigTypeInfo>(page, pageSize);
 		int offset = (page - 1) * pageSize;
 		if (totalCount == null || totalCount <= 0) {
-			paginationDto.setTotalCount(productBigTypeInfoMapper.getTotalCount());
+			totalCount = productBigTypeInfoMapper.getTotalCount();
 		}
+		paginationDto.setTotalCount(totalCount);
 		List<ProductBigTypeInfo> list = productBigTypeInfoMapper.queryListByPage(offset, pageSize);
 		paginationDto.setData(list);
 		return paginationDto;

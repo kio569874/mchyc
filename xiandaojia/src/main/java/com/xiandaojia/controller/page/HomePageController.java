@@ -138,15 +138,7 @@ public class HomePageController extends BaseController {
 			int pageSize = jsonObj.getInteger("pageSize");
 			PaginationDto<HomePageImage> paginationDto = homePageImageService.querySystemUserListByPage(page, pageSize,
 					null);
-			List<HomePageImage> homePageImageList = paginationDto.getData();
-			if (homePageImageList != null && homePageImageList.size() > 0) {
-				JSONObject list = new JSONObject();
-				JSONArray jsonArr = (JSONArray) JSONArray.toJSON(homePageImageList);
-				list.put("listData", jsonArr);
-				return getSuccessResultMsg(list.toJSONString());
-			} else {
-				return getSuccessResultMsg(new JSONObject().toJSONString());
-			}
+			return getSuccessResultMsg(JSONObject.toJSONString(paginationDto));
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			return getErrorResultMsg(e.getMessage());

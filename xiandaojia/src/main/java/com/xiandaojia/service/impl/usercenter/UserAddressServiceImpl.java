@@ -41,12 +41,13 @@ public class UserAddressServiceImpl extends AbstractBaseService implements IUser
 	@Override
 	public PaginationDto<UserAddress> queryListByPage(int page, int pageSize, Integer totalCount, Long userId)
 			throws SysException {
-		PaginationDto<UserAddress> paginationDto = new PaginationDto<UserAddress>();
 		PaginationUtil.checkPaginationArgs(page, pageSize);
+		PaginationDto<UserAddress> paginationDto = new PaginationDto<UserAddress>(page, pageSize);
 		int offset = (page - 1) * pageSize;
 		if (totalCount == null || totalCount <= 0) {
-			paginationDto.setTotalCount(userAddressMapper.getTotalCount(userId));
+			totalCount = userAddressMapper.getTotalCount(userId);
 		}
+		paginationDto.setTotalCount(totalCount);
 		List<UserAddress> list = userAddressMapper.queryListByPage(offset, pageSize, userId);
 		paginationDto.setData(list);
 		return paginationDto;

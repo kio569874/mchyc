@@ -43,12 +43,13 @@ public class HomePageImageServiceImpl implements IHomePageImageService {
 	@Override
 	public PaginationDto<HomePageImage> querySystemUserListByPage(int page, int pageSize, Integer totalCount)
 			throws SysException {
-		PaginationDto<HomePageImage> paginationDto = new PaginationDto<HomePageImage>();
 		PaginationUtil.checkPaginationArgs(page, pageSize);
+		PaginationDto<HomePageImage> paginationDto = new PaginationDto<HomePageImage>(page, pageSize);
 		int offset = (page - 1) * pageSize;
 		if (totalCount == null || totalCount <= 0) {
-			paginationDto.setTotalCount(homePageImageMapper.getTotalCount());
+			totalCount = homePageImageMapper.getTotalCount();
 		}
+		paginationDto.setTotalCount(totalCount);
 		List<HomePageImage> list = homePageImageMapper.queryListByPage(offset, pageSize);
 		paginationDto.setData(list);
 		return paginationDto;

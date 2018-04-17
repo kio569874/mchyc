@@ -40,12 +40,13 @@ public class NoticeInfoServiceImpl implements INoticeInfoService {
 	@Override
 	public PaginationDto<NoticeInfo> querySystemUserListByPage(int page, int pageSize, Integer totalCount)
 			throws SysException {
-		PaginationDto<NoticeInfo> paginationDto = new PaginationDto<NoticeInfo>();
 		PaginationUtil.checkPaginationArgs(page, pageSize);
+		PaginationDto<NoticeInfo> paginationDto = new PaginationDto<NoticeInfo>(page, pageSize);
 		int offset = (page - 1) * pageSize;
 		if (totalCount == null || totalCount <= 0) {
-			paginationDto.setTotalCount(noticeInfoMapper.getTotalCount());
+			totalCount = noticeInfoMapper.getTotalCount();
 		}
+		paginationDto.setTotalCount(totalCount);
 		List<NoticeInfo> list = noticeInfoMapper.queryListByPage(offset, pageSize);
 		paginationDto.setData(list);
 		return paginationDto;

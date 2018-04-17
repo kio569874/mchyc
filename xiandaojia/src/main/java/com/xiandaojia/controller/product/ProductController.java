@@ -96,15 +96,7 @@ public class ProductController extends BaseController {
 			Map<String, Object> paramMap = jsonObj;
 			PaginationDto<ProductInfo> paginationDto = productInfoService.queryProductListByPage(page, pageSize, null,
 					paramMap);
-			List<ProductInfo> productInfoList = paginationDto.getData();
-			if (productInfoList != null && productInfoList.size() > 0) {
-				JSONObject list = new JSONObject();
-				JSONArray jsonArr = (JSONArray) JSONArray.toJSON(productInfoList);
-				list.put("listData", jsonArr);
-				return getSuccessResultMsg(list.toJSONString());
-			} else {
-				return getSuccessResultMsg(new JSONObject().toJSONString());
-			}
+			return getSuccessResultMsg(JSONObject.toJSONString(paginationDto));
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			return getErrorResultMsg(e.getMessage());
@@ -163,15 +155,7 @@ public class ProductController extends BaseController {
 			int pageSize = jsonObj.getInteger("pageSize");
 			PaginationDto<ProductBigTypeInfo> paginationDto = productBigTypeInfoService.queryProductListByPage(page,
 					pageSize, null);
-			List<ProductBigTypeInfo> productBigTypeInfoList = paginationDto.getData();
-			if (productBigTypeInfoList != null && productBigTypeInfoList.size() > 0) {
-				JSONObject list = new JSONObject();
-				JSONArray jsonArr = (JSONArray) JSONArray.toJSON(productBigTypeInfoList);
-				list.put("listData", jsonArr);
-				return getSuccessResultMsg(list.toJSONString());
-			} else {
-				return getSuccessResultMsg(new JSONObject().toJSONString());
-			}
+			return getSuccessResultMsg(JSONObject.toJSONString(paginationDto));
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			return getErrorResultMsg(e.getMessage());
@@ -230,15 +214,7 @@ public class ProductController extends BaseController {
 			int pageSize = jsonObj.getInteger("pageSize");
 			PaginationDto<ProductSmallTypeInfo> paginationDto = productSmallTypeInfoService.queryProductListByPage(page,
 					pageSize, null);
-			List<ProductSmallTypeInfo> productSmallTypeInfoList = paginationDto.getData();
-			if (productSmallTypeInfoList != null && productSmallTypeInfoList.size() > 0) {
-				JSONObject list = new JSONObject();
-				JSONArray jsonArr = (JSONArray) JSONArray.toJSON(productSmallTypeInfoList);
-				list.put("listData", jsonArr);
-				return getSuccessResultMsg(list.toJSONString());
-			} else {
-				return getSuccessResultMsg(new JSONObject().toJSONString());
-			}
+			return getSuccessResultMsg(JSONObject.toJSONString(paginationDto));
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			return getErrorResultMsg(e.getMessage());
@@ -303,15 +279,7 @@ public class ProductController extends BaseController {
 			int pageSize = jsonObj.getInteger("pageSize");
 			PaginationDto<ProductInformation> paginationDto = productInformationService.queryProductListByPage(page,
 					pageSize, null);
-			List<ProductInformation> productInformationList = paginationDto.getData();
-			if (productInformationList != null && productInformationList.size() > 0) {
-				JSONObject list = new JSONObject();
-				JSONArray jsonArr = (JSONArray) JSONArray.toJSON(productInformationList);
-				list.put("listData", jsonArr);
-				return getSuccessResultMsg(list.toJSONString());
-			} else {
-				return getSuccessResultMsg(new JSONObject().toJSONString());
-			}
+			return getSuccessResultMsg(JSONObject.toJSONString(paginationDto));
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			return getErrorResultMsg(e.getMessage());

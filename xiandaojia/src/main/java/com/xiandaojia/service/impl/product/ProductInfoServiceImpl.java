@@ -106,13 +106,13 @@ public class ProductInfoServiceImpl extends AbstractBaseService implements IProd
 	@Override
 	public PaginationDto<ProductInfo> queryProductListByPage(int page, int pageSize, Integer totalCount,
 			Map<String, Object> paramMap) throws SysException {
-		PaginationDto<ProductInfo> paginationDto = new PaginationDto<ProductInfo>();
-		// 分页参数校验
 		PaginationUtil.checkPaginationArgs(page, pageSize);
+		PaginationDto<ProductInfo> paginationDto = new PaginationDto<ProductInfo>(page, pageSize);
 		int offset = (page - 1) * pageSize;
 		if (totalCount == null || totalCount <= 0) {
-			paginationDto.setTotalCount(productInfoMapper.getTotalCount(paramMap));
+			totalCount = productInfoMapper.getTotalCount(paramMap);
 		}
+		paginationDto.setTotalCount(totalCount);
 		paramMap.put("offset", offset);
 		paramMap.put("pageSize", pageSize);
 		List<ProductInfo> list = productInfoMapper.queryListByPage(paramMap);

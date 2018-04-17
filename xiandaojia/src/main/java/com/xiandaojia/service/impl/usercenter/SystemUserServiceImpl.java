@@ -39,15 +39,14 @@ public class SystemUserServiceImpl extends AbstractBaseService implements ISyste
 	}
 
 	@Override
-	public PaginationDto<SystemUser> queryListByPage(int page, int pageSize, Integer totalCount)
-			throws SysException {
-		PaginationDto<SystemUser> paginationDto = new PaginationDto<SystemUser>();
-		// 分页参数校验
+	public PaginationDto<SystemUser> queryListByPage(int page, int pageSize, Integer totalCount) throws SysException {
 		PaginationUtil.checkPaginationArgs(page, pageSize);
+		PaginationDto<SystemUser> paginationDto = new PaginationDto<SystemUser>(page, pageSize);
 		int offset = (page - 1) * pageSize;
 		if (totalCount == null || totalCount <= 0) {
-			paginationDto.setTotalCount(systemUserMapper.getTotalCount());
+			totalCount = systemUserMapper.getTotalCount();
 		}
+		paginationDto.setTotalCount(totalCount);
 		List<SystemUser> list = systemUserMapper.queryListByPage(offset, pageSize);
 		paginationDto.setData(list);
 		return paginationDto;

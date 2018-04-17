@@ -22,12 +22,13 @@ public class ProductInformationServiceImpl implements IProductInformationService
 	@Override
 	public PaginationDto<ProductInformation> queryProductListByPage(int page, int pageSize, Integer totalCount)
 			throws SysException {
-		PaginationDto<ProductInformation> paginationDto = new PaginationDto<ProductInformation>();
 		PaginationUtil.checkPaginationArgs(page, pageSize);
+		PaginationDto<ProductInformation> paginationDto = new PaginationDto<ProductInformation>(page, pageSize);
 		int offset = (page - 1) * pageSize;
 		if (totalCount == null || totalCount <= 0) {
-			paginationDto.setTotalCount(productInformationMapper.getTotalCount());
+			totalCount = productInformationMapper.getTotalCount();
 		}
+		paginationDto.setTotalCount(totalCount);
 		List<ProductInformation> list = productInformationMapper.queryListByPage(offset, pageSize);
 		paginationDto.setData(list);
 		return paginationDto;
