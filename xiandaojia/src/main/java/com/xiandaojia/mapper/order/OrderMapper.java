@@ -1,5 +1,8 @@
 package com.xiandaojia.mapper.order;
 
+import java.util.List;
+import java.util.Map;
+
 import com.xiandaojia.common.domain.Order;
 
 public interface OrderMapper {
@@ -14,4 +17,8 @@ public interface OrderMapper {
     int updateByPrimaryKeySelective(Order record);
 
     int updateByPrimaryKey(Order record);
+    
+    int getTotalCount(Map<String,Object> paramMap);
+
+	List<Order> queryListByPage(Map<String,Object> paramMap);
 }

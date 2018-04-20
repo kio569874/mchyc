@@ -1,5 +1,7 @@
 package com.xiandaojia.mapper.order;
 
+import java.util.List;
+
 import com.xiandaojia.common.domain.OrderProduct;
 
 public interface OrderProductMapper {
@@ -14,4 +16,8 @@ public interface OrderProductMapper {
     int updateByPrimaryKeySelective(OrderProduct record);
 
     int updateByPrimaryKey(OrderProduct record);
+    
+    int deleteByOrderId(Long orderId);
+    
+    List<OrderProduct> queryListByOrderId(Long orderId);
 }

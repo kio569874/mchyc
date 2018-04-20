@@ -213,7 +213,7 @@ public class ProductController extends BaseController {
 			int page = jsonObj.getInteger("page");
 			int pageSize = jsonObj.getInteger("pageSize");
 			PaginationDto<ProductSmallTypeInfo> paginationDto = productSmallTypeInfoService.queryProductListByPage(page,
-					pageSize, null);
+					pageSize, null, null);
 			return getSuccessResultMsg(JSONObject.toJSONString(paginationDto));
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
@@ -278,7 +278,7 @@ public class ProductController extends BaseController {
 			int page = jsonObj.getInteger("page");
 			int pageSize = jsonObj.getInteger("pageSize");
 			PaginationDto<ProductInformation> paginationDto = productInformationService.queryProductListByPage(page,
-					pageSize, null);
+					pageSize, null, null);
 			return getSuccessResultMsg(JSONObject.toJSONString(paginationDto));
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
@@ -293,9 +293,9 @@ public class ProductController extends BaseController {
 	 * @param content
 	 * @return
 	 */
-	@RequestMapping(value = "/productInformation/queryByProductId", method = RequestMethod.POST)
+	@RequestMapping(value = "/productInformation/queryListByProductId", method = RequestMethod.POST)
 	@ResponseBody
-	public String productInformationQureyByProductId(@RequestBody String content) {
+	public String queryListByProductId(@RequestBody String content) {
 		try {
 			JSONObject jsonObj = JSONObject.parseObject(content);
 			Long productId = jsonObj.getLong("productId");

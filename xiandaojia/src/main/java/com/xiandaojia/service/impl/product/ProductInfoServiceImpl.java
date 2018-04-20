@@ -10,7 +10,6 @@ import org.springframework.util.StringUtils;
 
 import com.xiandaojia.common.domain.PaginationDto;
 import com.xiandaojia.common.domain.ProductInfo;
-import com.xiandaojia.common.domain.ProductInformation;
 import com.xiandaojia.common.domain.ProductInformationRelation;
 import com.xiandaojia.common.domain.SmallProductRelation;
 import com.xiandaojia.common.dto.ProductDto;
@@ -118,11 +117,6 @@ public class ProductInfoServiceImpl extends AbstractBaseService implements IProd
 		List<ProductInfo> list = productInfoMapper.queryListByPage(paramMap);
 		paginationDto.setData(list);
 		return paginationDto;
-	}
-
-	@Override
-	public PaginationDto queryProductListByPage(int page, int pageSize, Integer totalCount) throws SysException {
-		return null;
 	}
 
 }

@@ -2,6 +2,7 @@ package com.xiandaojia.service.impl.product;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,8 +42,8 @@ public class ProductSmallTypeInfoServiceImpl extends AbstractBaseService impleme
 	}
 
 	@Override
-	public PaginationDto<ProductSmallTypeInfo> queryProductListByPage(int page, int pageSize, Integer totalCount)
-			throws SysException {
+	public PaginationDto<ProductSmallTypeInfo> queryProductListByPage(int page, int pageSize, Integer totalCount,
+			Map<String, Object> paramMap) throws SysException {
 		PaginationUtil.checkPaginationArgs(page, pageSize);
 		PaginationDto<ProductSmallTypeInfo> paginationDto = new PaginationDto<ProductSmallTypeInfo>(page, pageSize);
 		int offset = (page - 1) * pageSize;
