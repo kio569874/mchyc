@@ -21,7 +21,7 @@ public class ProductTest {
 		// 产品信息分页查询
 		 queryProductInfo();
 		// 根据产品id查询介绍信息
-//		productInformationQureyByProductId();
+//		queryListByProductId();
 
 	}
 
@@ -123,12 +123,12 @@ public class ProductTest {
 		System.out.println(re);
 	}
 
-	private static void productInformationQureyByProductId() {
+	private static void queryListByProductId() {
 		JSONObject json = new JSONObject();
 		json.put("productId", 2);
 		System.out.println(json);
 		String re = SendHttp.getInstance().sendPost(
-				"http://127.0.0.1:8999/xiandaojia/product/productInformation/queryByProductId", json.toString());
+				"http://127.0.0.1:8999/xiandaojia/product/productInformation/queryListByProductId", json.toString());
 		System.out.println(re);
 	}
 
