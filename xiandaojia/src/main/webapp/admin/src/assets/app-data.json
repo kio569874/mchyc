@@ -470,5 +470,35 @@
                 "i18n": "poi"
             }]
         }]
+    }, {
+        "text": "基础参数管理",
+        "group": true,
+        "children": [{
+            "text": "产品管理",
+            "icon": "icon-compass",
+            "children": [{
+                "text": "产品分类维护",
+                "link": "/product/type/list"
+            },{
+                "text": "产品属性维护",
+<<<<<<< HEAD
+                "link": "/product/tag/list"
+            },{
+                "text": "产品介绍维护",
+                "link": "/product/introduce/list"
+            }, {
+                "text": "产品维护",
+                "link": "/product/product/list"
+=======
+                "link": "/product/tag"
+            },{
+                "text": "产品介绍维护",
+                "link": "/product/introduce"
+            }, {
+                "text": "产品维护",
+                "link": "/product/product"
+>>>>>>> master
+            }]
+        }]
     }]
 }

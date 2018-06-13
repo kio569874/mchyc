@@ -6,6 +6,7 @@
 export const environment = {
     chore: false,
     SERVER_URL: `./`,
+    XDJ_SERVER_URL:`http://localhost:8999/xiandaojia`,
     production: false,
     hmr: false,
     useHash: true
