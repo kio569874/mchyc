@@ -23,6 +23,7 @@ import com.xiandaojia.controller.BaseController;
 import com.xiandaojia.service.product.IProductBigTypeInfoService;
 import com.xiandaojia.service.product.IProductInfoService;
 import com.xiandaojia.service.product.IProductInformationService;
+import com.xiandaojia.service.product.IProductService;
 import com.xiandaojia.service.product.IProductSmallTypeInfoService;
 
 /**
@@ -36,6 +37,8 @@ import com.xiandaojia.service.product.IProductSmallTypeInfoService;
 public class ProductController extends BaseController {
 
 	@Autowired
+	private IProductService productService;
+	@Autowired
 	private IProductInfoService productInfoService;
 	@Autowired
 	private IProductBigTypeInfoService productBigTypeInfoService;
@@ -43,6 +46,27 @@ public class ProductController extends BaseController {
 	private IProductSmallTypeInfoService productSmallTypeInfoService;
 	@Autowired
 	private IProductInformationService productInformationService;
+
+	/**
+	 * 移动端产品信息查询
+	 * 
+	 * @param content
+	 * @return
+	 */
+	@RequestMapping(value = "/mobile/query", method = RequestMethod.POST)
+	@ResponseBody
+	public String query(@RequestBody String content) {
+		try {
+			JSONObject jsonObj = JSONObject.parseObject(content);
+			Map<String, Object> paramMap = jsonObj;
+			String result = productService.query(paramMap);
+			return getSuccessResultMsg(result);
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			return getErrorResultMsg(e.getMessage());
+		}
+
+	}
 
 	@RequestMapping(value = "/productInfo/insert", method = RequestMethod.POST)
 	@ResponseBody

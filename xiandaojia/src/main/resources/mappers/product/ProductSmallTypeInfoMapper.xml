@@ -130,4 +130,11 @@
 		limit
 		#{arg0}, #{arg1}
 	</select>
+	<select id="query" parameterType="com.xiandaojia.common.domain.ProductSmallTypeInfo" resultMap="BaseResultMap">
+		select smalltype_id,smalltype_name,small_seqno
+		from t_product_smalltype_info
+		where status = '0'
+		ORDER BY small_seqno
+		ASC
+	</select>
 </mapper>

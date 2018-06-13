@@ -130,4 +130,11 @@
 		limit
 		#{arg0}, #{arg1}
 	</select>
+	<select id="query" parameterType="com.xiandaojia.common.domain.ProductBigTypeInfo" resultMap="BaseResultMap">
+		select  bigtype_id, bigtype_name, bigtype_seqno
+		from t_product_bigtype_info
+		where status = '0'
+		ORDER BY bigtype_seqno
+		ASC
+	</select>
 </mapper>

@@ -217,7 +217,8 @@
 
   <select id="queryListByPage" parameterType="java.util.HashMap" resultMap="BaseResultMap">
 		select
-		<include refid="Base_Column_List" />
+		A.product_id, bigtype_id, product_name, product_price, product_url, price_unit, product_num, 
+    	is_discount, product_discount, status, version, product_desc, create_time, update_time
 		from t_product_info A
 		<if test="smalltypeId != null" >
        	 	JOIN t_small_product_relation B ON  A.product_id = B.product_id

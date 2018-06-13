@@ -20,4 +20,6 @@ public interface ProductBigTypeInfoMapper {
 	int getTotalCount();
 
 	List<ProductBigTypeInfo> queryListByPage(int offset, int pageSize);
+	
+	List<ProductBigTypeInfo> query(ProductBigTypeInfo productBigTypeInfo);
 }
