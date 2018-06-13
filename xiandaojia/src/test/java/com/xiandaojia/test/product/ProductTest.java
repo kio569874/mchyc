@@ -19,9 +19,11 @@ public class ProductTest {
 		// 产品信息插入
 		// productInfoInsert();
 		// 产品信息分页查询
-		 queryProductInfo();
+		// queryProductInfo();
 		// 根据产品id查询介绍信息
-//		queryListByProductId();
+		// queryListByProductId();
+		// 移动端查询产品
+		query();
 
 	}
 
@@ -129,6 +131,19 @@ public class ProductTest {
 		System.out.println(json);
 		String re = SendHttp.getInstance().sendPost(
 				"http://127.0.0.1:8999/xiandaojia/product/productInformation/queryListByProductId", json.toString());
+		System.out.println(re);
+	}
+
+	private static void query() {
+		JSONObject json = new JSONObject();
+		json.put("page", 1);
+		json.put("pageSize", 10);
+		// json.put("smalltypeId", 1);
+		// json.put("bigtypeId", 1);
+		// json.put("productName", "草莓");
+		System.out.println(json);
+		String re = SendHttp.getInstance().sendPost("http://127.0.0.1:8999/xiandaojia/product//mobile/query",
+				json.toString());
 		System.out.println(re);
 	}
 
