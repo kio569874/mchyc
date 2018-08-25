@@ -1,51 +1,10 @@
 <template>
-    <div>
-    	<head-top signin-up='xdj_home'>
-        <router-link to="/home" slot="msite-title" class="msite_title">
+    <div clas="home_container">
+    	<head-top signin-up='xdj_home' go-back='true'>
+        <router-link to="/xdjHome" slot="msite-title" class="msite_title">
           <span class="title_text ellipsis">{{homeTitle}}</span>
         </router-link>
     	</head-top>
-    	<div class="home_carousel">
-    		<div class="swiper-container">
-		        <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                  <img src="../../images/1.jpg">
-		            </div>
-                <div class="swiper-slide">
-                  <img src="../../images/2.jpg">
-                </div>
-		        </div>
-		        <div class="swiper-pagination"></div>
-		    </div>
-    	</div>
-      <div class="top-nav">
-          <div class="food_types_container">
-            <router-link :to="{path: '/food'}" class="link_to_food">
-              <figure>
-                <img src="../../images/1.jpg">
-                <figcaption>果蔬到家</figcaption>
-              </figure>
-            </router-link>
-            <router-link :to="{path: '/food'}" class="link_to_food">
-              <figure>
-                <img src="../../images/flower.jpg">
-                <figcaption>我爱鲜花</figcaption>
-              </figure>
-            </router-link>
-            <router-link :to="{path: '/food'}" class="link_to_food">
-              <figure>
-                <img src="../../images/food.jpg">
-                <figcaption>美食推荐</figcaption>
-              </figure>
-            </router-link>
-            <router-link :to="{path: '/food'}" class="link_to_food">
-              <figure>
-                <img src="../../images/1.jpg">
-                <figcaption>其他</figcaption>
-              </figure>
-            </router-link>
-          </div>
-      </div>
       <div class="nav_product_list">
           <div class="left_nav" ref="leftNav">
             <ul>
@@ -67,9 +26,9 @@
             <ul>
               <li>
                 <section class="menu_detail_list">
-                  <router-link  :to="{path: 'shop/foodDetail'}" tag="div" class="menu_detail_link">
+                  <router-link  :to="{path: 'xdjProductDetail'}" tag="div" class="menu_detail_link">
                     <section class="menu_food_img">
-                      <img src="../../images/food.jpg">
+                      <img src="../../../images/food.jpg">
                     </section>
                     <section class="menu_food_description">
                       <h3 class="food_description_head">
@@ -100,9 +59,9 @@
               </li>
               <li>
                 <section class="menu_detail_list">
-                  <router-link  :to="{path: 'shop/foodDetail'}" tag="div" class="menu_detail_link">
+                  <router-link  :to="{path: 'xdj_home/productDetail'}" tag="div" class="menu_detail_link">
                     <section class="menu_food_img">
-                      <img src="../../images/food.jpg">
+                      <img src="../../../images/food.jpg">
                     </section>
                     <section class="menu_food_description">
                       <h3 class="food_description_head">
@@ -133,9 +92,9 @@
               </li>
               <li>
                 <section class="menu_detail_list">
-                  <router-link  :to="{path: 'shop/foodDetail'}" tag="div" class="menu_detail_link">
+                  <router-link  :to="{path: 'xdj_home/productDetail'}" tag="div" class="menu_detail_link">
                     <section class="menu_food_img">
-                      <img src="../../images/food.jpg">
+                      <img src="../../../images/food.jpg">
                     </section>
                     <section class="menu_food_description">
                       <h3 class="food_description_head">
@@ -166,9 +125,9 @@
               </li>
               <li>
                 <section class="menu_detail_list">
-                  <router-link  :to="{path: 'shop/foodDetail'}" tag="div" class="menu_detail_link">
+                  <router-link  :to="{path: 'xdj_home/productDetail'}" tag="div" class="menu_detail_link">
                     <section class="menu_food_img">
-                      <img src="../../images/food.jpg">
+                      <img src="../../../images/food.jpg">
                     </section>
                     <section class="menu_food_description">
                       <h3 class="food_description_head">
@@ -199,9 +158,9 @@
               </li>
               <li>
                 <section class="menu_detail_list">
-                  <router-link  :to="{path: 'shop/foodDetail'}" tag="div" class="menu_detail_link">
+                  <router-link  :to="{path: 'xdj_home/productDetail'}" tag="div" class="menu_detail_link">
                     <section class="menu_food_img">
-                      <img src="../../images/food.jpg">
+                      <img src="../../../images/food.jpg">
                     </section>
                     <section class="menu_food_description">
                       <h3 class="food_description_head">
@@ -232,9 +191,9 @@
               </li>
               <li>
                 <section class="menu_detail_list">
-                  <router-link  :to="{path: 'shop/foodDetail'}" tag="div" class="menu_detail_link">
+                  <router-link  :to="{path: 'xdj_home/productDetail'}" tag="div" class="menu_detail_link">
                     <section class="menu_food_img">
-                      <img src="../../images/food.jpg">
+                      <img src="../../../images/food.jpg">
                     </section>
                     <section class="menu_food_description">
                       <h3 class="food_description_head">
@@ -265,9 +224,9 @@
               </li>
               <li>
                 <section class="menu_detail_list">
-                  <router-link  :to="{path: 'shop/foodDetail'}" tag="div" class="menu_detail_link">
+                  <router-link  :to="{path: 'xdj_home/productDetail'}" tag="div" class="menu_detail_link">
                     <section class="menu_food_img">
-                      <img src="../../images/food.jpg">
+                      <img src="../../../images/food.jpg">
                     </section>
                     <section class="menu_food_description">
                       <h3 class="food_description_head">
@@ -298,9 +257,9 @@
               </li>
               <li>
                 <section class="menu_detail_list">
-                  <router-link  :to="{path: 'shop/foodDetail'}" tag="div" class="menu_detail_link">
+                  <router-link  :to="{path: 'xdj_home/productDetail'}" tag="div" class="menu_detail_link">
                     <section class="menu_food_img">
-                      <img src="../../images/food.jpg">
+                      <img src="../../../images/food.jpg">
                     </section>
                     <section class="menu_food_description">
                       <h3 class="food_description_head">
@@ -331,9 +290,9 @@
               </li>
               <li>
                 <section class="menu_detail_list">
-                  <router-link  :to="{path: 'shop/foodDetail'}" tag="div" class="menu_detail_link">
+                  <router-link  :to="{path: 'xdj_home/productDetail'}" tag="div" class="menu_detail_link">
                     <section class="menu_food_img">
-                      <img src="../../images/food.jpg">
+                      <img src="../../../images/food.jpg">
                     </section>
                     <section class="menu_food_description">
                       <h3 class="food_description_head">
@@ -364,9 +323,9 @@
               </li>
               <li>
                 <section class="menu_detail_list">
-                  <router-link  :to="{path: 'shop/foodDetail'}" tag="div" class="menu_detail_link">
+                  <router-link  :to="{path: 'xdj_home/productDetail'}" tag="div" class="menu_detail_link">
                     <section class="menu_food_img">
-                      <img src="../../images/food.jpg">
+                      <img src="../../../images/food.jpg">
                     </section>
                     <section class="menu_food_description">
                       <h3 class="food_description_head">
@@ -397,9 +356,9 @@
               </li>
               <li>
                 <section class="menu_detail_list">
-                  <router-link  :to="{path: 'shop/foodDetail'}" tag="div" class="menu_detail_link">
+                  <router-link  :to="{path: 'xdj_home/productDetail'}" tag="div" class="menu_detail_link">
                     <section class="menu_food_img">
-                      <img src="../../images/food.jpg">
+                      <img src="../../../images/food.jpg">
                     </section>
                     <section class="menu_food_description">
                       <h3 class="food_description_head">
@@ -430,9 +389,9 @@
               </li>
               <li>
                 <section class="menu_detail_list">
-                  <router-link  :to="{path: 'shop/foodDetail'}" tag="div" class="menu_detail_link">
+                  <router-link  :to="{path: 'xdj_home/productDetail'}" tag="div" class="menu_detail_link">
                     <section class="menu_food_img">
-                      <img src="../../images/food.jpg">
+                      <img src="../../../images/food.jpg">
                     </section>
                     <section class="menu_food_description">
                       <h3 class="food_description_head">
@@ -463,9 +422,9 @@
               </li>
               <li>
                 <section class="menu_detail_list">
-                  <router-link  :to="{path: 'shop/foodDetail'}" tag="div" class="menu_detail_link">
+                  <router-link  :to="{path: 'xdj_home/productDetail'}" tag="div" class="menu_detail_link">
                     <section class="menu_food_img">
-                      <img src="../../images/food.jpg">
+                      <img src="../../../images/food.jpg">
                     </section>
                     <section class="menu_food_description">
                       <h3 class="food_description_head">
@@ -496,11 +455,6 @@
               </li>
             </ul>
             <p class="empty_data">加载更多...</p>
-            <aside class="return_top" @click="backTop" v-if="showBackStatus">
-              <svg class="back_top_svg">
-                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#backtop"></use>
-              </svg>
-            </aside>
           </div>
       </div>
     	<xdj-foot-guide></xdj-foot-guide>
@@ -518,9 +472,8 @@ import {showBack, animate} from 'src/config/mUtils'
 export default {
 	data(){
         return {
-            homeTitle: '公告: 鲜到家系统V1.0正式上线啦!', // 页面头部标题
+            homeTitle: '果蔬到家', // 页面头部标题
             menuIndex: 0, //已选菜单索引值，默认为0
-            showBackStatus: true, //显示返回顶部按钮
         }
     },
     async beforeMount(){
@@ -545,10 +498,6 @@ export default {
           pagination: '.swiper-pagination',
           loop: true,
           autoplay: 4000
-        });
-        //开始监听scrollTop的值，达到一定程度后显示返回顶部按钮
-        showBack(status => {
-          this.showBackStatus = status;
         });
       },
     	// 解码url地址，求去restaurant_category_id值
@@ -580,6 +529,15 @@ export default {
 
 <style lang="scss" scoped>
     @import 'src/style/mixin';
+  .home_container{
+    display: flex;
+    flex-direction: column;
+    overflow-y: hidden;
+    position: absolute;
+    right: 0;
+    left: 0;
+    height: 100%;
+  }
 	.msite_title{
 		@include center;
         width: 100%;
@@ -592,51 +550,10 @@ export default {
             display: block;
         }
 	}
-	.home_carousel{
-		padding-top: 2.1rem;
-		background-color: #fff;
-		border-bottom: 0.025rem solid $bc;
-		height: 8.0rem;
-		.swiper-container{
-			@include wh(100%, auto);
-			padding-bottom: 0.6rem;
-			.swiper-pagination{
-			}
-		}
-		.fl_back{
-			@include wh(100%, 100%);
-		}
-	}
-  .top-nav{
-    margin-top: .4rem;
-		background-color: #fff;
-		border-bottom: 0.025rem solid $bc;
-		height: 3.8rem;
-    padding-top: 0.2rem;
-    .food_types_container{
-      display:flex;
-      flex-wrap: wrap;
-      .link_to_food{
-        width: 25%;
-        padding: 0.3rem 0rem;
-        @include fj(center);
-        figure{
-          img{
-            margin-bottom: 0.2rem;
-            @include wh(1.8rem, 1.5rem);
-          }
-          figcaption{
-            text-align: center;
-            @include sc(0.5rem, #666);
-          }
-        }
-      }
-    }
-	}
   .nav_product_list{
-    padding-bottom: 2.1rem;
-    margin-top: .4rem;
+    margin-top: 1.95rem;
     display: flex;
+    height: 24.5rem;
     flex-direction: row;
 		border-bottom: 0.025rem solid $bc;
     .left_nav{
@@ -664,12 +581,12 @@ export default {
     .product_list{
       width: 75%;
       background-color: #fff;
+      overflow-y: auto;
       .menu_detail_list{
         background-color: #fff;
         padding: .6rem .4rem;
         border-bottom: 1px solid #f8f8f8;
         position: relative;
-        overflow: hidden;
         .menu_detail_link{
           display:flex;
           .menu_food_img{

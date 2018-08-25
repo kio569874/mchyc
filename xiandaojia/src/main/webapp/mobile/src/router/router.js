@@ -47,8 +47,9 @@ const find = r => require.ensure([], () => r(require('../page/find/find')), 'fin
 const download = r => require.ensure([], () => r(require('../page/download/download')), 'download')
 
 //xiandaojia router
-const xdj_home = r => require.ensure([], () => r(require('../page/xdj_home/xdj_home')), 'xdj_home')
-const xdj_product_detail = r => require.ensure([], () => r(require('../page/xdj_home/children/xdj_product_detail')), 'xdj_product_detail')
+const xdjHome = r => require.ensure([], () => r(require('../page/xdjHome/xdjHome')), 'xdjHome')
+const xdjProductDetail = r => require.ensure([], () => r(require('../page/xdjHome/children/xdjProductDetail')), 'xdjProductDetail')
+const xdjTypeList = r => require.ensure([], () => r(require('../page/xdjHome/children/xdjTypeList')), 'xdjTypeList')
 
 
 
@@ -59,14 +60,14 @@ export default [{
     children: [ //二级路由。对应App.vue
         //地址为空时跳转home页面
         {
-            path: '',
-            redirect: '/xdj_home'
+            path: '/',
+            redirect: '/xdjHome'
         },
-        //首页城市列表页
+        /*//首页城市列表页
         {
             path: '/home',
             component: home
-        },
+        },*/
         //当前选择城市页
         {
             path: '/city/:cityid',
@@ -255,12 +256,18 @@ export default [{
         },
         //鲜到家首页
         {
-            path: 'xdj_home',
-            component: xdj_home,
-            children: [{
-                path: 'detail', //产品详情
-                component: xdj_product_detail,
-            }, ]
+            path: '/xdjHome',
+            component: xdjHome
+        },
+        //鲜到家产品详情
+        {
+          path: '/xdjProductDetail',
+          component: xdjProductDetail,
+        },
+        //鲜到家产品详情
+        {
+          path: '/xdjTypeList',
+          component: xdjTypeList,
         },
 
     ]
