@@ -1,39 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-<<<<<<< HEAD
 import {NzMessageService, NzModalService} from 'ng-zorro-antd';
 import { _HttpClient } from '@delon/theme';
 import { tap } from 'rxjs/operators';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { environment } from '@env/environment';
-=======
-import { NzMessageService } from 'ng-zorro-antd';
-import { _HttpClient } from '@delon/theme';
-import { tap } from 'rxjs/operators';
->>>>>>> master
 
 @Component({
     selector: 'product-introduce-list',
     templateUrl: './introduce-list.component.html'
 })
 export class ProductIntroduceListComponent implements OnInit {
-<<<<<<< HEAD
     form: FormGroup;
     q: any = {
         page: 1,
         pageSize: 10,
-=======
-    q: any = {
-        pi: 1,
-        ps: 10,
->>>>>>> master
         sorter: '',
         status: null,
         statusList: []
     };
-<<<<<<< HEAD
     totalCount : number = 0;
-=======
->>>>>>> master
     data: any[] = [];
     loading = false;
     selectedRows: any[] = [];
@@ -41,7 +26,6 @@ export class ProductIntroduceListComponent implements OnInit {
     totalCallNo = 0;
     allChecked = false;
     indeterminate = false;
-<<<<<<< HEAD
     sortMap: any = {};
     expandForm = false;
     modalVisible = false;
@@ -60,6 +44,7 @@ export class ProductIntroduceListComponent implements OnInit {
         this.form = this.fb.group({
             informationName: [null, [Validators.required]],
             informationContent: [null, [Validators.required]],
+            informationDesc: [null, [Validators.required]],
         }, );
     }
 
@@ -73,45 +58,10 @@ export class ProductIntroduceListComponent implements OnInit {
             this.totalCount = res.data.totalCount;
             this.loading = false;}
         );
-=======
-    status = [
-        { text: '关闭', value: false, type: 'default' },
-        { text: '运行中', value: false, type: 'processing' },
-        { text: '已上线', value: false, type: 'success' },
-        { text: '异常', value: false, type: 'error' }
-    ];
-    sortMap: any = {};
-    expandForm = false;
-    modalVisible = false;
-    description = '';
-
-    constructor(private http: _HttpClient, public msg: NzMessageService) {}
-
-    ngOnInit() {
-        this.getData();
-    }
-
-    getData() {
-        this.pageChange(1).then(() => {
-            this.q.statusList = this.status.map((i, index) => i.value ? index : -1).filter(w => w !== -1);
-            if (this.q.status !== null && this.q.status > -1) this.q.statusList.push(this.q.status);
-            this.http.get('/rule', this.q).pipe(
-                tap((list: any[]) => {
-                    return list.map(i => {
-                        const statusItem = this.status[i.status];
-                        i.statusText = statusItem.text;
-                        i.statusType = statusItem.type;
-                        return i;
-                    });
-                })
-            ).subscribe(res => this.data = res);
-        });
->>>>>>> master
     }
 
     add() {
         this.modalVisible = true;
-<<<<<<< HEAD
         this.informationId = '';
         this.informationName = '';
         this.informationContent = '';
@@ -137,20 +87,11 @@ export class ProductIntroduceListComponent implements OnInit {
             action = 'insert';
         }
         this.http.post(this.baseUrl + '/product/productInformation/'+ action, body).subscribe(() => {
-=======
-        this.description = '';
-    }
-
-    save() {
-        this.loading = true;
-        this.http.post('/rule', { description: this.description }).subscribe(() => {
->>>>>>> master
             this.getData();
             setTimeout(() => this.modalVisible = false, 500);
         });
     }
 
-<<<<<<< HEAD
     edit(information){
         this.modalVisible = true;
         this.informationId = information.informationId;
@@ -161,16 +102,11 @@ export class ProductIntroduceListComponent implements OnInit {
 
     deleteAll() {
         this.http.post(this.baseUrl + '/product/productInformation/delete', { nos: this.selectedRows.map(i => i.no).join(',') }).subscribe(() => {
-=======
-    remove() {
-        this.http.delete('/rule', { nos: this.selectedRows.map(i => i.no).join(',') }).subscribe(() => {
->>>>>>> master
             this.getData();
             this.clear();
         });
     }
 
-<<<<<<< HEAD
     delete(id) {
         this.modal.open({
             title: '确认删除',
@@ -188,8 +124,6 @@ export class ProductIntroduceListComponent implements OnInit {
 
     }
 
-=======
->>>>>>> master
     approval() {
         this.msg.success(`审批了 ${this.selectedRows.length} 笔`);
     }
@@ -229,21 +163,9 @@ export class ProductIntroduceListComponent implements OnInit {
         this.refreshStatus();
     }
 
-<<<<<<< HEAD
     pageChange(page: number){
         this.q.page = page;
         this.getData();
-=======
-    pageChange(pi: number): Promise<any> {
-        this.q.pi = pi;
-        this.loading = true;
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                this.loading = false;
-                resolve();
-            }, 500);
-        });
->>>>>>> master
     }
 
     reset(ls: any[]) {

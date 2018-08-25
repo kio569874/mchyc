@@ -1,40 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-<<<<<<< HEAD
 import {NzMessageService, NzModalService} from 'ng-zorro-antd';
 import { _HttpClient } from '@delon/theme';
 import { tap } from 'rxjs/operators';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {environment} from "@env/environment";
 import {ProductProductFormComponent} from "../form/product-form.component";
-=======
-import { NzMessageService } from 'ng-zorro-antd';
-import { _HttpClient } from '@delon/theme';
-import { tap } from 'rxjs/operators';
->>>>>>> master
 
 @Component({
     selector: 'product-product-list',
     templateUrl: './product-list.component.html'
 })
 export class ProductProductListComponent implements OnInit {
-<<<<<<< HEAD
     options : {};
     q: any = {
         page: 1,
         pageSize: 10,
-=======
-    q: any = {
-        pi: 1,
-        ps: 10,
->>>>>>> master
         sorter: '',
         status: null,
         statusList: []
     };
-<<<<<<< HEAD
     totalCount : number = 0;
-=======
->>>>>>> master
     data: any[] = [];
     loading = false;
     selectedRows: any[] = [];
@@ -43,25 +28,16 @@ export class ProductProductListComponent implements OnInit {
     allChecked = false;
     indeterminate = false;
     status = [
-<<<<<<< HEAD
         { text: '启用', value: '0', type: 'success' },
         { text: '停用', value: '1', type: 'error' }
     ];
     isDiscounts = [
         { text: '是', value: '0'},
         { text: '否', value: '1'}
-=======
-        { text: '关闭', value: false, type: 'default' },
-        { text: '运行中', value: false, type: 'processing' },
-        { text: '已上线', value: false, type: 'success' },
-        { text: '异常', value: false, type: 'error' }
->>>>>>> master
     ];
     sortMap: any = {};
     expandForm = false;
     modalVisible = false;
-<<<<<<< HEAD
-
     productId : string;
     productName : string;
     productPrice: number;
@@ -75,18 +51,12 @@ export class ProductProductListComponent implements OnInit {
     baseUrl : string = environment.XDJ_SERVER_URL;
 
     constructor(private http: _HttpClient, private fb: FormBuilder, public msg: NzMessageService,private modal: NzModalService) {}
-=======
-    description = '';
-
-    constructor(private http: _HttpClient, public msg: NzMessageService) {}
->>>>>>> master
 
     ngOnInit() {
         this.getData();
     }
 
     getData() {
-<<<<<<< HEAD
         this.loading = true;
         this.q.statusList = this.status.map((i, index) => i.value ? index : -1).filter(w => w !== -1);
         if (this.q.status !== null && this.q.status > -1) this.q.statusList.push(this.q.status);
@@ -153,45 +123,11 @@ export class ProductProductListComponent implements OnInit {
 
     deleteAll() {
         this.http.post(this.baseUrl + '/product/productInfo/delete', { nos: this.selectedRows.map(i => i.no).join(',') }).subscribe(() => {
-=======
-        this.pageChange(1).then(() => {
-            this.q.statusList = this.status.map((i, index) => i.value ? index : -1).filter(w => w !== -1);
-            if (this.q.status !== null && this.q.status > -1) this.q.statusList.push(this.q.status);
-            this.http.get('/rule', this.q).pipe(
-                tap((list: any[]) => {
-                    return list.map(i => {
-                        const statusItem = this.status[i.status];
-                        i.statusText = statusItem.text;
-                        i.statusType = statusItem.type;
-                        return i;
-                    });
-                })
-            ).subscribe(res => this.data = res);
-        });
-    }
-
-    add() {
-        this.modalVisible = true;
-        this.description = '';
-    }
-
-    save() {
-        this.loading = true;
-        this.http.post('/rule', { description: this.description }).subscribe(() => {
-            this.getData();
-            setTimeout(() => this.modalVisible = false, 500);
-        });
-    }
-
-    remove() {
-        this.http.delete('/rule', { nos: this.selectedRows.map(i => i.no).join(',') }).subscribe(() => {
->>>>>>> master
             this.getData();
             this.clear();
         });
     }
 
-<<<<<<< HEAD
     delete(id) {
         this.modal.open({
             title: '确认删除',
@@ -208,9 +144,6 @@ export class ProductProductListComponent implements OnInit {
         });
 
     }
-
-=======
->>>>>>> master
     approval() {
         this.msg.success(`审批了 ${this.selectedRows.length} 笔`);
     }
@@ -250,21 +183,9 @@ export class ProductProductListComponent implements OnInit {
         this.refreshStatus();
     }
 
-<<<<<<< HEAD
     pageChange(page: number){
         this.q.page = page;
         this.getData();
-=======
-    pageChange(pi: number): Promise<any> {
-        this.q.pi = pi;
-        this.loading = true;
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                this.loading = false;
-                resolve();
-            }, 500);
-        });
->>>>>>> master
     }
 
     reset(ls: any[]) {

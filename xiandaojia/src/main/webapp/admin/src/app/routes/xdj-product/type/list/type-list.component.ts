@@ -3,10 +3,7 @@ import {NzMessageService, NzModalService} from 'ng-zorro-antd';
 import { _HttpClient } from '@delon/theme';
 import { tap } from 'rxjs/operators';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-<<<<<<< HEAD
 import {environment} from "@env/environment";
-=======
->>>>>>> master
 
 @Component({
     selector: 'product-type-list',
@@ -42,12 +39,7 @@ export class ProductTypeListComponent implements OnInit {
     bigtypeSeqno: number;
     bigtypeStatus: string;
 
-<<<<<<< HEAD
     baseUrl : string = environment.XDJ_SERVER_URL;
-=======
-    baseUrl : string = 'http://localhost:8999/xiandaojia';
->>>>>>> master
-
     constructor(private http: _HttpClient, private fb: FormBuilder, public msg: NzMessageService,private modal: NzModalService) {}
 
     ngOnInit() {
@@ -65,12 +57,7 @@ export class ProductTypeListComponent implements OnInit {
         if (this.q.status !== null && this.q.status > -1) this.q.statusList.push(this.q.status);
         this.http.post(this.baseUrl + '/product/productBigTypeInfo/query', this.q).pipe(
             tap((res: any) => {
-<<<<<<< HEAD
                 return res.data.data.map(i => {
-=======
-                debugger;
-                return res.data.listData.map(i => {
->>>>>>> master
                     const statusItem = this.status[i.status];
                     i.statusText = statusItem.text;
                     i.statusType = statusItem.type;
@@ -78,14 +65,8 @@ export class ProductTypeListComponent implements OnInit {
                 });
             })
         ).subscribe(res =>{
-<<<<<<< HEAD
             this.data = res.data.data;
             this.totalCount = res.data.totalCount;
-=======
-            debugger;
-            this.data = res.data.listData;
-            this.totalCount = 12;
->>>>>>> master
             this.loading = false;}
         );
     }
@@ -101,11 +82,7 @@ export class ProductTypeListComponent implements OnInit {
     save() {
         let action;
         if (this.form.invalid) {
-<<<<<<< HEAD
             this.msg.error('数据填写有误,请仔细检查!');
-=======
-            alert(1);
->>>>>>> master
             return;
         }
         this.loading = true;
