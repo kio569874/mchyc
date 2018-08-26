@@ -13,3 +13,4 @@ out
 .project
 /.settings/
 *.log
+/node_modules
