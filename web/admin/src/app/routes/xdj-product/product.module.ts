@@ -7,7 +7,6 @@ import { ProductProductFormComponent } from './product/form/product-form.compone
 import { ProductIntroduceListComponent } from './introduce/list/introduce-list.component';
 import { ProductTagListComponent } from './tag/list/tag-list.component';
 import { ProductTypeListComponent } from './type/list/type-list.component';
-import {ModelCustomComponent} from "../elements/modal/custom.component";
 
 @NgModule({
     imports: [ SharedModule, ProductRoutingModule ],
