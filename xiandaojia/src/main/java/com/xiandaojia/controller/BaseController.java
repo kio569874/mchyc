@@ -66,16 +66,12 @@ public class BaseController {
 	}
 	/**
 	 * 成功结果
-	 * 
-	 * @param json
-	 * @param retCode
-	 * @param retMsg
 	 * @return
 	 */
-	protected <T> String getSuccessPageResultMsg(PaginationDto<T> pageDto, String retCode, String retMsg) {
+	protected <T> String getSuccessResultMsg(PaginationDto<T> pageDto) {
 		JSONObject resultJson = new JSONObject();
-		resultJson.put(Contants.RET_CODE, retCode);
-		resultJson.put(Contants.RET_MSG, retMsg);
+		resultJson.put(Contants.RET_CODE, Contants.RET_CODE_SUCCESS);
+		resultJson.put(Contants.RET_MSG, Contants.RET_MSG_SUCCESS);
 		resultJson.put("totalCount", pageDto.getTotalCount());
 		resultJson.put("pageSize", pageDto.getPageSize());
 		resultJson.put("currentPage", pageDto.getCurrentPage());
