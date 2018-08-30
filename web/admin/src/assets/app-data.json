@@ -473,7 +473,8 @@
     }, {
         "text": "基础参数管理",
         "group": true,
-        "children": [{
+        "children": [
+            {
             "text": "产品管理",
             "icon": "icon-compass",
             "children": [{
@@ -489,6 +490,19 @@
                 "text": "产品维护",
                 "link": "/product/product/list"
             }]
-        }]
-    }]
+            },
+            {
+                "text": "员工管理",
+                "icon": "icon-compass",
+                "children": [
+                    {
+                        "text": "员工维护",
+                        "link": "/role/role"
+                    }
+
+                ]
+            }
+        ]
+    }
+    ]
 }
