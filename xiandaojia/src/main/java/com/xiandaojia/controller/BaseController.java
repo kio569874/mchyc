@@ -8,6 +8,7 @@ import org.springframework.util.StringUtils;
 
 import com.alibaba.fastjson.JSONObject;
 import com.xiandaojia.common.Contants;
+import com.xiandaojia.common.domain.PaginationDto;
 
 /**
  * 
@@ -62,6 +63,27 @@ public class BaseController {
 		}
 		return resultJson.toJSONString();
 
+	}
+	/**
+	 * 成功结果
+	 * 
+	 * @param json
+	 * @param retCode
+	 * @param retMsg
+	 * @return
+	 */
+	protected <T> String getSuccessPageResultMsg(PaginationDto<T> pageDto, String retCode, String retMsg) {
+		JSONObject resultJson = new JSONObject();
+		resultJson.put(Contants.RET_CODE, retCode);
+		resultJson.put(Contants.RET_MSG, retMsg);
+		resultJson.put("totalCount", pageDto.getTotalCount());
+		resultJson.put("pageSize", pageDto.getPageSize());
+		resultJson.put("currentPage", pageDto.getCurrentPage());
+		resultJson.put("totalPages", pageDto.getTotalPages());
+		if (pageDto.getData() != null) {
+			resultJson.put(Contants.DATA, JSONObject.toJSONString(pageDto.getData()));
+		}
+		return resultJson.toJSONString();
 	}
 
 	/**
