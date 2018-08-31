@@ -73,4 +73,12 @@
 		delete from t_small_product_relation
 		where product_id = #{productId,jdbcType=BIGINT}
 	</delete>
+
+
+  <select id="selectByProductId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from t_small_product_relation
+    where product_id = #{productId,jdbcType=BIGINT}
+  </select>
 </mapper>

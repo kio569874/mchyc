@@ -144,6 +144,9 @@
       <if test="userStatus != null" >
         user_status = #{userStatus,jdbcType=CHAR},
       </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=CHAR},
+      </if>
       <if test="loginTime != null" >
         login_time = #{loginTime,jdbcType=DATE},
       </if>
@@ -168,6 +171,7 @@
       user_level = #{userLevel,jdbcType=VARCHAR},
       user_position = #{userPosition,jdbcType=VARCHAR},
       user_status = #{userStatus,jdbcType=CHAR},
+       del_flag = #{delFlag,jdbcType=CHAR},
       login_time = #{loginTime,jdbcType=DATE},
       login_ip = #{loginIp,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=DATE},

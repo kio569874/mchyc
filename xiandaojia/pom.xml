@@ -126,11 +126,11 @@
 		</dependency>
 		
 		<!-- 云片平台短信验证码实现 -->
-		<dependency>
+		<!--<dependency>
 			<groupId>com.yunpian</groupId>
 			<artifactId>yunpiansmssdk</artifactId>
 			<version>${yunpian.version}</version>
-		</dependency>
+		</dependency>-->
 
 		<!-- 支付宝支付 start 
 		<dependency>
