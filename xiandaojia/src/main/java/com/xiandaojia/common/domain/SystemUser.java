@@ -33,6 +33,16 @@ public class SystemUser implements Serializable{
 
     private Date updateTime;
 
+    private String delFlag;
+
+    public String getDelFlag() {
+        return delFlag;
+    }
+
+    public void setDelFlag(String delFlag) {
+        this.delFlag = delFlag;
+    }
+
     public Long getId() {
         return id;
     }

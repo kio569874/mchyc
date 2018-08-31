@@ -1,3 +1,4 @@
+/*
 package com.xiandaojia.spi.sms.impl;
 
 import java.math.BigDecimal;
@@ -14,13 +15,15 @@ import com.yunpian.sdk.model.SendSingleSmsInfo;
 import com.yunpian.sdk.service.SmsOperator;
 import com.yunpian.sdk.service.YunpianRestClient;
 
+*/
 /**
  * 云片网短信服务实现
  * 
  * @author yc
  * @param
  *
- */
+ *//*
+
 public class YunPianSmsServiceImpl extends AbstractSmsHandler implements ISmsHandle {
 
 	@Override
@@ -62,3 +65,4 @@ public class YunPianSmsServiceImpl extends AbstractSmsHandler implements ISmsHan
 
 	}
 }
+*/

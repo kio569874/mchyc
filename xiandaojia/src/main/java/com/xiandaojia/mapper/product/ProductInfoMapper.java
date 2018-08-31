@@ -21,4 +21,9 @@ public interface ProductInfoMapper {
 	int getTotalCount(Map<String,Object> paramMap);
 
 	List<ProductInfo> queryListByPage(Map<String,Object> paramMap);
+
+    List<ProductInfo> selectListBigType(Map<String,Object> paramMap);
+
+    int getTotalCountByBigType(Map<String,Object> paramMap);
+
 }

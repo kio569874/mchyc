@@ -53,6 +53,25 @@ public class ProductController extends BaseController {
 	 * @param content
 	 * @return
 	 */
+
+	@RequestMapping(value = "/productList/query", method = RequestMethod.POST)
+	@ResponseBody
+	public String selectListByType(@RequestBody String content) {
+		try {
+			JSONObject jsonObj = JSONObject.parseObject(content);
+			Map<String, Object> paramMap = jsonObj;
+			String result = productService.queryList(paramMap);
+			return getSuccessResultMsg(result);
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			return getErrorResultMsg(e.getMessage());
+		}
+
+	}
+
+
+
+
 	@RequestMapping(value = "/mobile/query", method = RequestMethod.POST)
 	@ResponseBody
 	public String query(@RequestBody String content) {

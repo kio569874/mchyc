@@ -2,6 +2,7 @@ package com.xiandaojia.controller.usercenter;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -29,7 +30,7 @@ import com.xiandaojia.service.usercenter.IUserAddressService;
 import com.xiandaojia.service.usercenter.IUserService;
 
 @RestController
-@RequestMapping("userCenter")
+@RequestMapping("user")
 public class UserController extends BaseController {
 
 	@Autowired
@@ -77,8 +78,12 @@ public class UserController extends BaseController {
 	@ResponseBody
 	public String insert(@RequestBody String content) {
 		try {
-			SystemUser systemUser = JsonBeanUtil.stringToBean(SystemUser.class, content);
-			systemUser.setUserPassword(MD5Util.createMD5(systemUser.getUserPassword()));
+			//SystemUser systemUser = JsonBeanUtil.stringToBean(SystemUser.class, content);
+			//systemUser.setUserPassword(MD5Util.createMD5(systemUser.getUserPassword()));
+			JSONObject jsonObj = JSONObject.parseObject(content);
+			Map<String, Object> paramMap = jsonObj;
+			JSONObject data =  (JSONObject)paramMap.get("data");
+			SystemUser systemUser = JsonBeanUtil.stringToBean(SystemUser.class, data.toJSONString());
 			systemUserService.insert(systemUser);
 			return getSuccessResultMsg();
 		} catch (Exception e) {
@@ -92,8 +97,13 @@ public class UserController extends BaseController {
 	@ResponseBody
 	public String delete(@RequestBody String content) {
 		try {
-			SystemUser systemUser = JsonBeanUtil.stringToBean(SystemUser.class, content);
-			systemUserService.delete(systemUser.getId());
+			JSONObject jsonObj = JSONObject.parseObject(content);
+			Map<String, Object> paramMap = jsonObj;
+			JSONObject data =  (JSONObject)paramMap.get("data");
+			SystemUser systemUser = JsonBeanUtil.stringToBean(SystemUser.class, data.toJSONString());
+			//systemUserService.delete(systemUser.getId());
+			systemUser.setDelFlag("1");
+			systemUserService.update(systemUser);
 			return getSuccessResultMsg();
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
@@ -106,7 +116,11 @@ public class UserController extends BaseController {
 	@ResponseBody
 	public String update(@RequestBody String content) {
 		try {
-			SystemUser systemUser = JsonBeanUtil.stringToBean(SystemUser.class, content);
+			//SystemUser systemUser = JsonBeanUtil.stringToBean(SystemUser.class, content);
+			JSONObject jsonObj = JSONObject.parseObject(content);
+			Map<String, Object> paramMap = jsonObj;
+			JSONObject data =  (JSONObject)paramMap.get("data");
+			SystemUser systemUser = JsonBeanUtil.stringToBean(SystemUser.class, data.toJSONString());
 			systemUserService.update(systemUser);
 			return getSuccessResultMsg();
 		} catch (Exception e) {
@@ -114,7 +128,55 @@ public class UserController extends BaseController {
 			return getErrorResultMsg(e.getMessage());
 		}
 	}
-
+/*
+*
+* 密码修改
+* */
+	@RequestMapping(value = "/systemUser/passWordModify", method = RequestMethod.POST)
+	@ResponseBody
+	public String passWordModify(@RequestBody String content) {
+		try {
+			//SystemUser systemUser = JsonBeanUtil.stringToBean(SystemUser.class, content);
+			JSONObject jsonObj = JSONObject.parseObject(content);
+			Map<String, Object> paramMap = jsonObj;
+			JSONObject data =  (JSONObject)paramMap.get("data");
+			Long id = Long.valueOf(data.getString("id"));
+			String passWord = data.getString("userPassword");
+			String passWordAgain = data.getString("usePasswordAgain");
+			if(!passWord.equals(passWordAgain)){
+				logger.error("两次密码不一致");
+				return getErrorResultMsg("两次密码不一致");
+			}
+			SystemUser systemUser = new SystemUser();
+			systemUser.setId(id);
+			systemUser.setUserPassword(passWord);
+			systemUserService.update(systemUser);
+			return getSuccessResultMsg();
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			return getErrorResultMsg(e.getMessage());
+		}
+	}
+	@RequestMapping(value = "/systemUser/passWordReset", method = RequestMethod.POST)
+	@ResponseBody
+	public String passWordReset(@RequestBody String content) {
+		try {
+			//SystemUser systemUser = JsonBeanUtil.stringToBean(SystemUser.class, content);
+			JSONObject jsonObj = JSONObject.parseObject(content);
+			Map<String, Object> paramMap = jsonObj;
+			JSONObject data =  (JSONObject)paramMap.get("data");
+			Long id = Long.valueOf(data.getString("id"));
+			String passWord = MD5Util.createMD5("111111");
+			SystemUser systemUser = new SystemUser();
+			systemUser.setId(id);
+			systemUser.setUserPassword(passWord);
+			systemUserService.update(systemUser);
+			return getSuccessResultMsg();
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			return getErrorResultMsg(e.getMessage());
+		}
+	}
 	@RequestMapping(value = "/systemUser/queryListByPage", method = RequestMethod.POST)
 	@ResponseBody
 	public String queryListByPage(@RequestBody String content) {
@@ -123,13 +185,31 @@ public class UserController extends BaseController {
 			int page = jsonObj.getInteger("page");
 			int pageSize = jsonObj.getInteger("pageSize");
 			PaginationDto<SystemUser> paginationDto = systemUserService.queryListByPage(page, pageSize, null);
-			return getSuccessResultMsg(JSONObject.toJSONString(paginationDto));
+			return getSuccessPageResultMsg(paginationDto);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			return getErrorResultMsg(e.getMessage());
 		}
 
 	}
+	@RequestMapping(value = "/systemUser/queryListById", method = RequestMethod.POST)
+	@ResponseBody
+	public String queryListById(@RequestBody String content) {
+		try {
+			JSONObject jsonObj = JSONObject.parseObject(content);
+			Map<String, Object> paramMap = jsonObj;
+			JSONObject data =  (JSONObject)paramMap.get("data");
+			SystemUser systemUser = JsonBeanUtil.stringToBean(SystemUser.class, data.toJSONString());
+			SystemUser User = systemUserService.selectUserById(systemUser.getId());
+			return getSuccessResultMsg(JSONObject.toJSONString(User));
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			return getErrorResultMsg(e.getMessage());
+		}
+
+	}
+
+
 
 	@RequestMapping(value = "/shoppingCart/insert", method = RequestMethod.POST)
 	@ResponseBody

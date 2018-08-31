@@ -57,4 +57,9 @@ public class SystemUserServiceImpl extends AbstractBaseService implements ISyste
 		return systemUserMapper.checkSystemUser(userCode, userPassword);
 	}
 
+	@Override
+	public SystemUser selectUserById(Long id) {
+		return systemUserMapper.selectByPrimaryKey(id);
+	}
+
 }

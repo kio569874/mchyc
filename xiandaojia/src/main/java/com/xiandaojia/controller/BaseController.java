@@ -68,7 +68,8 @@ public class BaseController {
 	 * 成功结果
 	 * @return
 	 */
-	protected <T> String getSuccessResultMsg(PaginationDto<T> pageDto) {
+	protected <T> String getSuccessPageResultMsg(PaginationDto<T> pageDto) {
+		System.out.println(1111111);
 		JSONObject resultJson = new JSONObject();
 		resultJson.put(Contants.RET_CODE, Contants.RET_CODE_SUCCESS);
 		resultJson.put(Contants.RET_MSG, Contants.RET_MSG_SUCCESS);

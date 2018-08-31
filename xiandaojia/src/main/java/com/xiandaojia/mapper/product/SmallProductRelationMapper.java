@@ -2,6 +2,8 @@ package com.xiandaojia.mapper.product;
 
 import com.xiandaojia.common.domain.SmallProductRelation;
 
+import java.util.List;
+
 public interface SmallProductRelationMapper {
     int deleteByPrimaryKey(Long id);
 
@@ -16,4 +18,6 @@ public interface SmallProductRelationMapper {
     int updateByPrimaryKey(SmallProductRelation record);
     
     int deleteByProductId(Long productId);
+
+    List<SmallProductRelation> selectByProductId(Long id);
 }

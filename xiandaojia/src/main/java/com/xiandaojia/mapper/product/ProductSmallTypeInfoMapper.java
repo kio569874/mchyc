@@ -22,4 +22,6 @@ public interface ProductSmallTypeInfoMapper {
 	List<ProductSmallTypeInfo> queryListByPage(int offset, int pageSize);
 
 	List<ProductSmallTypeInfo> query(ProductSmallTypeInfo productSmallTypeInfo);
+
+
 }
