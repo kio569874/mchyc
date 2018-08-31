@@ -69,7 +69,6 @@ public class BaseController {
 	 * @return
 	 */
 	protected <T> String getSuccessPageResultMsg(PaginationDto<T> pageDto) {
-		System.out.println(1111111);
 		JSONObject resultJson = new JSONObject();
 		resultJson.put(Contants.RET_CODE, Contants.RET_CODE_SUCCESS);
 		resultJson.put(Contants.RET_MSG, Contants.RET_MSG_SUCCESS);
@@ -78,7 +77,7 @@ public class BaseController {
 		resultJson.put("currentPage", pageDto.getCurrentPage());
 		resultJson.put("totalPages", pageDto.getTotalPages());
 		if (pageDto.getData() != null) {
-			resultJson.put(Contants.DATA, JSONObject.toJSONString(pageDto.getData()));
+			resultJson.put(Contants.DATA, pageDto.getData());
 		}
 		return resultJson.toJSONString();
 	}
