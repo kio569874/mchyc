@@ -88,14 +88,16 @@
             <td nz-td>{{i.id}}</td>
             <td nz-td>{{i.userCode}}</td>
             <td nz-td>{{i.userName}}</td>
-            <td nz-td><nz-badge [nzStatus]="i.userStatus" [nzText]="i.userText"></nz-badge></td>
+            <td nz-td><nz-badge [nzStatus]="i.statusType" [nzText]="i.statusText"></nz-badge></td>
             <td nz-td>{{i.userLevel}}</td>
             <td nz-td>{{i.userPosition}}</td>
             <td nz-td>{{i.createTime | _date}}</td>
             <td nz-td>
                 <a (click)="edit(i)">编辑</a>
-                <span nz-table-divider></span>
+                    <span nz-table-divider></span>
                 <a (click)="delete(i.id)">删除</a>
+                <span nz-table-divider></span>
+                <a (click)="resetPassword(i)">密码重置</a>
             </td>
         </tr>
         </tbody>
@@ -129,7 +131,7 @@
                         请必须输入字典名称
                     </div>
                 </div>
-                <div nz-col [nzSpan]="24" class="mb-md">
+                <div nz-col [nzSpan]="24" class="mb-md"   *ngIf="isPassword">
                     <div nz-form-item class="d-flex">
                         <div nz-col [nzSpan]="3"   nz-form-label class="alignment"><label for="funcCode">用户密码</label><span [ngClass]="{'fromErrors':userPassword.errors?.required}">* </span></div>
                         <div nz-col [nzSpan]="20" nz-form-control>
@@ -142,7 +144,7 @@
                 </div>
                 <div nz-col [nzSpan]="24" class="mb-md">
                     <div nz-form-item class="d-flex">
-                        <div nz-col [nzSpan]="3"   nz-form-label class="alignment"><label for="userPhone">手机号码</label><span [ngClass]="{'fromErrors':userPassword.errors?.required}">* </span></div>
+                        <div nz-col [nzSpan]="3"   nz-form-label class="alignment"><label for="userPhone">手机号码</label><span [ngClass]="{'fromErrors':userPhone.errors?.required}">* </span></div>
                         <div nz-col [nzSpan]="20" nz-form-control>
                             <nz-input [(ngModel)]="roleAdd.userPhone" name="userPhone" #userPhone="ngModel"  required  [nzSize]="'large'" [nzPlaceHolder]="'手机号码'" nzId="userPhone"></nz-input>
                         </div>

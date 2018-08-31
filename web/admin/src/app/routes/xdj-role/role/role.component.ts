@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { _HttpClient } from '@delon/theme';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {NzMessageService, NzModalService, NzNotificationService} from 'ng-zorro-antd';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {environment} from "@env/environment";
 import { tap } from 'rxjs/operators';
 import * as moment from 'moment';
-
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/Rx';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-role',
@@ -14,7 +16,7 @@ import * as moment from 'moment';
 export class RoleComponent implements OnInit {
 
     constructor(
-        private http: _HttpClient,
+        private http: HttpClient,
         private fb: FormBuilder,
         public msg: NzMessageService,
         private modal: NzModalService,
@@ -38,6 +40,7 @@ export class RoleComponent implements OnInit {
     baseUrl : string = environment.XDJ_SERVER_URL; // url路径
     isEdit : boolean;
     roleTitle: string; // 弹出框名称
+    isPassword: boolean; // 密码栏是否显示
     status = [
         { text: '正常', value: '0', type: 'success' },
         { text: '停用', value: '1', type: 'error' }
@@ -58,35 +61,26 @@ export class RoleComponent implements OnInit {
 
 
     getData() {
-       /* this.http.post(this.baseUrl + '/user/systemUser/queryListByPage', this.q)
-            .subscribe(res =>{
-                console.log(res)
-           /!* this.data = res.data.data;
-            this.totalCount = res.data.totalCount;
-            this.loading = false;*!/
-        });*/
-
         this.loading = true;
         this.q.statusList = this.status.map((i, index) => i.value ? index : -1).filter(w => w !== -1);
         if (this.q.status !== null && this.q.status > -1) this.q.statusList.push(this.q.status);
-       this.data = [
-           {id:1 ,userCode: 'role001', userPassword: '123456', userName: '汪波', userPhone: 13003504858, userLevel: 1, userPosition: '测试', userStatus: '0', createTime: '2018-08-29'},
-           {id:1 ,userCode: 'role002', userPassword: '123456', userName: '赵春海', userPhone: 13003504858, userLevel: 1, userPosition: '测试', userStatus: '0', createTime: '2018-08-29'},
-           {id:1 ,userCode: 'role003', userPassword: '123456', userName: '汪波', userPhone: 13003504858, userLevel: 1, userPosition: '测试', userStatus: '1', createTime: '2018-08-26'},
-           {id:1 ,userCode: 'role004', userPassword: '123456', userName: '李俊华', userPhone: 13003504858, userLevel: 1, userPosition: '测试', userStatus: '1', createTime: '2018-08-29'},
-           {id:1 ,userCode: 'role005', userPassword: '123456', userName: '汪波', userPhone: 13003504858, userLevel: 1, userPosition: '测试', userStatus: '0', createTime: '2018-08-24'},
-           {id:1 ,userCode: 'role006', userPassword: '123456', userName: '汪波', userPhone: 13003504858, userLevel: 1, userPosition: '测试', userStatus: '0', createTime: '2018-08-20'},
-           {id:1 ,userCode: 'role007', userPassword: '123456', userName: '郭柿彤', userPhone: 13003504858, userLevel: 1, userPosition: '测试', userStatus: '1', createTime: '2018-08-25'},
-           {id:1 ,userCode: 'role008', userPassword: '123456', userName: '汪波', userPhone: 13003504858, userLevel: 1, userPosition: '测试', userStatus: '0', createTime: '2018-08-21'},
-           {id:1 ,userCode: 'role009', userPassword: '123456', userName: '汪波', userPhone: 13003504858, userLevel: 1, userPosition: '测试', userStatus: '1', createTime: '2018-08-18'}
-       ]
-        for(let i = 0; i < this.data.length; i ++) {
-            const statusItem = this.status[this.data[i].userStatus];
-            this.data[i].statusText = statusItem.text;
-            this.data[i].statusType = statusItem.type;
+        this.http.post(this.baseUrl + '/user/systemUser/queryListByPage', this.q).pipe(
+            tap((res: any) => {
+                console.log(res)
+                res.data = JSON.parse(res.data); // 先转一下, 晚上修改好接口，在改,把转换去掉即可
+                return res.data.map(i => {
+                    const statusItem = this.status[i.userStatus];
+                    i.statusText = statusItem.text;
+                    i.statusType = statusItem.type;
+                    return i;
+                });
+            })
+        ).subscribe(res =>{
+            this.data = res.data;
+            this.totalCount = res.totalCount;
+            this.loading = false;
         }
-
-        this.loading = false;
+        );
     }
 
 
@@ -94,6 +88,8 @@ export class RoleComponent implements OnInit {
     add() {
         this.modalVisible = true;
         this.roleTitle = '新增角色'
+        this.isPassword = true;
+        this.roleAdd = new RolesModule(); // 清空
         this.isEdit = false; // 不是修改
     }
 
@@ -101,7 +97,8 @@ export class RoleComponent implements OnInit {
     // 修改方法
     edit(item) {
         this.modalVisible = true;
-        this.roleTitle = '修改角色'
+        this.roleTitle = '修改角色';
+        this.isPassword = false;
         this.isEdit = true; // 是修改
         this.roleAdd = item;
     }
@@ -109,28 +106,38 @@ export class RoleComponent implements OnInit {
     // 保存按钮
     save() {
         let objJson = this.roleAdd;
+        if(_.isUndefined(objJson.createTime)) {
+            objJson.createTime = moment(new Date()).format('YYYY-MM-DD'); // 默认当前时间
+        }
         objJson.createTime = moment(objJson.createTime).format('YYYY-MM-DD')
-        console.log(objJson);
-
-        if(this.isEdit) {
-            this.http.post(this.baseUrl + '/user/systemUser/update', objJson)
+        let objJsondata = {
+            data: objJson
+        }
+        console.log(objJsondata)
+        if(this.isEdit) { // 修改接口
+            this.http.post(this.baseUrl + '/user/systemUser/update', objJsondata)
                 .subscribe(
                     (val) =>{
-                        this.nznot.create('error', '新增成功' , '成功');
+                        this.modalVisible = false;
+                        this.nznot.create('success', '修改成功', '修改成功');
                         this.getData();
+
                     },
                     (error) => {
-                        this.nznot.create('error', error.msg , error.msg);
+                        this.modalVisible = false;
+                        this.nznot.create('error', '修改' + error.retMsg , '修改' + error.retMsg);
                     });
 
         } else {
-            this.http.post(this.baseUrl + '/user/systemUser/insert', objJson)
+            this.http.post(this.baseUrl + '/user/systemUser/insert', objJsondata)
                 .subscribe(
                     (val) =>{
-                        this.nznot.create('error', '新增成功' , '成功');
+                        this.modalVisible = false;
+                        this.nznot.create('success', '新增成功' , '成功');
                         this.getData();
                     },
                     (error) => {
+                        this.modalVisible = false;
                         this.nznot.create('error', error.msg , error.msg);
                     });
         }
@@ -138,20 +145,23 @@ export class RoleComponent implements OnInit {
 
     // 删除方法
     delete(id) {
-        console.log(id)
+        let dataObj = {
+            data: {id: id}
+        }
+        console.log(dataObj)
         this.modal.open({
             title: '确认删除',
             content: '是否确认删除该用户',
             okText: '确认',
             cancelText: '取消',
             onOk: () => {
-                this.http.post(this.baseUrl + '/user/systemUser/delete', { id : id}).subscribe(
+                this.http.post(this.baseUrl + '/user/systemUser/delete', dataObj).subscribe(
                     (val) =>{
-                        this.nznot.create('error', '删除成功' , '删除成功');
+                        this.nznot.create('success', '删除成功' , '删除成功');
                         this.getData();
                     },
                     (error) => {
-                        this.nznot.create('error', error.msg , error.msg);
+                        this.nznot.create('error', '删除失败', '删除失败');
                     });
             },
             onCancel: () => {
@@ -160,6 +170,31 @@ export class RoleComponent implements OnInit {
 
     }
 
+
+    // 密码重置
+    resetPassword(i) {
+        let dataObj = {
+            data: {id: i.id}
+        }
+        console.log(dataObj)
+        this.modal.open({
+            title: '确认删除',
+            content: '是否重置用户(' + i.userName + ')的密码?',
+            okText: '确认',
+            cancelText: '取消',
+            onOk: () => {
+                this.http.post(this.baseUrl + '/user/systemUser/passWordReset', dataObj).subscribe(
+                    (val) =>{
+                        this.nznot.create('success', '密码重置成功' , '密码重置成功');
+                    },
+                    (error) => {
+                        this.nznot.create('error', '密码重置失败', '密码重置失败');
+                    });
+            },
+            onCancel: () => {
+            }
+        });
+    }
     // 批量删除方法, 先弃用
     /*deleteAll() {
         console.log(this.selectedRows)
@@ -217,11 +252,6 @@ export class RoleComponent implements OnInit {
         for (const item of ls) item.value = false;
         this.getData();
     }
-
-
-
-
-
 }
 
 
