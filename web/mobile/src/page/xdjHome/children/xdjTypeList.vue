@@ -24,7 +24,7 @@
           </div>
           <div class="product_list" ref="productList">
             <ul>
-              <li>
+              <li v-for="item in initData">
                 <section class="menu_detail_list">
                   <router-link  :to="{path: 'xdjProductDetail'}" tag="div" class="menu_detail_link">
                     <section class="menu_food_img">
@@ -32,7 +32,7 @@
                     </section>
                     <section class="menu_food_description">
                       <h3 class="food_description_head">
-                        <strong class="description_foodname">产品名称</strong>
+                        <strong class="description_foodname">{{item.smalltypeName}}</strong>
                         <ul class="attributes_ul">
                           <li>
                             <p>产品属性</p>
@@ -52,403 +52,7 @@
                   <footer class="menu_detail_footer">
                     <section class="food_price">
                       <span>¥</span>
-                      <span>100</span>
-                    </section>
-                  </footer>
-                </section>
-              </li>
-              <li>
-                <section class="menu_detail_list">
-                  <router-link  :to="{path: 'xdj_home/productDetail'}" tag="div" class="menu_detail_link">
-                    <section class="menu_food_img">
-                      <img src="../../../images/food.jpg">
-                    </section>
-                    <section class="menu_food_description">
-                      <h3 class="food_description_head">
-                        <strong class="description_foodname">产品名称</strong>
-                        <ul class="attributes_ul">
-                          <li>
-                            <p>产品属性</p>
-                          </li>
-                        </ul>
-                      </h3>
-                      <p class="food_description_content">描述</p>
-                      <p class="food_description_sale_rating">
-                        <span>月售99份</span>
-                        <span>好评率100%</span>
-                      </p>
-                      <p class="food_activity">
-                        <span style="{color: red;borderColor:red}">产品活动</span>
-                      </p>
-                    </section>
-                  </router-link>
-                  <footer class="menu_detail_footer">
-                    <section class="food_price">
-                      <span>¥</span>
-                      <span>100</span>
-                    </section>
-                  </footer>
-                </section>
-              </li>
-              <li>
-                <section class="menu_detail_list">
-                  <router-link  :to="{path: 'xdj_home/productDetail'}" tag="div" class="menu_detail_link">
-                    <section class="menu_food_img">
-                      <img src="../../../images/food.jpg">
-                    </section>
-                    <section class="menu_food_description">
-                      <h3 class="food_description_head">
-                        <strong class="description_foodname">产品名称</strong>
-                        <ul class="attributes_ul">
-                          <li>
-                            <p>产品属性</p>
-                          </li>
-                        </ul>
-                      </h3>
-                      <p class="food_description_content">描述</p>
-                      <p class="food_description_sale_rating">
-                        <span>月售99份</span>
-                        <span>好评率100%</span>
-                      </p>
-                      <p class="food_activity">
-                        <span style="{color: red;border-color:red}">产品活动</span>
-                      </p>
-                    </section>
-                  </router-link>
-                  <footer class="menu_detail_footer">
-                    <section class="food_price">
-                      <span>¥</span>
-                      <span>100</span>
-                    </section>
-                  </footer>
-                </section>
-              </li>
-              <li>
-                <section class="menu_detail_list">
-                  <router-link  :to="{path: 'xdj_home/productDetail'}" tag="div" class="menu_detail_link">
-                    <section class="menu_food_img">
-                      <img src="../../../images/food.jpg">
-                    </section>
-                    <section class="menu_food_description">
-                      <h3 class="food_description_head">
-                        <strong class="description_foodname">产品名称</strong>
-                        <ul class="attributes_ul">
-                          <li>
-                            <p>产品属性</p>
-                          </li>
-                        </ul>
-                      </h3>
-                      <p class="food_description_content">描述</p>
-                      <p class="food_description_sale_rating">
-                        <span>月售99份</span>
-                        <span>好评率100%</span>
-                      </p>
-                      <p class="food_activity">
-                        <span style="{color: red;border-color:red}">产品活动</span>
-                      </p>
-                    </section>
-                  </router-link>
-                  <footer class="menu_detail_footer">
-                    <section class="food_price">
-                      <span>¥</span>
-                      <span>100</span>
-                    </section>
-                  </footer>
-                </section>
-              </li>
-              <li>
-                <section class="menu_detail_list">
-                  <router-link  :to="{path: 'xdj_home/productDetail'}" tag="div" class="menu_detail_link">
-                    <section class="menu_food_img">
-                      <img src="../../../images/food.jpg">
-                    </section>
-                    <section class="menu_food_description">
-                      <h3 class="food_description_head">
-                        <strong class="description_foodname">产品名称</strong>
-                        <ul class="attributes_ul">
-                          <li>
-                            <p>产品属性</p>
-                          </li>
-                        </ul>
-                      </h3>
-                      <p class="food_description_content">描述</p>
-                      <p class="food_description_sale_rating">
-                        <span>月售99份</span>
-                        <span>好评率100%</span>
-                      </p>
-                      <p class="food_activity">
-                        <span style="{color: red;border-color:red}">产品活动</span>
-                      </p>
-                    </section>
-                  </router-link>
-                  <footer class="menu_detail_footer">
-                    <section class="food_price">
-                      <span>¥</span>
-                      <span>100</span>
-                    </section>
-                  </footer>
-                </section>
-              </li>
-              <li>
-                <section class="menu_detail_list">
-                  <router-link  :to="{path: 'xdj_home/productDetail'}" tag="div" class="menu_detail_link">
-                    <section class="menu_food_img">
-                      <img src="../../../images/food.jpg">
-                    </section>
-                    <section class="menu_food_description">
-                      <h3 class="food_description_head">
-                        <strong class="description_foodname">产品名称</strong>
-                        <ul class="attributes_ul">
-                          <li>
-                            <p>产品属性</p>
-                          </li>
-                        </ul>
-                      </h3>
-                      <p class="food_description_content">描述</p>
-                      <p class="food_description_sale_rating">
-                        <span>月售99份</span>
-                        <span>好评率100%</span>
-                      </p>
-                      <p class="food_activity">
-                        <span style="{color: red;border-color:red}">产品活动</span>
-                      </p>
-                    </section>
-                  </router-link>
-                  <footer class="menu_detail_footer">
-                    <section class="food_price">
-                      <span>¥</span>
-                      <span>100</span>
-                    </section>
-                  </footer>
-                </section>
-              </li>
-              <li>
-                <section class="menu_detail_list">
-                  <router-link  :to="{path: 'xdj_home/productDetail'}" tag="div" class="menu_detail_link">
-                    <section class="menu_food_img">
-                      <img src="../../../images/food.jpg">
-                    </section>
-                    <section class="menu_food_description">
-                      <h3 class="food_description_head">
-                        <strong class="description_foodname">产品名称</strong>
-                        <ul class="attributes_ul">
-                          <li>
-                            <p>产品属性</p>
-                          </li>
-                        </ul>
-                      </h3>
-                      <p class="food_description_content">描述</p>
-                      <p class="food_description_sale_rating">
-                        <span>月售99份</span>
-                        <span>好评率100%</span>
-                      </p>
-                      <p class="food_activity">
-                        <span style="{color: red;border-color:red}">产品活动</span>
-                      </p>
-                    </section>
-                  </router-link>
-                  <footer class="menu_detail_footer">
-                    <section class="food_price">
-                      <span>¥</span>
-                      <span>100</span>
-                    </section>
-                  </footer>
-                </section>
-              </li>
-              <li>
-                <section class="menu_detail_list">
-                  <router-link  :to="{path: 'xdj_home/productDetail'}" tag="div" class="menu_detail_link">
-                    <section class="menu_food_img">
-                      <img src="../../../images/food.jpg">
-                    </section>
-                    <section class="menu_food_description">
-                      <h3 class="food_description_head">
-                        <strong class="description_foodname">产品名称</strong>
-                        <ul class="attributes_ul">
-                          <li>
-                            <p>产品属性</p>
-                          </li>
-                        </ul>
-                      </h3>
-                      <p class="food_description_content">描述</p>
-                      <p class="food_description_sale_rating">
-                        <span>月售99份</span>
-                        <span>好评率100%</span>
-                      </p>
-                      <p class="food_activity">
-                        <span style="{color: red;border-color:red}">产品活动</span>
-                      </p>
-                    </section>
-                  </router-link>
-                  <footer class="menu_detail_footer">
-                    <section class="food_price">
-                      <span>¥</span>
-                      <span>100</span>
-                    </section>
-                  </footer>
-                </section>
-              </li>
-              <li>
-                <section class="menu_detail_list">
-                  <router-link  :to="{path: 'xdj_home/productDetail'}" tag="div" class="menu_detail_link">
-                    <section class="menu_food_img">
-                      <img src="../../../images/food.jpg">
-                    </section>
-                    <section class="menu_food_description">
-                      <h3 class="food_description_head">
-                        <strong class="description_foodname">产品名称</strong>
-                        <ul class="attributes_ul">
-                          <li>
-                            <p>产品属性</p>
-                          </li>
-                        </ul>
-                      </h3>
-                      <p class="food_description_content">描述</p>
-                      <p class="food_description_sale_rating">
-                        <span>月售99份</span>
-                        <span>好评率100%</span>
-                      </p>
-                      <p class="food_activity">
-                        <span style="{color: red;border-color:red}">产品活动</span>
-                      </p>
-                    </section>
-                  </router-link>
-                  <footer class="menu_detail_footer">
-                    <section class="food_price">
-                      <span>¥</span>
-                      <span>100</span>
-                    </section>
-                  </footer>
-                </section>
-              </li>
-              <li>
-                <section class="menu_detail_list">
-                  <router-link  :to="{path: 'xdj_home/productDetail'}" tag="div" class="menu_detail_link">
-                    <section class="menu_food_img">
-                      <img src="../../../images/food.jpg">
-                    </section>
-                    <section class="menu_food_description">
-                      <h3 class="food_description_head">
-                        <strong class="description_foodname">产品名称</strong>
-                        <ul class="attributes_ul">
-                          <li>
-                            <p>产品属性</p>
-                          </li>
-                        </ul>
-                      </h3>
-                      <p class="food_description_content">描述</p>
-                      <p class="food_description_sale_rating">
-                        <span>月售99份</span>
-                        <span>好评率100%</span>
-                      </p>
-                      <p class="food_activity">
-                        <span style="{color: red;border-color:red}">产品活动</span>
-                      </p>
-                    </section>
-                  </router-link>
-                  <footer class="menu_detail_footer">
-                    <section class="food_price">
-                      <span>¥</span>
-                      <span>100</span>
-                    </section>
-                  </footer>
-                </section>
-              </li>
-              <li>
-                <section class="menu_detail_list">
-                  <router-link  :to="{path: 'xdj_home/productDetail'}" tag="div" class="menu_detail_link">
-                    <section class="menu_food_img">
-                      <img src="../../../images/food.jpg">
-                    </section>
-                    <section class="menu_food_description">
-                      <h3 class="food_description_head">
-                        <strong class="description_foodname">产品名称</strong>
-                        <ul class="attributes_ul">
-                          <li>
-                            <p>产品属性</p>
-                          </li>
-                        </ul>
-                      </h3>
-                      <p class="food_description_content">描述</p>
-                      <p class="food_description_sale_rating">
-                        <span>月售99份</span>
-                        <span>好评率100%</span>
-                      </p>
-                      <p class="food_activity">
-                        <span style="{color: red;border-color:red}">产品活动</span>
-                      </p>
-                    </section>
-                  </router-link>
-                  <footer class="menu_detail_footer">
-                    <section class="food_price">
-                      <span>¥</span>
-                      <span>100</span>
-                    </section>
-                  </footer>
-                </section>
-              </li>
-              <li>
-                <section class="menu_detail_list">
-                  <router-link  :to="{path: 'xdj_home/productDetail'}" tag="div" class="menu_detail_link">
-                    <section class="menu_food_img">
-                      <img src="../../../images/food.jpg">
-                    </section>
-                    <section class="menu_food_description">
-                      <h3 class="food_description_head">
-                        <strong class="description_foodname">产品名称</strong>
-                        <ul class="attributes_ul">
-                          <li>
-                            <p>产品属性</p>
-                          </li>
-                        </ul>
-                      </h3>
-                      <p class="food_description_content">描述</p>
-                      <p class="food_description_sale_rating">
-                        <span>月售99份</span>
-                        <span>好评率100%</span>
-                      </p>
-                      <p class="food_activity">
-                        <span style="{color: red;border-color:red}">产品活动</span>
-                      </p>
-                    </section>
-                  </router-link>
-                  <footer class="menu_detail_footer">
-                    <section class="food_price">
-                      <span>¥</span>
-                      <span>100</span>
-                    </section>
-                  </footer>
-                </section>
-              </li>
-              <li>
-                <section class="menu_detail_list">
-                  <router-link  :to="{path: 'xdj_home/productDetail'}" tag="div" class="menu_detail_link">
-                    <section class="menu_food_img">
-                      <img src="../../../images/food.jpg">
-                    </section>
-                    <section class="menu_food_description">
-                      <h3 class="food_description_head">
-                        <strong class="description_foodname">产品名称</strong>
-                        <ul class="attributes_ul">
-                          <li>
-                            <p>产品属性</p>
-                          </li>
-                        </ul>
-                      </h3>
-                      <p class="food_description_content">描述</p>
-                      <p class="food_description_sale_rating">
-                        <span>月售99份</span>
-                        <span>好评率100%</span>
-                      </p>
-                      <p class="food_activity">
-                        <span style="{color: red;border-color:red}">产品活动</span>
-                      </p>
-                    </section>
-                  </router-link>
-                  <footer class="menu_detail_footer">
-                    <section class="food_price">
-                      <span>¥</span>
-                      <span>100</span>
+                      <span>{{item.smalltypeId}}</span>
                     </section>
                   </footer>
                 </section>
@@ -469,19 +73,29 @@ import 'src/plugins/swiper.min.js'
 import 'src/style/swiper.min.css'
 import {showBack, animate} from 'src/config/mUtils'
 
+
 export default {
 	data(){
         return {
             homeTitle: '果蔬到家', // 页面头部标题
             menuIndex: 0, //已选菜单索引值，默认为0
+            page: {
+              page: 1,
+              pageSize: 10,
+              bigtypeId:1
+            },
+            initData: [],
         }
     },
-    async beforeMount(){
-	  //组件挂在前
-    },
-    mounted(){
+    // async beforeMount(){
+	 //  //组件挂在前
+    // },
+    //  vue生命周期---  mounted 挂载结束状态-(dom加载完毕之后)
+    mounted() {
 	    this.init();
+      this.getinitData();
     },
+    // 加载子组件
     components: {
     	headTop,
     	xdjFootGuide,
@@ -489,6 +103,7 @@ export default {
     computed: {
 
     },
+    // vue写所有方法地方
     methods: {
     	...mapMutations([
     		'RECORD_ADDRESS', 'SAVE_GEOHASH'
@@ -500,6 +115,17 @@ export default {
           autoplay: 4000
         });
       },
+      getinitData() {
+
+       /* Vue.http.post('http://121.42.54.120:8999/xiandaojia/product/productList/query', {})
+          .then((data) => {
+            console.log(data)
+          // 请求成功
+        }, (error) => {
+          // 请求失败
+        })*/
+      },
+
     	// 解码url地址，求去restaurant_category_id值
     	getCategoryId(url){
     		let urlData = decodeURIComponent(url.split('=')[1].replace('&target_name',''));
@@ -509,6 +135,7 @@ export default {
     			return ''
     		}
     	},
+
       chooseMenu(index){
         this.menuIndex = index;
         /*this.foodScroll.scrollTo(0, -this.shopListTop[index], 400);
@@ -521,6 +148,15 @@ export default {
       }
     },
     watch: {
+
+    },
+    created() {
+      this.$http.post('http://121.42.54.120:8999/xiandaojia/product/productList/query', this.page).then(
+        success => {
+             this.initData = success.body.data.smallTypeList;
+    }, error => {
+        console.log('错误')
+    })
 
     }
 }

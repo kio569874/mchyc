@@ -52,8 +52,6 @@ const xdjProductDetail = r => require.ensure([], () => r(require('../page/xdjHom
 const xdjTypeList = r => require.ensure([], () => r(require('../page/xdjHome/children/xdjTypeList')), 'xdjTypeList')
 
 
-
-
 export default [{
     path: '/',
     component: App, //顶层路由，对应index.html
@@ -268,7 +266,6 @@ export default [{
         {
           path: '/xdjTypeList',
           component: xdjTypeList,
-        },
-
+        }
     ]
 }]

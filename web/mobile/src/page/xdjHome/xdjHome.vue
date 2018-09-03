@@ -1,7 +1,7 @@
 <template>
     <div clas="home_container">
     	<head-top signin-up='xdj_home'>
-        <router-link to="/home" slot="msite-title" class="msite_title">
+        <router-link to="/xdjHome" slot="msite-title" class="msite_title">
           <span class="title_text ellipsis">{{homeTitle}}</span>
         </router-link>
     	</head-top>
@@ -26,7 +26,7 @@
                 <figcaption>果蔬到家</figcaption>
               </figure>
             </router-link>
-            <router-link :to="{path: '/xdjTypeList'}" class="link_to_food">
+            <router-link :to="{path: '/xdjFlowersList'}" class="link_to_food">
               <figure>
                 <img src="../../images/flower.jpg">
                 <figcaption>我爱鲜花</figcaption>

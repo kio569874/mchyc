@@ -38,7 +38,15 @@ module.exports = {
             '/payapi',
             '/img',
         ],
-        proxypath: 'http://cangdu.org:8001',
+        proxyTable: {
+        '/api': {
+          target: 'http://121.42.54.120:8999/xiandaojia',
+          changeOrigin: true, // // 必须加上这个才能跨域请求
+          pathRewrite: { // 重命名
+            '^/api': ''
+          }
+        }
+      },
         // CSS Sourcemaps off by default because relative paths are "buggy"
         // with this option, according to the CSS-Loader README
         // (https://github.com/webpack/css-loader#sourcemaps)

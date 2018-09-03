@@ -5,14 +5,17 @@ import store from './store/'
 import {routerMode} from './config/env'
 import './config/rem'
 import FastClick from 'fastclick'
-
+// 引入vue resource第三方ajax
+import VueResource from 'vue-resource'
 if ('addEventListener' in document) {
     document.addEventListener('DOMContentLoaded', function() {
         FastClick.attach(document.body);
     }, false);
 }
-
 Vue.use(VueRouter)
+Vue.use(VueResource)  // 注册一下,才能全局使用
+
+
 const router = new VueRouter({
 	routes,
 	mode: routerMode,
