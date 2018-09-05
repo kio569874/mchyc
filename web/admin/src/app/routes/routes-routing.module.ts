@@ -45,7 +45,6 @@ const routes: Routes = [
             { path: 'pro', loadChildren: './pro/pro.module#ProModule' },
             { path: 'product', loadChildren: './xdj-product/product.module#ProductModule' },
             { path: 'role', loadChildren: './xdj-role/role.module#RoleModule' },
-
         ]
     },
     // 全屏布局

@@ -498,8 +498,11 @@
                     {
                         "text": "员工维护",
                         "link": "/role/role"
+                    },
+                    {
+                        "text": "用户维护",
+                        "link": "/role/user"
                     }
-
                 ]
             }
         ]

@@ -8,12 +8,11 @@ import * as moment from 'moment';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
 import * as _ from 'lodash';
-
 @Component({
-  selector: 'app-role',
-  templateUrl: './role.component.html',
+  selector: 'app-user',
+  templateUrl: './user.component.html',
 })
-export class RoleComponent implements OnInit {
+export class UserComponent implements OnInit {
 
     constructor(
         private http: HttpClient,
@@ -22,7 +21,6 @@ export class RoleComponent implements OnInit {
         private modal: NzModalService,
         private nznot: NzNotificationService,
     ) { }
-
 
     // 变量
     modalVisible = false; // 默认关闭
@@ -76,11 +74,10 @@ export class RoleComponent implements OnInit {
                 });
             })
         ).subscribe(res =>{
-            console.log(res)
-            this.data = res.data;
-            this.totalCount = res.totalCount;
-            this.loading = false;
-        }
+                this.data = res.data;
+                this.totalCount = res.totalCount;
+                this.loading = false;
+            }
         );
     }
 
@@ -88,7 +85,7 @@ export class RoleComponent implements OnInit {
     // 添加方法
     add() {
         this.modalVisible = true;
-        this.roleTitle = '新增员工'
+        this.roleTitle = '新增用户'
         this.isPassword = true;
         this.roleAdd = new RolesModule(); // 清空
         this.isEdit = false; // 不是修改
@@ -98,7 +95,7 @@ export class RoleComponent implements OnInit {
     // 修改方法
     edit(item) {
         this.modalVisible = true;
-        this.roleTitle = '修改员工';
+        this.roleTitle = '修改用户';
         this.isPassword = false;
         this.isEdit = true; // 是修改
         this.roleAdd = item;
@@ -152,7 +149,7 @@ export class RoleComponent implements OnInit {
         console.log(dataObj)
         this.modal.open({
             title: '确认删除',
-            content: '是否确认删除该员工',
+            content: '是否确认删除该用户',
             okText: '确认',
             cancelText: '取消',
             onOk: () => {
@@ -180,7 +177,7 @@ export class RoleComponent implements OnInit {
         console.log(dataObj)
         this.modal.open({
             title: '确认删除',
-            content: '是否重置员工(' + i.userName + ')的密码?',
+            content: '是否重置用户(' + i.userName + ')的密码?',
             okText: '确认',
             cancelText: '取消',
             onOk: () => {
@@ -259,19 +256,19 @@ export class RoleComponent implements OnInit {
 // 角色类型
 export class RolesModule {
 
-    // 员工代码
+    // 用户代码
     public userCode: string;
-    // 员工密码
+    // 用户密码
     public userPassword: string;
-    // 员工姓名
+    // 用户姓名
     public userName: string;
     // 手机号码
     public userPhone: string;
-    // 员工级别
+    // 用户级别
     public userLevel: string;
-    // 员工职位
+    // 用户职位
     public userPosition: string;
-    // 员工状态
+    // 用户状态
     public userStatus: string;
     // 创建时间
     public createTime: string;
@@ -279,5 +276,3 @@ export class RolesModule {
     public id: string;
 
 }
-
-
