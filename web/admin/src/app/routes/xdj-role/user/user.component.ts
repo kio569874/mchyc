@@ -24,8 +24,8 @@ export class UserComponent implements OnInit {
 
     // 变量
     modalVisible = false; // 默认关闭
-    roleAdd: RolesModule = new RolesModule();
-    roleItem: RolesModule = new RolesModule();
+    userAdd: UsersModule = new UsersModule();
+    userItem: UsersModule = new UsersModule();
     totalCount : number = 0;
     data: any[] = [];
     loading = false;
@@ -43,6 +43,12 @@ export class UserComponent implements OnInit {
         { text: '正常', value: '0', type: 'success' },
         { text: '停用', value: '1', type: 'error' }
     ];
+
+    Sex = [
+        { text: '男', value: '0', type: 'success' },
+        { text: '女', value: '1', type: 'error' }
+    ];
+
 
     q: any = {
         page: 1,
@@ -62,18 +68,16 @@ export class UserComponent implements OnInit {
         this.loading = true;
         this.q.statusList = this.status.map((i, index) => i.value ? index : -1).filter(w => w !== -1);
         if (this.q.status !== null && this.q.status > -1) this.q.statusList.push(this.q.status);
-        this.http.post(this.baseUrl + '/user/systemUser/queryListByPage', this.q).pipe(
+        this.http.post(this.baseUrl + '/user/user/queryListByPage', this.q).pipe(
             tap((res: any) => {
                 console.log(res)
                 res.data = JSON.parse(res.data); // 先转一下, 晚上修改好接口，在改,把转换去掉即可
                 return res.data.map(i => {
-                    const statusItem = this.status[i.userStatus];
-                    i.statusText = statusItem.text;
-                    i.statusType = statusItem.type;
-                    return i;
+
                 });
             })
         ).subscribe(res =>{
+            console.log(res)
                 this.data = res.data;
                 this.totalCount = res.totalCount;
                 this.loading = false;
@@ -87,7 +91,7 @@ export class UserComponent implements OnInit {
         this.modalVisible = true;
         this.roleTitle = '新增用户'
         this.isPassword = true;
-        this.roleAdd = new RolesModule(); // 清空
+        this.userAdd = new UsersModule(); // 清空
         this.isEdit = false; // 不是修改
     }
 
@@ -98,12 +102,12 @@ export class UserComponent implements OnInit {
         this.roleTitle = '修改用户';
         this.isPassword = false;
         this.isEdit = true; // 是修改
-        this.roleAdd = item;
+        this.userAdd = item;
     }
 
     // 保存按钮
     save() {
-        let objJson = this.roleAdd;
+        let objJson = this.userAdd;
         if(_.isUndefined(objJson.createTime)) {
             objJson.createTime = moment(new Date()).format('YYYY-MM-DD'); // 默认当前时间
         }
@@ -254,25 +258,33 @@ export class UserComponent implements OnInit {
 
 
 // 角色类型
-export class RolesModule {
+export class UsersModule {
 
-    // 用户代码
-    public userCode: string;
+    // 用户账号
+    public userAccount: string;
     // 用户密码
     public userPassword: string;
-    // 用户姓名
-    public userName: string;
-    // 手机号码
+    // 手机号
     public userPhone: string;
+    // 会员名
+    public userMemberName: string;
     // 用户级别
     public userLevel: string;
     // 用户职位
     public userPosition: string;
-    // 用户状态
-    public userStatus: string;
+    // 身份证姓名
+    public userName: string;
+    // 身份证号码
+    public userIdcard: string;
+    // 用户头像
+    public userImage: string;
+    // 年龄
+    public userAge: string;
+    // 性别
+    public userSex: string;
     // 创建时间
     public createTime: string;
-    // id
-    public id: string;
+    // 登陆时间
+    public lastLoginTime: string;
 
 }

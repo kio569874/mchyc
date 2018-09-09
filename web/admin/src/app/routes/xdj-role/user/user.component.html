@@ -4,18 +4,42 @@
         <div nz-row [nzGutter]="24">
             <div nz-col [nzSpan]="8" class="mb-md">
                 <div nz-form-item class="d-flex">
-                    <div nz-form-label><label for="no">用户姓名</label></div>
+                    <div nz-form-label><label for="no">用户账号</label></div>
                     <div nz-form-control class="flex-1">
-                        <nz-input [(ngModel)]="roleItem.userName" name="no" [nzSize]="'large'" [nzPlaceHolder]="'用户姓名'" nzId="userName"></nz-input>
+                        <nz-input [(ngModel)]="userItem.userAccount" name="no" [nzSize]="'large'" [nzPlaceHolder]="'用户姓名'" nzId="userAccount"></nz-input>
                     </div>
                 </div>
             </div>
             <div nz-col [nzSpan]="8" class="mb-md">
                 <div nz-form-item class="d-flex">
-                    <div nz-form-label><label for="status">用户状态</label></div>
+                    <div nz-form-label><label for="no">会员名</label></div>
                     <div nz-form-control class="flex-1">
-                        <nz-select [(ngModel)]="roleItem.userStatus" name="userStatus" nzId="userStatus" [nzPlaceHolder]="'请选择'" [nzShowSearch]="true" [nzSize]="'large'">
-                            <nz-option *ngFor="let i of status" [nzLabel]="i.text" [nzValue]="i.value"></nz-option>
+                        <nz-input [(ngModel)]="userItem.userMemberName" name="no" [nzSize]="'large'" [nzPlaceHolder]="'用户姓名'" nzId="userMemberName"></nz-input>
+                    </div>
+                </div>
+            </div>
+            <div nz-col [nzSpan]="8" class="mb-md">
+                <div nz-form-item class="d-flex">
+                    <div nz-form-label><label for="no">身份证姓名</label></div>
+                    <div nz-form-control class="flex-1">
+                        <nz-input [(ngModel)]="userItem.userName" name="no" [nzSize]="'large'" [nzPlaceHolder]="'身份证姓名'" nzId="userName"></nz-input>
+                    </div>
+                </div>
+            </div>
+            <div nz-col [nzSpan]="8" class="mb-md">
+                <div nz-form-item class="d-flex">
+                    <div nz-form-label><label for="no">用户年龄</label></div>
+                    <div nz-form-control class="flex-1">
+                        <nz-input [(ngModel)]="userItem.userAge" name="no" [nzSize]="'large'" [nzPlaceHolder]="'年龄'" nzId="userAge"></nz-input>
+                    </div>
+                </div>
+            </div>
+            <div nz-col [nzSpan]="8" class="mb-md">
+                <div nz-form-item class="d-flex">
+                    <div nz-form-label><label for="status">性别</label></div>
+                    <div nz-form-control class="flex-1">
+                        <nz-select [(ngModel)]="userItem.userSex" name="userSex" nzId="userSex" [nzPlaceHolder]="'请选择'" [nzShowSearch]="true" [nzSize]="'large'">
+                            <nz-option *ngFor="let i of Sex" [nzLabel]="i.text" [nzValue]="i.value"></nz-option>
                         </nz-select>
                     </div>
                 </div>
@@ -52,28 +76,17 @@
                 <label nz-checkbox [(ngModel)]="allChecked" [nzIndeterminate]="indeterminate"
                        (ngModelChange)="checkAll($event)"></label>
             </th>
-            <th nz-th><span>id</span></th>
-            <th nz-th><span>用户代码</span></th>
-            <th nz-th><span>用户姓名</span></th>
-            <th nz-th>
-                <span>用户状态</span>
-                <nz-dropdown [nzTrigger]="'click'">
-                    <i class="anticon anticon-filter" nz-dropdown></i>
-                    <ul nz-menu>
-                        <li nz-menu-item *ngFor="let i of status">
-                            <label nz-checkbox [(ngModel)]="i.value"><span>{{i.text}}</span></label>
-                        </li>
-                    </ul>
-                    <div nz-table-filter>
-                        <span nz-table-filter-confirm (click)="getData()">确定</span>
-                        <span nz-table-filter-clear (click)="reset(status)">重置</span>
-                    </div>
-                </nz-dropdown>
-            </th>
-            <th nz-th><span>用户级别</span></th>
-            <th nz-th><span>用户职位</span></th>
+            <th nz-th><span>用户id</span></th>
+            <th nz-th><span>用户账号</span></th>
+            <th nz-th><span>身份证姓名</span></th>
+            <th nz-th><span>会员名</span></th>
+            <th nz-th><span>手机号</span></th>
             <th nz-th>
                 <span>创建时间</span>
+                <nz-table-sort [(nzValue)]="sortMap.createdAt" (nzValueChange)="sort('createdAt',$event)"></nz-table-sort>
+            </th>
+            <th nz-th>
+                <span>登陆时间</span>
                 <nz-table-sort [(nzValue)]="sortMap.createdAt" (nzValueChange)="sort('createdAt',$event)"></nz-table-sort>
             </th>
             <th nz-th><span>操作</span></th>
@@ -85,13 +98,13 @@
                 <label nz-checkbox [nzDisabled]="i.disabled" [(ngModel)]="i.checked" (ngModelChange)="refreshStatus($event)">
                 </label>
             </td>
-            <td nz-td>{{i.id}}</td>
-            <td nz-td>{{i.userCode}}</td>
+            <td nz-td>{{i.userId}}</td>
+            <td nz-td>{{i.userAccount}}</td>
             <td nz-td>{{i.userName}}</td>
-            <td nz-td><nz-badge [nzStatus]="i.statusType" [nzText]="i.statusText"></nz-badge></td>
-            <td nz-td>{{i.userLevel}}</td>
-            <td nz-td>{{i.userPosition}}</td>
+            <td nz-td>{{i.userMemberName}}</td>
+            <td nz-td>{{i.userPhone}}</td>
             <td nz-td>{{i.createTime | _date}}</td>
+            <td nz-td>{{i.lastLoginTime | _date}}</td>
             <td nz-td>
                 <a (click)="edit(i)">编辑</a>
                 <span nz-table-divider></span>
@@ -111,31 +124,20 @@
             <div nz-row  [nzType]="'flex'" [nzJustify]="'end'" [nzGutter]="24">
                 <div nz-col [nzSpan]="24" class="mb-md">
                     <div nz-form-item class="d-flex">
-                        <div nz-col [nzSpan]="3"   nz-form-label class="alignment"><label for="funcCode">用户姓名</label><span [ngClass]="{'fromErrors':userName.errors?.required}">* </span></div>
+                        <div nz-col [nzSpan]="3"   nz-form-label class="alignment"><label for="funcCode">用户账号</label><span [ngClass]="{'fromErrors':userAccount.errors?.required}">* </span></div>
                         <div nz-col [nzSpan]="20" nz-form-control>
-                            <nz-input [(ngModel)]="roleAdd.userName" name="userName" #userName="ngModel"   required [nzSize]="'large'" [nzPlaceHolder]="'用户姓名'" nzId="userName"></nz-input>
+                            <nz-input [(ngModel)]="userAdd.userAccount" name="userAccount" #userAccount="ngModel"   required [nzSize]="'large'" [nzPlaceHolder]="'用户账号'" nzId="userAccount"></nz-input>
                         </div>
                     </div>
-                    <div *ngIf="userName.errors?.required && userName.touched"  nz-col [nzSpan]="6" [nzOffset]="3"     class="fromErrors">
-                        请必须输入用户姓名
-                    </div>
-                </div>
-                <div nz-col [nzSpan]="24" class="mb-md">
-                    <div nz-form-item class="d-flex">
-                        <div nz-col [nzSpan]="3"   nz-form-label class="alignment"><label for="funcCode">用户代码</label><span [ngClass]="{'fromErrors':userCode.errors?.required}">* </span></div>
-                        <div nz-col [nzSpan]="20" nz-form-control>
-                            <nz-input [(ngModel)]="roleAdd.userCode" name="userCode" #userCode="ngModel"  required  [nzSize]="'large'" [nzPlaceHolder]="'用户代码'" nzId="userCode"></nz-input>
-                        </div>
-                    </div>
-                    <div *ngIf="userCode.errors?.required && userCode.touched"  nz-col [nzSpan]="6" [nzOffset]="3"     class="fromErrors">
-                        请必须输入字典名称
+                    <div *ngIf="userAccount.errors?.required && userAccount.touched"  nz-col [nzSpan]="6" [nzOffset]="3"     class="fromErrors">
+                        请必须输入用户账号
                     </div>
                 </div>
                 <div nz-col [nzSpan]="24" class="mb-md"   *ngIf="isPassword">
                     <div nz-form-item class="d-flex">
                         <div nz-col [nzSpan]="3"   nz-form-label class="alignment"><label for="funcCode">用户密码</label><span [ngClass]="{'fromErrors':userPassword.errors?.required}">* </span></div>
                         <div nz-col [nzSpan]="20" nz-form-control>
-                            <nz-input [(ngModel)]="roleAdd.userPassword" name="userPassword" #userPassword="ngModel"  required  [nzSize]="'large'" [nzPlaceHolder]="'用户密码'" nzId="userPassword"></nz-input>
+                            <nz-input [(ngModel)]="userAdd.userPassword" name="userPassword" #userPassword="ngModel"  required  [nzSize]="'large'" [nzPlaceHolder]="'用户密码'" nzId="userPassword"></nz-input>
                         </div>
                     </div>
                     <div *ngIf="userPassword.errors?.required && userPassword.touched"  nz-col [nzSpan]="6" [nzOffset]="3"     class="fromErrors">
@@ -146,7 +148,7 @@
                     <div nz-form-item class="d-flex">
                         <div nz-col [nzSpan]="3"   nz-form-label class="alignment"><label for="userPhone">手机号码</label><span [ngClass]="{'fromErrors':userPhone.errors?.required}">* </span></div>
                         <div nz-col [nzSpan]="20" nz-form-control>
-                            <nz-input [(ngModel)]="roleAdd.userPhone" name="userPhone" #userPhone="ngModel"  required  [nzSize]="'large'" [nzPlaceHolder]="'手机号码'" nzId="userPhone"></nz-input>
+                            <nz-input [(ngModel)]="userAdd.userPhone" name="userPhone" #userPhone="ngModel"  required  [nzSize]="'large'" [nzPlaceHolder]="'手机号码'" nzId="userPhone"></nz-input>
                         </div>
                     </div>
                     <div *ngIf="userPhone.errors?.required && userPhone.touched"  nz-col [nzSpan]="6" [nzOffset]="3"     class="fromErrors">
@@ -155,48 +157,73 @@
                 </div>
                 <div nz-col [nzSpan]="24" class="mb-md">
                     <div nz-form-item class="d-flex">
-                        <div nz-col [nzSpan]="3"   nz-form-label class="alignment"><label for="userLevel">用户级别</label><span [ngClass]="{'fromErrors':userLevel.errors?.required}">* </span></div>
+                        <div nz-col [nzSpan]="3"   nz-form-label class="alignment"><label for="userLevel">会员名</label><span [ngClass]="{'fromErrors':userMemberName.errors?.required}">* </span></div>
                         <div nz-col [nzSpan]="20" nz-form-control>
-                            <nz-input [(ngModel)]="roleAdd.userLevel" name="userLevel" #userLevel="ngModel"  required  [nzSize]="'large'" [nzPlaceHolder]="'用户级别'" nzId="userLevel"></nz-input>
+                            <nz-input [(ngModel)]="userAdd.userMemberName" name="userMemberName" #userMemberName="ngModel"  required  [nzSize]="'large'" [nzPlaceHolder]="'会员名'" nzId="userMemberName"></nz-input>
                         </div>
                     </div>
-                    <div *ngIf="userLevel.errors?.required && userLevel.touched"  nz-col [nzSpan]="6" [nzOffset]="3"     class="fromErrors">
-                        请必须输入用户级别
+                    <div *ngIf="userMemberName.errors?.required && userMemberName.touched"  nz-col [nzSpan]="6" [nzOffset]="3"     class="fromErrors">
+                        请必须输入会员名
                     </div>
                 </div>
                 <div nz-col [nzSpan]="24" class="mb-md">
                     <div nz-form-item class="d-flex">
-                        <div nz-col [nzSpan]="3"   nz-form-label class="alignment"><label for="userLevel">用户职位</label><span [ngClass]="{'fromErrors':userPosition.errors?.required}">* </span></div>
+                        <div nz-col [nzSpan]="3"   nz-form-label class="alignment"><label for="userLevel">身份证姓名</label><span [ngClass]="{'fromErrors':userName.errors?.required}">* </span></div>
                         <div nz-col [nzSpan]="20" nz-form-control>
-                            <nz-input [(ngModel)]="roleAdd.userPosition" name="userLevel" #userPosition="ngModel"  required  [nzSize]="'large'" [nzPlaceHolder]="'用户职位'" nzId="userPosition"></nz-input>
+                            <nz-input [(ngModel)]="userAdd.userName" name="userLevel" #userName="ngModel"  required  [nzSize]="'large'" [nzPlaceHolder]="'身份证姓名'" nzId="userName"></nz-input>
                         </div>
                     </div>
-                    <div *ngIf="userPosition.errors?.required && userPosition.touched"  nz-col [nzSpan]="6" [nzOffset]="3"     class="fromErrors">
-                        请必须输入用户职位
+                    <div *ngIf="userName.errors?.required && userName.touched"  nz-col [nzSpan]="6" [nzOffset]="3"     class="fromErrors">
+                        请必须输入身份证姓名
                     </div>
                 </div>
                 <div nz-col [nzSpan]="24" class="mb-md">
                     <div nz-form-item class="d-flex">
-                        <div nz-col [nzSpan]="3"   nz-form-label class="alignment"><label for="funcCode">用户状态</label><span [ngClass]="{'fromErrors':f.controls.userStatus?.errors}">* </span></div>
+                        <div nz-col [nzSpan]="3"   nz-form-label class="alignment"><label for="userLevel">身份证号码</label><span [ngClass]="{'fromErrors':userIdcard.errors?.required}">* </span></div>
                         <div nz-col [nzSpan]="20" nz-form-control>
-                            <nz-select style="width:100%" [(ngModel)]="roleAdd.userStatus"   required      name="userStatus" [nzSize]="'large'" [nzPlaceHolder]="'请选择'" nzId="userStatus">
-                                <nz-option  *ngFor="let i of status; let app = index" [nzLabel]="i.text" [nzValue]="i.value"></nz-option>
+                            <nz-input [(ngModel)]="userAdd.userIdcard" name="userIdcard" #userIdcard="ngModel"  required  [nzSize]="'large'" [nzPlaceHolder]="'身份证姓名'" nzId="userIdcard"></nz-input>
+                        </div>
+                    </div>
+                    <div *ngIf="userIdcard.errors?.required && userIdcard.touched"  nz-col [nzSpan]="6" [nzOffset]="3"     class="fromErrors">
+                        请必须输入身份证号码
+                    </div>
+                </div>
+                <!--用户头像，后期改成select或者上传-->
+                <div nz-col [nzSpan]="24" class="mb-md">
+                    <div nz-form-item class="d-flex">
+                        <div nz-col [nzSpan]="3"   nz-form-label class="alignment"><label for="userLevel">用户头像</label><span [ngClass]="{'fromErrors':userImage.errors?.required}">* </span></div>
+                        <div nz-col [nzSpan]="20" nz-form-control>
+                            <nz-input [(ngModel)]="userAdd.userImage" name="userImage" #userImage="ngModel"  required  [nzSize]="'large'" [nzPlaceHolder]="'用户头像'" nzId="userImage"></nz-input>
+                        </div>
+                    </div>
+                    <div *ngIf="userImage.errors?.required && userImage.touched"  nz-col [nzSpan]="6" [nzOffset]="3"     class="fromErrors">
+                        请必须输入身份证号码
+                    </div>
+                </div>
+                <div nz-col [nzSpan]="24" class="mb-md">
+                    <div nz-form-item class="d-flex">
+                        <div nz-col [nzSpan]="3"   nz-form-label class="alignment"><label for="userAge">年龄</label><span [ngClass]="{'fromErrors':userAge.errors?.required}">* </span></div>
+                        <div nz-col [nzSpan]="20" nz-form-control>
+                            <nz-input [(ngModel)]="userAdd.userAge" name="userAge" #userAge="ngModel"  required  [nzSize]="'large'" [nzPlaceHolder]="'年龄'" nzId="userAge"></nz-input>
+                        </div>
+                    </div>
+                    <div *ngIf="userAge.errors?.required && userAge.touched"  nz-col [nzSpan]="6" [nzOffset]="3"     class="fromErrors">
+                        请必须输入年龄
+                    </div>
+                </div>
+                <div nz-col [nzSpan]="24" class="mb-md">
+                    <div nz-form-item class="d-flex">
+                        <div nz-col [nzSpan]="3"   nz-form-label class="alignment"><label for="funcCode">性别</label><span [ngClass]="{'fromErrors':f.controls.userSex?.errors}">* </span></div>
+                        <div nz-col [nzSpan]="20" nz-form-control>
+                            <nz-select style="width:100%" [(ngModel)]="userAdd.userSex"   required      name="userSex" [nzSize]="'large'" [nzPlaceHolder]="'请选择'" nzId="userSex">
+                                <nz-option  *ngFor="let i of Sex; let app = index" [nzLabel]="i.text" [nzValue]="i.value"></nz-option>
                             </nz-select>
                         </div>
                     </div>
-                    <div *ngIf="f.controls.userStatus?.errors && f.controls.userStatus.touched"  nz-col [nzSpan]="6" [nzOffset]="3"     class="fromErrors">
-                        请必须选择用户状态
+                    <div *ngIf="f.controls.userSex?.errors && f.controls.userSex.touched"  nz-col [nzSpan]="6" [nzOffset]="3"     class="fromErrors">
+                        请必须选择性别
                     </div>
                 </div>
-                <div nz-col [nzSpan]="24" class="mb-md">
-                    <div nz-form-item class="d-flex">
-                        <div nz-col [nzSpan]="3"   nz-form-label class="alignment"><label for="funcCode">创建时间</label></div>
-                        <div nz-col [nzSpan]="20" nz-form-control>
-                            <nz-datepicker [(ngModel)]="roleAdd.createTime" name="createTime"  [nzSize]="'large'" [nzPlaceHolder]="'请选择创建时间'" nzId="createTime" class="d-block"></nz-datepicker>
-                        </div>
-                    </div>
-                </div>
-
             </div>
             <div nz-row>
                 <div nz-col [nzSpan]="6" [nzOffset]="19">
