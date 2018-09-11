@@ -1,7 +1,7 @@
 package com.xiandaojia.controller.usercenter;
 
 import java.util.Date;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,14 +14,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.xiandaojia.auth.bean.UserDetail;
 import com.xiandaojia.common.domain.PaginationDto;
 import com.xiandaojia.common.domain.ShoppingCart;
 import com.xiandaojia.common.domain.SystemUser;
 import com.xiandaojia.common.domain.User;
 import com.xiandaojia.common.domain.UserAddress;
 import com.xiandaojia.common.utils.JsonBeanUtil;
+import com.xiandaojia.common.utils.JwtUtil;
 import com.xiandaojia.common.utils.MD5Util;
 import com.xiandaojia.controller.BaseController;
 import com.xiandaojia.service.usercenter.IShoppingCartService;
@@ -63,7 +64,7 @@ public class UserController extends BaseController {
 				systemUser.setLoginTime(new Date());
 				systemUser.setLoginIp(getIpAddr(request));
 				systemUserService.update(systemUser);
-				return getSuccessResultMsg(JSONObject.toJSONString(systemUser));
+				return getSuccessResultMsg(JSONObject.toJSONString(createTokenResult(systemUser)));
 			} else {
 				return getErrorResultMsg("用户名或密码错误");
 			}
@@ -71,7 +72,19 @@ public class UserController extends BaseController {
 			logger.error(e.getMessage(), e);
 			return getErrorResultMsg(e.getMessage());
 		}
-
+	}
+	
+	/**
+	 * 封装带token的响应结果
+	 * @param systemUser
+	 * @return
+	 */
+	private Map<String,Object> createTokenResult(SystemUser systemUser) {
+		Map<String,Object> result = new HashMap<String, Object>();
+		result.put("user", systemUser);
+		systemUser.setUserPassword(null);
+		result.put("token", JwtUtil.sign(UserDetail.from(systemUser), JwtUtil.EXP_TIME));
+		return result;
 	}
 
 	@RequestMapping(value = "/systemUser/insert", method = RequestMethod.POST)

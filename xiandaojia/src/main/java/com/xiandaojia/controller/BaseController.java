@@ -7,8 +7,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
 
 import com.alibaba.fastjson.JSONObject;
+import com.xiandaojia.auth.bean.UserDetail;
 import com.xiandaojia.common.Contants;
 import com.xiandaojia.common.domain.PaginationDto;
+import com.xiandaojia.common.utils.JwtUtil;
 
 /**
  * 
@@ -132,6 +134,14 @@ public class BaseController {
 			}
 		} else {
 			return request.getRemoteAddr();
+		}
+	}
+	
+	protected Long getCurrentUserId(HttpServletRequest request) {
+		try {
+			return JwtUtil.unsign(request.getHeader("Authorization"), UserDetail.class).getUserId();
+		}catch(Exception e) {
+			return null;
 		}
 	}
 }
