@@ -134,12 +134,9 @@ public class ProductController extends BaseController {
 	public String productInfoQuery(@RequestBody String content) {
 		try {
 			JSONObject jsonObj = JSONObject.parseObject(content);
-			int page = jsonObj.getInteger("page");
-			int pageSize = jsonObj.getInteger("pageSize");
 			Map<String, Object> paramMap = jsonObj;
-			PaginationDto<ProductInfo> paginationDto = productInfoService.queryProductListByPage(page, pageSize, null,
-					paramMap);
-			return getSuccessResultMsg(JSONObject.toJSONString(paginationDto));
+			String result = productService.queryInfo(paramMap);
+			return getSuccessResultMsg(result);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			return getErrorResultMsg(e.getMessage());

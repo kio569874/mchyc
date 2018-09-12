@@ -8,4 +8,6 @@ import com.xiandaojia.service.IBaseService;
 public interface IUserAddressService extends IBaseService<UserAddress> {
 	PaginationDto<UserAddress> queryListByPage(int page, int pageSize, Integer totalCount, Long userId)
 			throws SysException;
+
+	String queryList(Long userId);
 }

@@ -16,8 +16,12 @@ public interface ShoppingCartMapper {
     int updateByPrimaryKeySelective(ShoppingCart record);
 
     int updateByPrimaryKey(ShoppingCart record);
+
+    int updateByUserId(ShoppingCart record);
     
     int getTotalCount(Long userId);
 
 	List<ShoppingCart> queryListByPage(int offset, int pageSize,Long userId);
+
+    List<ShoppingCart> queryListByUserId(Long userId);
 }

@@ -10,4 +10,6 @@ public interface IProductService {
 
 	String queryList(Map<String, Object> paramMap) throws SysException;
 
+
+	String queryInfo(Map<String, Object> paramMap) throws SysException;
 }

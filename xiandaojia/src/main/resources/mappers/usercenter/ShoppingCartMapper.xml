@@ -103,7 +103,15 @@
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
-  
+
+  <update id="updateByUserId" parameterType="com.xiandaojia.common.domain.ShoppingCart" >
+    update t_shopping_cart
+    set is_select = #{isSelect,jdbcType=CHAR},
+    create_time = #{createTime,jdbcType=TIMESTAMP}
+    where user_id = #{userId,jdbcType=BIGINT}
+  </update>
+
+
   	<select id="getTotalCount" resultType="int">
 		select count(1) from
 		t_shopping_cart
@@ -118,4 +126,11 @@
 		limit
 		#{arg0}, #{arg1}
 	</select>
+
+  <select id="queryListByUserId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_shopping_cart
+    where user_id = #{arg2}
+  </select>
 </mapper>

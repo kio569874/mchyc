@@ -188,7 +188,7 @@
 		select
 		<include refid="Base_Column_List" />
 		from t_system_user
-		where user_status = '0' 
+		where user_status = '0' AND del_flag = '0'
 		limit
 		#{arg0}, #{arg1}
   </select>

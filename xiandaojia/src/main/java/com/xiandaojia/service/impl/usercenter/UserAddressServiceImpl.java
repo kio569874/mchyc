@@ -3,6 +3,7 @@ package com.xiandaojia.service.impl.usercenter;
 import java.util.Date;
 import java.util.List;
 
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -52,5 +53,11 @@ public class UserAddressServiceImpl extends AbstractBaseService implements IUser
 		paginationDto.setData(list);
 		return paginationDto;
 	}
-
+	@Override
+	public String queryList(Long userId) {
+		JSONObject resJsonObject = new JSONObject();//返回的ＪＳＯＮ串
+		List<UserAddress> list= userAddressMapper.queryList(userId);
+		resJsonObject.put("UserAddressList",list);
+		return resJsonObject.toJSONString();
+	}
 }

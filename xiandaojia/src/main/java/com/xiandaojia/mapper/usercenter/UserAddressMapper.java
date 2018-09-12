@@ -20,4 +20,6 @@ public interface UserAddressMapper {
     int getTotalCount(Long userId);
 
 	List<UserAddress> queryListByPage(int offset, int pageSize,Long userId);
+
+    List<UserAddress> queryList(Long userId);
 }

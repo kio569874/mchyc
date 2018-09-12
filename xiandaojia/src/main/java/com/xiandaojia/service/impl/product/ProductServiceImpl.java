@@ -6,9 +6,10 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import com.alibaba.fastjson.JSON;
 import com.xiandaojia.common.domain.*;
 import com.xiandaojia.common.dto.ProductInfoVo;
-import com.xiandaojia.mapper.product.SmallProductRelationMapper;
+import com.xiandaojia.mapper.product.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,9 +18,6 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.xiandaojia.common.exception.SysException;
 import com.xiandaojia.common.utils.PaginationUtil;
-import com.xiandaojia.mapper.product.ProductBigTypeInfoMapper;
-import com.xiandaojia.mapper.product.ProductInfoMapper;
-import com.xiandaojia.mapper.product.ProductSmallTypeInfoMapper;
 import com.xiandaojia.service.product.IProductService;
 
 /**
@@ -42,6 +40,12 @@ public class ProductServiceImpl implements IProductService {
 
 	@Autowired
 	SmallProductRelationMapper smallProductRelationMapper;
+
+	@Autowired
+	ProductInformationMapper productInformationMapper;
+
+	@Autowired
+	ProductInformationRelationMapper productInformationRelationMapper;
 
 	@Override
 	public String queryList(Map<String, Object> paramMap) throws SysException {
@@ -79,6 +83,44 @@ public class ProductServiceImpl implements IProductService {
 		System.out.println(resJson.toJSONString());
 		return resJson.toJSONString();
 	}
+
+	@Override
+	public String queryInfo(Map<String, Object> paramMap) throws SysException {
+		JSONObject resJson = new JSONObject();
+		Map<String, Object> paramMap2 = (Map<String, Object>) paramMap.get("data");//参数产品ID
+		//查询产品信息
+		Integer id = (Integer) paramMap2.get("productId");
+		ProductInfo productInfo = productInfoMapper.selectByPrimaryKey(Long.valueOf(id));
+		resJson.put("productInfo",productInfo);
+		//查询大类信息
+		ProductBigTypeInfo productBigTypeInfo = productBigTypeInfoMapper.selectByPrimaryKey(productInfo.getBigtypeId());
+		resJson.put("bigTypeInfo",productBigTypeInfo);
+		//查询小类信息
+		List<SmallProductRelation> smallProductRelation = smallProductRelationMapper
+							.selectByProductId(productInfo.getProductId());//根据产品ID查询出所以的小类关联ID
+		JSONArray smallTypeList = new JSONArray();
+		for (SmallProductRelation sm:smallProductRelation){
+			//遍历获取小类信息
+			ProductSmallTypeInfo ps = productSmallTypeInfoMapper.selectByPrimaryKey(sm.getSmalltypeId());
+			JSONObject smallJson = new JSONObject();
+			smallJson.put("smallTypeInfo", ps);
+			smallTypeList.add(smallJson);
+		}
+		resJson.put("smallTypeList",smallTypeList);
+		//查询介绍信息
+		List<ProductInformationRelation> infomationList = productInformationRelationMapper.selectByProductId(productInfo.getProductId());
+		JSONArray infomationInfoList = new JSONArray();
+		for (ProductInformationRelation list :infomationList){
+			ProductInformation productInformation = 	productInformationMapper.selectByPrimaryKey(list.getInformationId());
+			JSONObject infomationJson = new JSONObject();
+			infomationJson.put("infomationInfo", productInformation);
+			infomationInfoList.add(infomationJson);
+		}
+		resJson.put("infomationInfoList",infomationInfoList);
+		System.out.println(resJson.toJSONString());
+		return resJson.toJSONString();
+	}
+
 
 	@Override
 	public String query(Map<String, Object> paramMap) throws SysException {

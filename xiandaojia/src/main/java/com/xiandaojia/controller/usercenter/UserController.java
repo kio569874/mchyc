@@ -97,6 +97,7 @@ public class UserController extends BaseController {
 			Map<String, Object> paramMap = jsonObj;
 			JSONObject data =  (JSONObject)paramMap.get("data");
 			SystemUser systemUser = JsonBeanUtil.stringToBean(SystemUser.class, data.toJSONString());
+			systemUser.setUserPassword(MD5Util.createMD5("xdj@2018"));
 			systemUserService.insert(systemUser);
 			return getSuccessResultMsg();
 		} catch (Exception e) {
@@ -179,7 +180,7 @@ public class UserController extends BaseController {
 			Map<String, Object> paramMap = jsonObj;
 			JSONObject data =  (JSONObject)paramMap.get("data");
 			Long id = Long.valueOf(data.getString("id"));
-			String passWord = MD5Util.createMD5("111111");
+			String passWord = MD5Util.createMD5("xdj@2018");
 			SystemUser systemUser = new SystemUser();
 			systemUser.setId(id);
 			systemUser.setUserPassword(passWord);
@@ -228,7 +229,15 @@ public class UserController extends BaseController {
 	@ResponseBody
 	public String shoppingCartInsert(@RequestBody String content) {
 		try {
-			ShoppingCart shoppingCart = JsonBeanUtil.stringToBean(ShoppingCart.class, content);
+			JSONObject jsonObj = JSONObject.parseObject(content);
+			Map<String, Object> paramMap = jsonObj;
+			JSONObject data =  (JSONObject)paramMap.get("data");
+			ShoppingCart shoppingCart = JsonBeanUtil.stringToBean(ShoppingCart.class, data.toJSONString());
+			//传参：ProductId productNum
+			shoppingCart.setUserId(Long.valueOf(4));//后台获取
+			shoppingCart.setCreateTime(new Date());
+			shoppingCart.setIsSelect("0");//默认未选中
+
 			shoppingCartService.insert(shoppingCart);
 			return getSuccessResultMsg();
 		} catch (Exception e) {
@@ -242,7 +251,10 @@ public class UserController extends BaseController {
 	@ResponseBody
 	public String shoppingCartDelete(@RequestBody String content) {
 		try {
-			ShoppingCart shoppingCart = JsonBeanUtil.stringToBean(ShoppingCart.class, content);
+			JSONObject jsonObj = JSONObject.parseObject(content);
+			Map<String, Object> paramMap = jsonObj;
+			JSONObject data =  (JSONObject)paramMap.get("data");
+			ShoppingCart shoppingCart = JsonBeanUtil.stringToBean(ShoppingCart.class, data.toJSONString());
 			shoppingCartService.delete(shoppingCart.getId());
 			return getSuccessResultMsg();
 		} catch (Exception e) {
@@ -256,8 +268,11 @@ public class UserController extends BaseController {
 	@ResponseBody
 	public String shoppingCartUpdate(@RequestBody String content) {
 		try {
-			ShoppingCart t = JsonBeanUtil.stringToBean(ShoppingCart.class, content);
-			shoppingCartService.update(t);
+			JSONObject jsonObj = JSONObject.parseObject(content);
+			Map<String, Object> paramMap = jsonObj;
+			JSONObject data =  (JSONObject)paramMap.get("data");
+			ShoppingCart shoppingCart = JsonBeanUtil.stringToBean(ShoppingCart.class, data.toJSONString());
+			shoppingCartService.update(shoppingCart);
 			return getSuccessResultMsg();
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
@@ -265,23 +280,41 @@ public class UserController extends BaseController {
 		}
 	}
 
-	@RequestMapping(value = "/shoppingCart/queryListByPage", method = RequestMethod.POST)
+	@RequestMapping(value = "/shoppingCart/queryList", method = RequestMethod.POST)
 	@ResponseBody
 	public String shoppingCartQuery(@RequestBody String content) {
 		try {
-			JSONObject jsonObj = JSONObject.parseObject(content);
-			int page = jsonObj.getInteger("page");
-			int pageSize = jsonObj.getInteger("pageSize");
-			Long userId = jsonObj.getLong("userId");
-			PaginationDto<ShoppingCart> paginationDto = shoppingCartService.queryListByPage(page, pageSize, null,
-					userId);
-			return getSuccessResultMsg(JSONObject.toJSONString(paginationDto));
+			/*JSONObject jsonObj = JSONObject.parseObject(content);
+			Long userId = jsonObj.getLong("userId");*///LWQ 改变USERID通过后台获取
+			String result = shoppingCartService.queryListByUserId(Long.valueOf(4));
+			return getSuccessResultMsg(result);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			return getErrorResultMsg(e.getMessage());
 		}
 
 	}
+
+	@RequestMapping(value = "/shoppingCart/selectAll", method = RequestMethod.POST)
+	@ResponseBody
+	public String shoppingCartselectAll(@RequestBody String content) {
+		try {
+			JSONObject jsonObj = JSONObject.parseObject(content);
+			Map<String, Object> paramMap = jsonObj;
+			JSONObject data =  (JSONObject)paramMap.get("data");
+			ShoppingCart shoppingCart = JsonBeanUtil.stringToBean(ShoppingCart.class, data.toJSONString());
+
+			shoppingCart.setUserId(Long.valueOf(4));//----------
+			shoppingCart.setCreateTime(new Date());
+			shoppingCartService.upadteStateAll(shoppingCart);
+			return getSuccessResultMsg();
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			return getErrorResultMsg(e.getMessage());
+		}
+
+	}
+
 
 	@RequestMapping(value = "/user/login", method = RequestMethod.POST)
 	@ResponseBody
@@ -362,19 +395,25 @@ public class UserController extends BaseController {
 			int page = jsonObj.getInteger("page");
 			int pageSize = jsonObj.getInteger("pageSize");
 			PaginationDto<User> paginationDto = userService.queryListByPage(page, pageSize, null);
-			return getSuccessResultMsg(JSONObject.toJSONString(paginationDto));
+			return getSuccessPageResultMsg(paginationDto);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			return getErrorResultMsg(e.getMessage());
 		}
-
 	}
 
 	@RequestMapping(value = "/userAddress/insert", method = RequestMethod.POST)
 	@ResponseBody
 	public String userAddressInsert(@RequestBody String content) {
 		try {
-			UserAddress t = JsonBeanUtil.stringToBean(UserAddress.class, content);
+			JSONObject jsonObj = JSONObject.parseObject(content);
+			Map<String, Object> paramMap = jsonObj;
+			JSONObject data =  (JSONObject)paramMap.get("data");
+			//ShoppingCart shoppingCart = JsonBeanUtil.stringToBean(ShoppingCart.class, data.toJSONString());
+			UserAddress t = JsonBeanUtil.stringToBean(UserAddress.class, data.toJSONString());
+			logger.info("data.toJSONString()："+data.toJSONString());
+			t.setUserId("4");//-----
+			t.setCreateTime(new Date());
 			userAddressService.insert(t);
 			return getSuccessResultMsg();
 		} catch (Exception e) {
@@ -388,7 +427,11 @@ public class UserController extends BaseController {
 	@ResponseBody
 	public String userAddressDelete(@RequestBody String content) {
 		try {
-			UserAddress t = JsonBeanUtil.stringToBean(UserAddress.class, content);
+			JSONObject jsonObj = JSONObject.parseObject(content);
+			Map<String, Object> paramMap = jsonObj;
+			JSONObject data =  (JSONObject)paramMap.get("data");
+			//ShoppingCart shoppingCart = JsonBeanUtil.stringToBean(ShoppingCart.class, data.toJSONString());
+			UserAddress t = JsonBeanUtil.stringToBean(UserAddress.class, data.toJSONString());
 			userAddressService.delete(t.getId());
 			return getSuccessResultMsg();
 		} catch (Exception e) {
@@ -402,7 +445,11 @@ public class UserController extends BaseController {
 	@ResponseBody
 	public String userAddressUpdate(@RequestBody String content) {
 		try {
-			UserAddress t = JsonBeanUtil.stringToBean(UserAddress.class, content);
+			JSONObject jsonObj = JSONObject.parseObject(content);
+			Map<String, Object> paramMap = jsonObj;
+			JSONObject data =  (JSONObject)paramMap.get("data");
+			//ShoppingCart shoppingCart = JsonBeanUtil.stringToBean(ShoppingCart.class, data.toJSONString());
+			UserAddress t = JsonBeanUtil.stringToBean(UserAddress.class, data.toJSONString());
 			userAddressService.update(t);
 			return getSuccessResultMsg();
 		} catch (Exception e) {
@@ -411,16 +458,17 @@ public class UserController extends BaseController {
 		}
 	}
 
-	@RequestMapping(value = "/userAddress/queryListByPage", method = RequestMethod.POST)
+	@RequestMapping(value = "/userAddress/queryList", method = RequestMethod.POST)
 	@ResponseBody
 	public String userAddressQuery(@RequestBody String content) {
 		try {
-			JSONObject jsonObj = JSONObject.parseObject(content);
+			/*JSONObject jsonObj = JSONObject.parseObject(content);
 			int page = jsonObj.getInteger("page");
 			int pageSize = jsonObj.getInteger("pageSize");
-			Long userId = jsonObj.getLong("userId");
-			PaginationDto<UserAddress> paginationDto = userAddressService.queryListByPage(page, pageSize, null, userId);
-			return getSuccessResultMsg(JSONObject.toJSONString(paginationDto));
+			Long userId = jsonObj.getLong("userId");*/
+			//PaginationDto<UserAddress> paginationDto = userAddressService.queryListByPage(1, 50, null, Long.valueOf(4));
+			String result = userAddressService.queryList(Long.valueOf(4));
+			return getSuccessResultMsg(result);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			return getErrorResultMsg(e.getMessage());

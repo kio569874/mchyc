@@ -183,4 +183,12 @@
 		limit
 		#{arg0}, #{arg1}
 	</select>
+
+	<select id="queryList" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_user_address
+		where user_id = #{arg2}
+		ORDER by create_time desc
+	</select>
 </mapper>
