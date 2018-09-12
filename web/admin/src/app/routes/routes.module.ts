@@ -16,6 +16,9 @@ import { CallbackComponent } from './callback/callback.component';
 import { Exception403Component } from './exception/403.component';
 import { Exception404Component } from './exception/404.component';
 import { Exception500Component } from './exception/500.component';
+import {XDJUserRegisterResultComponent} from "./xdj-passport/register-result/register-result.component";
+import {XDJUserRegisterComponent} from "./xdj-passport/register/register.component";
+import {XDJUserLoginComponent} from "./xdj-passport/login/login.component";
 
 @NgModule({
     imports: [ SharedModule, RouteRoutingModule ],
@@ -28,6 +31,10 @@ import { Exception500Component } from './exception/500.component';
         UserLoginComponent,
         UserRegisterComponent,
         UserRegisterResultComponent,
+        // xdj passport pages
+        XDJUserLoginComponent,
+        XDJUserRegisterComponent,
+        XDJUserRegisterResultComponent,
         // single pages
         CallbackComponent,
         Exception403Component,

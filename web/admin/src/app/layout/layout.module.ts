@@ -36,8 +36,10 @@ const HEADERCOMPONENTS = [
 
 // passport
 import { LayoutPassportComponent } from './passport/passport.component';
+import {XDJLayoutPassportComponent} from "./xdj-passport/passport.component";
 const PASSPORT = [
-    LayoutPassportComponent
+    LayoutPassportComponent,
+    XDJLayoutPassportComponent
 ];
 
 @NgModule({

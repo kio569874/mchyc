@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {NzMessageService, NzModalService} from 'ng-zorro-antd';
-import { _HttpClient } from '@delon/theme';
-import { tap } from 'rxjs/operators';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {environment} from "@env/environment";
+import {HttpSender} from "../../../../xdj-core/net/http.service";
+import {Loading} from "../../../../xdj-core/net/loading.model";
 
 @Component({
     selector: 'product-type-list',
@@ -18,9 +18,9 @@ export class ProductTypeListComponent implements OnInit {
         status: null,
         statusList: []
     };
-    totalCount : number = 0;
+    totalCount: number = 0;
     data: any[] = [];
-    loading = false;
+    loading = new Loading();
     selectedRows: any[] = [];
     curRows: any[] = [];
     totalCallNo = 0;
@@ -39,8 +39,8 @@ export class ProductTypeListComponent implements OnInit {
     bigtypeSeqno: number;
     bigtypeStatus: string;
 
-    baseUrl : string = environment.XDJ_SERVER_URL;
-    constructor(private http: _HttpClient, private fb: FormBuilder, public msg: NzMessageService,private modal: NzModalService) {}
+    baseUrl: string = environment.XDJ_SERVER_URL;
+    constructor(private http: HttpSender, private fb: FormBuilder, public msg: NzMessageService,private modal: NzModalService) {}
 
     ngOnInit() {
         this.getData();
@@ -52,23 +52,17 @@ export class ProductTypeListComponent implements OnInit {
     }
 
     getData() {
-        this.loading = true;
         this.q.statusList = this.status.map((i, index) => i.value ? index : -1).filter(w => w !== -1);
         if (this.q.status !== null && this.q.status > -1) this.q.statusList.push(this.q.status);
-        this.http.post(this.baseUrl + '/product/productBigTypeInfo/query', this.q).pipe(
-            tap((res: any) => {
-                return res.data.data.map(i => {
-                    const statusItem = this.status[i.status];
-                    i.statusText = statusItem.text;
-                    i.statusType = statusItem.type;
-                    return i;
-                });
-            })
-        ).subscribe(res =>{
-            this.data = res.data.data;
-            this.totalCount = res.data.totalCount;
-            this.loading = false;}
-        );
+        this.http.post('/product/productBigTypeInfo/query', this.loading, null, this.q.page, this.q.pageSize).then(res => {
+            this.data = res.data.map(i => {
+                const statusItem = this.status[i.status];
+                i.statusText = statusItem.text;
+                i.statusType = statusItem.type;
+                return i;
+            });
+            this.totalCount = res.totalCount;
+        });
     }
 
     add() {
@@ -85,7 +79,6 @@ export class ProductTypeListComponent implements OnInit {
             this.msg.error('数据填写有误,请仔细检查!');
             return;
         }
-        this.loading = true;
         const body = {
                         bigtypeName: this.bigtypeName,
                         bigtypeSeqno: this.bigtypeSeqno,
@@ -97,7 +90,7 @@ export class ProductTypeListComponent implements OnInit {
         }else{
             action = 'insert';
         }
-        this.http.post(this.baseUrl + '/product/productBigTypeInfo/'+ action, body).subscribe(() => {
+        this.http.post( '/product/productBigTypeInfo/' + action, this.loading, body).then(() => {
             this.getData();
             setTimeout(() => this.modalVisible = false, 500);
         });
@@ -113,7 +106,7 @@ export class ProductTypeListComponent implements OnInit {
     }
 
     deleteAll() {
-        this.http.post(this.baseUrl + '/product/productBigTypeInfo/delete', { nos: this.selectedRows.map(i => i.no).join(',') }).subscribe(() => {
+        this.http.post('/product/productBigTypeInfo/delete', this.loading,{ nos: this.selectedRows.map(i => i.no).join(',') }).then(() => {
             this.getData();
             this.clear();
         });
@@ -126,7 +119,7 @@ export class ProductTypeListComponent implements OnInit {
             okText: '确认',
             cancelText: '取消',
             onOk: () => {
-                this.http.post(this.baseUrl + '/product/productBigTypeInfo/delete', { bigtypeId : id}).subscribe(() => {
+                this.http.post('/product/productBigTypeInfo/delete', this.loading, { bigtypeId : id}).then(() => {
                     this.getData();
                 });
             },

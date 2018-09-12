@@ -26,6 +26,9 @@ import { UEditorModule } from 'ngx-ueditor';
 import { NgxTinymceModule } from 'ngx-tinymce';
 // JSON-Schema form
 import { JsonSchemaModule } from '@shared/json-schema/json-schema.module';
+import {HttpSender} from "./xdj-core/net/http.service";
+import {TokenInterceptor} from "./xdj-core/auth/token.interceptor";
+import {TokenService} from "./xdj-core/auth/token.service";
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -77,8 +80,11 @@ export function StartupServiceFactory(startupService: StartupService): Function 
         { provide: LOCALE_ID, useValue: 'zh-Hans' },
         /*{ provide: HTTP_INTERCEPTORS, useClass: SimpleInterceptor, multi: true},
         { provide: HTTP_INTERCEPTORS, useClass: DefaultInterceptor, multi: true},*/
+        { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
         { provide: ALAIN_I18N_TOKEN, useClass: I18NService, multi: false },
         StartupService,
+        HttpSender,
+        TokenService,
         {
             provide: APP_INITIALIZER,
             useFactory: StartupServiceFactory,

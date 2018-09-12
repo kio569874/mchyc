@@ -5,6 +5,7 @@ import { environment } from '@env/environment';
 import { LayoutDefaultComponent } from '../layout/default/default.component';
 import { LayoutFullScreenComponent } from '../layout/fullscreen/fullscreen.component';
 import { LayoutPassportComponent } from '../layout/passport/passport.component';
+import { XDJLayoutPassportComponent } from '../layout/xdj-passport/passport.component';
 // dashboard pages
 import { DashboardV1Component } from './dashboard/v1/v1.component';
 import { DashboardAnalysisComponent } from './dashboard/analysis/analysis.component';
@@ -14,6 +15,10 @@ import { DashboardWorkplaceComponent } from './dashboard/workplace/workplace.com
 import { UserLoginComponent } from './passport/login/login.component';
 import { UserRegisterComponent } from './passport/register/register.component';
 import { UserRegisterResultComponent } from './passport/register-result/register-result.component';
+// xdj-passport pages
+import { XDJUserLoginComponent } from './xdj-passport/login/login.component';
+import { XDJUserRegisterComponent } from './xdj-passport/register/register.component';
+import { XDJUserRegisterResultComponent } from './xdj-passport/register-result/register-result.component';
 // single pages
 import { CallbackComponent } from './callback/callback.component';
 import { Exception403Component } from './exception/403.component';
@@ -63,6 +68,16 @@ const routes: Routes = [
             { path: 'login', component: UserLoginComponent },
             { path: 'register', component: UserRegisterComponent },
             { path: 'register-result', component: UserRegisterResultComponent }
+        ]
+    },
+    // xdj-passport
+    {
+        path: 'xdjpassport',
+        component: XDJLayoutPassportComponent,
+        children: [
+            { path: 'login', component: XDJUserLoginComponent },
+            { path: 'register', component: XDJUserRegisterComponent },
+            { path: 'register-result', component: XDJUserRegisterResultComponent }
         ]
     },
     // 单页不包裹Layout
