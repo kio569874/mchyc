@@ -50,7 +50,7 @@ public class UserController extends BaseController {
 	@ResponseBody
 	public String login(@RequestBody String content, HttpServletRequest request) {
 		try {
-			JSONObject jsonObj = JSONObject.parseObject(content);
+			JSONObject jsonObj = getDataJSONObject(content);
 			if (!jsonObj.containsKey("userCode") || !jsonObj.containsKey("userCode")
 					|| StringUtils.isEmpty(jsonObj.get("userCode"))
 					|| StringUtils.isEmpty(jsonObj.get("userPassword"))) {
@@ -58,7 +58,6 @@ public class UserController extends BaseController {
 			}
 			String userCode = jsonObj.getString("userCode");
 			String userPassword = jsonObj.getString("userPassword");
-			userPassword = MD5Util.createMD5(userPassword);
 			SystemUser systemUser = systemUserService.checkSystemUser(userCode, userPassword);
 			if (systemUser != null && !StringUtils.isEmpty(systemUser.getUserCode())) {
 				systemUser.setLoginTime(new Date());

@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -25,6 +26,9 @@ public class TokenInterceptor implements HandlerInterceptor {
 
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
+		if("OPTIONS".equals(request.getMethod())) {
+			return true;
+		}
 		response.setCharacterEncoding("utf-8");
 		String token = request.getHeader("Authorization");
 		// token不存在
@@ -33,21 +37,20 @@ public class TokenInterceptor implements HandlerInterceptor {
 			if (user != null) {
 				return true;
 			}
-			responseMessage(response, response.getWriter());
+			response.setHeader("Access-Control-Allow-Origin", "*");
+		    response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
+		    response.setHeader("Access-Control-Max-Age", "3600");
+		    response.setHeader("Access-Control-Allow-Headers", "Content-Type, x-requested-with");
+			response.setStatus(401);
 			return false;
 		} else {
-			responseMessage(response, response.getWriter());
+			response.setHeader("Access-Control-Allow-Origin", "*");
+		    response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
+		    response.setHeader("Access-Control-Max-Age", "3600");
+		    response.setHeader("Access-Control-Allow-Headers", "Content-Type, x-requested-with");
+		    response.setStatus(401);
 			return false;
 		}
 	}
 
-	private void responseMessage(HttpServletResponse response, PrintWriter out) {
-		Map<String, String> authError = new HashMap<String, String>();
-		authError.put("retCode", "401");
-		response.setContentType("application/json; charset=utf-8");
-		String json = JSONObject.toJSONString(authError);
-		out.print(json);
-		out.flush();
-		out.close();
-	}
 }

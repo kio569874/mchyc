@@ -195,7 +195,7 @@ public class ProductController extends BaseController {
 			int pageSize = jsonObj.getInteger("pageSize");
 			PaginationDto<ProductBigTypeInfo> paginationDto = productBigTypeInfoService.queryProductListByPage(page,
 					pageSize, null);
-			return getSuccessResultMsg(JSONObject.toJSONString(paginationDto));
+			return getSuccessPageResultMsg(paginationDto);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			return getErrorResultMsg(e.getMessage());

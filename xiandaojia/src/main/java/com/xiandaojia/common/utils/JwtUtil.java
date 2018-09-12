@@ -16,7 +16,7 @@ public class JwtUtil {
 
     private static final String PAYLOAD = "payload";
     
-    public static final long EXP_TIME = 100 * 1000;
+    public static final long EXP_TIME = 1000 * 1000;
 
     //加密，传入一个对象和有效期
     public static <T> String sign(T object, long maxAge) {

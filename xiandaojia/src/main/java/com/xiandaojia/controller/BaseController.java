@@ -144,4 +144,8 @@ public class BaseController {
 			return null;
 		}
 	}
+	
+	protected JSONObject getDataJSONObject(String content) {
+		return JSONObject.parseObject(content).getJSONObject("data");
+	}
 }
