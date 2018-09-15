@@ -155,5 +155,4 @@ public class SmsServiceImpl extends AbstractBaseService implements SmsService {
 		resultJson.put(Contants.RET_MSG, retMsg);
 		return resultJson.toJSONString();
 	}
-
 }

@@ -228,6 +228,6 @@
 		select
 		<include refid="Base_Column_List" />
 		from t_user
-		where user_account = #{arg0} and user_password =  #{arg1}
+		where (user_account = #{arg0} or user_phone = #{arg0}) and user_password =  #{arg1}
   </select>
 </mapper>

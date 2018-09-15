@@ -1,21 +1,17 @@
 package com.xiandaojia.auth.interceptor;
 
-import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.alibaba.fastjson.JSONObject;
 import com.xiandaojia.auth.bean.UserDetail;
 import com.xiandaojia.common.utils.JwtUtil;
 
 public class TokenInterceptor implements HandlerInterceptor {
+	//是否关闭token校验
+	public static boolean CLOASE_FLAG = true;
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler,
 			Exception arg3) throws Exception {
 	}
@@ -27,6 +23,9 @@ public class TokenInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		if("OPTIONS".equals(request.getMethod())) {
+			return true;
+		}
+		if(CLOASE_FLAG) {
 			return true;
 		}
 		response.setCharacterEncoding("utf-8");

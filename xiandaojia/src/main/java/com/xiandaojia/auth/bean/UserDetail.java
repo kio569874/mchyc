@@ -1,6 +1,7 @@
 package com.xiandaojia.auth.bean;
 
 import com.xiandaojia.common.domain.SystemUser;
+import com.xiandaojia.common.domain.User;
 
 public class UserDetail{
 	
@@ -12,6 +13,12 @@ public class UserDetail{
 		user.setUserId(systemUser.getId());
 		user.setUsername(systemUser.getUserName());
 		return user;
+	}
+	
+	public static Object from(User user) {
+		UserDetail userDetail = new UserDetail();
+		userDetail.setUserId(user.getUserId());
+		return userDetail;
 	}
 	
 	public Long getUserId() {

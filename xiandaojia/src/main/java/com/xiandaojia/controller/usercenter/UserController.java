@@ -85,6 +85,18 @@ public class UserController extends BaseController {
 		result.put("token", JwtUtil.sign(UserDetail.from(systemUser), JwtUtil.EXP_TIME));
 		return result;
 	}
+	/**
+	 * 封装带token的响应结果
+	 * @param systemUser
+	 * @return
+	 */
+	private Map<String,Object> createTokenResult(User user) {
+		Map<String,Object> result = new HashMap<String, Object>();
+		result.put("user", user);
+		user.setUserPassword(null);
+		result.put("token", JwtUtil.sign(UserDetail.from(user), JwtUtil.EXP_TIME));
+		return result;
+	}
 
 	@RequestMapping(value = "/systemUser/insert", method = RequestMethod.POST)
 	@ResponseBody
@@ -319,7 +331,7 @@ public class UserController extends BaseController {
 	@ResponseBody
 	public String userLogin(@RequestBody String content, HttpServletRequest request) {
 		try {
-			JSONObject jsonObj = JSONObject.parseObject(content);
+			JSONObject jsonObj = getDataJSONObject(content);
 			if (!jsonObj.containsKey("userAccount") || !jsonObj.containsKey("userPassword")
 					|| StringUtils.isEmpty(jsonObj.get("userAccount"))
 					|| StringUtils.isEmpty(jsonObj.get("userPassword"))) {
@@ -329,11 +341,11 @@ public class UserController extends BaseController {
 			String userPassword = jsonObj.getString("userPassword");
 			userPassword = MD5Util.createMD5(userPassword);
 			User user = userService.checkUser(userAccount, userPassword);
-			if (user != null && !StringUtils.isEmpty(user.getUserAccount())) {
+			if (user != null) {
 				user.setLastLoginTime(new Date());
 				user.setLastLoginIp(getIpAddr(request));
 				userService.update(user);
-				return getSuccessResultMsg(JSONObject.toJSONString(user));
+				return getSuccessResultMsg(JSONObject.toJSONString(createTokenResult(user)));
 			} else {
 				return getErrorResultMsg("用户名或密码错误");
 			}
@@ -348,7 +360,7 @@ public class UserController extends BaseController {
 	@ResponseBody
 	public String userInsert(@RequestBody String content) {
 		try {
-			User t = JsonBeanUtil.stringToBean(User.class, content);
+			User t = JsonBeanUtil.stringToBean(User.class, getDataJSONObject(content).toJSONString());
 			t.setUserPassword(MD5Util.createMD5(t.getUserPassword()));
 			userService.insert(t);
 			return getSuccessResultMsg();
