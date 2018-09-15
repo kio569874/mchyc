@@ -17,6 +17,7 @@
             <span class="title_text">{{headTitle}}</span>
         </section>
         <slot name="msite-title"></slot>
+        <slot name="changeLogin"></slot>
     </header>
 </template>
 

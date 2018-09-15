@@ -28,6 +28,7 @@ import {
 	SAVE_QUESTION,
 	ADD_ADDRESS,
 	BUY_CART,
+  XDJ_RECORD_USERINFO
 } from './mutation-types.js'
 
 import {setStore, getStore} from '../config/mUtils'
@@ -168,7 +169,7 @@ export default {
 	//保存geohash
 	[SAVE_GEOHASH](state, geohash) {
 		state.geohash = geohash;
-		
+
 	},
 	//确认订单页添加新的的地址
 	[CONFIRM_ADDRESS](state, newAddress) {
@@ -241,4 +242,11 @@ export default {
 		state.cartPrice = price;
 	},
 
+  // 记录用户信息
+  [XDJ_RECORD_USERINFO](state, info) {
+	  debugger;
+    state.xdjUserInfo = {...info};
+    state.login = true;
+    setStore('userId', info.userId);
+  },
 }

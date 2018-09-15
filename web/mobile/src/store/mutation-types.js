@@ -27,3 +27,5 @@ export const SAVE_ADDRESS = 'SAVE_ADDRESS'
 export const SAVE_QUESTION = 'SAVE_QUESTION'
 export const ADD_ADDRESS = 'ADD_ADDRESS'
 export const BUY_CART = 'BUY_CART'
+
+export const XDJ_RECORD_USERINFO = 'XDJ_RECORD_USERINFO'

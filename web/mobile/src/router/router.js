@@ -50,6 +50,10 @@ const download = r => require.ensure([], () => r(require('../page/download/downl
 const xdjHome = r => require.ensure([], () => r(require('../page/xdjHome/xdjHome')), 'xdjHome')
 const xdjProductDetail = r => require.ensure([], () => r(require('../page/xdjHome/children/xdjProductDetail')), 'xdjProductDetail')
 const xdjTypeList = r => require.ensure([], () => r(require('../page/xdjHome/children/xdjTypeList')), 'xdjTypeList')
+const xdjLogin = r => require.ensure([], () => r(require('../page/xdjLogin/xdjLogin')), 'xdjLogin')
+const xdjRegeist = r => require.ensure([], () => r(require('../page/xdjRegeist/xdjRegeist')), 'xdjRegeist')
+const xdjRegeistSetPwd = r => require.ensure([], () => r(require('../page/xdjRegeist/children/xdjRegeistSetPwd')), 'xdjRegeistSetPwd')
+const xdjProfile = r => require.ensure([], () => r(require('../page/xdjProfile/xdjProfile')), 'xdjProfile')
 
 
 export default [{
@@ -266,6 +270,27 @@ export default [{
         {
           path: '/xdjTypeList',
           component: xdjTypeList,
-        }
+        },
+        //登录页
+        {
+          path: '/xdjLogin',
+          component: xdjLogin
+        },
+        //注册页
+        {
+          path: '/xdjRegeist',
+          component: xdjRegeist
+        },
+        //注册页2
+        {
+          name:'xdjRegeistSetPwd',
+          path: '/xdjRegeistSetPwd',
+          component: xdjRegeistSetPwd
+        },
+        //用户中心
+        {
+          path: '/xdjProfile',
+          component: xdjProfile
+        },
     ]
 }]
