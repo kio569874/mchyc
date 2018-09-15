@@ -79,7 +79,7 @@ export class DashboardWorkplaceComponent implements OnInit, OnDestroy {
     constructor(private http: _HttpClient, public msg: NzMessageService) {}
 
     ngOnInit() {
-        zip(
+       /* zip(
             this.http.get('/chart'),
             this.http.get('/api/notice'),
             this.http.get('/api/activities')
@@ -94,7 +94,7 @@ export class DashboardWorkplaceComponent implements OnInit, OnDestroy {
                 return item;
             });
             this.loading = false;
-        });
+        });*/
     }
 
     ngOnDestroy(): void {

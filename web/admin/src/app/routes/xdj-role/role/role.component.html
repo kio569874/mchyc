@@ -105,7 +105,7 @@
 </nz-card>
 <nz-modal [nzVisible]="modalVisible" [nzMaskClosable]="false"  [nzWidth]="1024" [nzTitle]="roleTitle"
           [nzConfirmLoading]="loading" [nzContent]="dictModal"
-          (nzOnCancel)="modalVisible = false" [nzFooter]="modalFooter">
+          (nzOnCancel)="modalVisible = false" [nzFooter]="">
     <ng-template #dictModal>
         <form novalidate  (ngSubmit)="save(f)"  #f="ngForm" >
             <div nz-row  [nzType]="'flex'" [nzJustify]="'end'" [nzGutter]="24">
