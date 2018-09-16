@@ -7,27 +7,21 @@
       </router-link>
     </head-top>
     <div class="goods">
-      <!--布局分析，两栏布局，左侧是固定有的宽度，右侧是根据手机子适应-->
       <div class="menu-wrapper" ref="menuWrapper">
         <ul>
-          <!-- 循环类型, 给左侧加一个类，标识滑动高亮 -->
           <li v-for="(item, index) in goods" class="menu-item" :class="{'current': currentIndex === index}"
               @click="selectMenu(index, $event)">
             <span class="text">
-              <!-- 判断 type> 0 显示不同的类名-->
               <span v-show="item.type>0" class="icon"
                     :class="classMap[item]"></span>{{item.name}}
             </span>
           </li>
         </ul>
       </div>
-      <!--安装better-scroll 完成滑动效果-->
       <div class="foods-wrapper" ref="foodWrapper">
         <ul>
-          <!--因为要计算高度，给一个类food-list-hook,包含右侧的一个大类的高度,给li标签-->
           <li v-for="item in goods" class="food-list food-list-hook">
             <h1 class="title">{{item.name}}</h1>
-            <!-- 还是一个列表，因为每个商品里可能有多个-->
             <ul>
               <li v-for="food in item.foods" class="food-item">
                 <div class="icon">
@@ -57,9 +51,6 @@
           </li>
         </ul>
       </div>
-      <!--购物车组件， 传递数据给购物车组件信息 delivery-price 传递配送费信息,
-      传递起送费信息 :min-price="seller.minPrice"
-      刚开始会报错，因为seller vue不知道，要在vue.app中 从router-view 传过去-->
       <shopcard ref="shopcart"
                 :select-foods="selectFoods"
                 :delivery-price="seller.deliveryPrice"
@@ -88,7 +79,8 @@
       };
     },
     computed: { // vue的计算属性
-      currentIndex() { // 写一个方法,根据滚动的距离获取到对应的索引
+      currentIndex() {
+        // 写一个方法,根据滚动的距离获取到对应的索引
         for (let i = 0; i < this.listHeight.length; i++) {
           let height1 = this.listHeight[i];
           let height2 = this.listHeight[i + 1];
@@ -1191,13 +1183,10 @@
       // DOM 更新了 操作dom时一定要在$nextTick里, 这个有点问题，必须刷新才能滚动，回来搞一下
       this.$nextTick(() => {
         this.initScroll();
-        // 要实现滑动右侧商品，左侧对应的菜单实现高亮，其实就是去计算距离，在这里写一个方法,同样写在dom更新的这里面
         this.calculateHeight()
       });
-
       this.classMap = ['decrease', 'discount', 'special', 'invoice',
         'guarantee']
-
       Bus.$on('cart.add', el => {
         this.$nextTick(() => {
           this.$refs.shopcart.drop(el);
@@ -1222,16 +1211,12 @@
           this.scrollY = Math.abs(Math.round(pos.y));
         })
       },
-      selectMenu(index, event) { // 点击左侧右侧也要有对应的滑动,所以要传索引,点击了第几个
-        // better-scroll 可以监听到此事件，浏览器原生不能监听到，就是false 直接return 防止pc端出现两次点击
-        // 获取食物的li Dom节点列表
+      selectMenu(index, event) {
         let foodList = this.$refs.foodWrapper.getElementsByClassName('food-list-hook');
         let el = foodList[index];
-        // 调用better-scroll 方法滚动到响应位置
         this.foodScroll.scrollToElement(el, 300);
       },
       calculateHeight() {
-        // 获取到这个类,然后获取高度，完成左侧菜单滑动右侧左侧实时高亮更新
         let foodList = this.$refs.foodWrapper.getElementsByClassName('food-list-hook');
         let height = 0;
         this.listHeight.push(height); // 先把第一个高度push进去
@@ -1239,7 +1224,6 @@
           let item = foodList[i]; // 获得每一个高度
           height += item.clientHeight; // 高度累加
           this.listHeight.push(height); // 知道每个区间的高度之后 ，在push到这个数组中
-          // 其实就是一个递增的区间数组，标识每个区间对应的高度是多少
         }
       },
       selectFood(food, event) {

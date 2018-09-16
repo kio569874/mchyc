@@ -6,7 +6,6 @@
           <div class="logo">
             <i class="icon-shopping_cart"></i>
           </div>
-          <!--代表一共选择了多少个,左侧的图标, 必须长度大于0的时候 才会显示，代表添加了-->
           <div class="num" v-show="totalCount > 0">{{ totalCount }}</div>
         </div>
         <div class="price">￥{{ totalPrice }}</div>
@@ -48,7 +47,6 @@
       </div>
     </transition>
   </div>
-  <!-- 右侧的添加按钮，是多次出现的，单独写一个组件-->
 </template>
 
 <script>
@@ -56,7 +54,7 @@
   import cartcontrol from '../common/cartcontrol'
   export default{
     props: {
-      // 购物车实际上是跟一个数组关联，加一个数组push一个，所以我们定义一个空数组
+      // 购物车实际上是跟一个数组关联，加一个数组push一个，所以定义一个空数组
       selectFoods: {
         type: Array,
         default(){
@@ -73,7 +71,7 @@
       }
     },
     data() {
-      return { // 5个小球，基本上够用了，为fasle，为了动画效果
+      return {
         balls: [
           {
             show: false
@@ -92,7 +90,7 @@
           }
         ],
         dropBalls: [],
-        fold: true /*折叠*/
+        fold: true
       };
     },
     computed: {
@@ -111,10 +109,11 @@
         });
         return count;
       },
-      payDesc() { // 描述的状态变化，根据总价是相关的，存在计算关系的
+      payDesc() {
+        // 描述的状态变化，根据总价是相关的，存在计算关系的
         if (this.totalPrice === 0) { // 如果是等于0的时候，那就直接return
-          return `￥${this.minPrice}元起送`; // 模板字符串的方式，省着拼了
-        } else if (this.totalPrice < this.minPrice) { // 如果总价小于定义的价格，那就提示
+          return `￥${this.minPrice}元起送`;
+        } else if (this.totalPrice < this.minPrice) {
           let diff = this.minPrice - this.totalPrice;
           return `还差￥${diff}元起送`;
         } else {
@@ -170,7 +169,6 @@
         while (count--) {
           let ball = this.balls[count];
           if (ball.show) {
-            // getBoundingClientRect 这个方法返回一个矩形对象，包含四个属性：left、top、right和bottom
             let rect = ball.el.getBoundingClientRect();
             let x = rect.left - 32;
             let y = -(window.innerHeight - rect.top - 22);
@@ -187,7 +185,6 @@
         }
       },
       enter(el) {
-        /* 触发浏览器重绘 */
         let rf = el.offsetHeight;
 
         this.$nextTick(() => {

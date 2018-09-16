@@ -8,7 +8,6 @@
     </transition>
     <!-- 总数-->
     <div class="cart-count" v-show="food.count > 0">{{ food.count }}</div>
-    <!--增加的按钮,点击增加方法-->
     <div class="cart-add icon-add_circle" @click.stop.prevent="addCart"></div>
   </div>
 </template>
@@ -18,7 +17,6 @@
   import Bus from '../../config/EventBus';
 
   export default {
-    // 是和商品关联的，比如一个商品买多少个,调用这个控件的时候，一定要传入多少个,完成个数
     props: {
       food: {
         type: Object
@@ -29,19 +27,15 @@
     },
     methods: {
       addCart(event) {
-        // 判断是否存在, 防止在PC端多次被点击,
         if (!this.food.count) {
-          // 添加food不存在的字段时 需要调用vue.set方法添加
-          // 这样才可以通过vue观测到这个字段的变化
           Vue.set(this.food, 'count', 1)
           // this.food.count = 1  vue 检测不到变化，所以要调用vue的观测接口，引入全局的vue
         } else {
           this.food.count++;
         }
-        // Bus.$emit('cart.add', event.target);
+        Bus.$emit('cart.add', event.target);
       },
       decreaseCart(event) {
-        // 防止多次被点击
         if (this.food.count) {
           this.food.count--;
         }
