@@ -50,6 +50,7 @@ const download = r => require.ensure([], () => r(require('../page/download/downl
 const xdjHome = r => require.ensure([], () => r(require('../page/xdjHome/xdjHome')), 'xdjHome')
 const xdjProductDetail = r => require.ensure([], () => r(require('../page/xdjHome/children/xdjProductDetail')), 'xdjProductDetail')
 const xdjTypeList = r => require.ensure([], () => r(require('../page/xdjHome/children/xdjTypeList')), 'xdjTypeList')
+const xdjFlowersList = r => require.ensure([], () => r(require('../page/xdjHome/children/xdjFlowersList')), 'xdjFlowersList')
 const xdjLogin = r => require.ensure([], () => r(require('../page/xdjLogin/xdjLogin')), 'xdjLogin')
 const xdjRegeist = r => require.ensure([], () => r(require('../page/xdjRegeist/xdjRegeist')), 'xdjRegeist')
 const xdjRegeistSetPwd = r => require.ensure([], () => r(require('../page/xdjRegeist/children/xdjRegeistSetPwd')), 'xdjRegeistSetPwd')
@@ -270,6 +271,11 @@ export default [{
         {
           path: '/xdjTypeList',
           component: xdjTypeList,
+        },
+        // 我爱鲜花
+        {
+          path: '/xdjFlowersList',
+          component: xdjFlowersList,
         },
         //登录页
         {
