@@ -66,8 +66,7 @@ export class RoleComponent implements OnInit {
         if (this.q.status !== null && this.q.status > -1) this.q.statusList.push(this.q.status);
         this.http.post(this.baseUrl + '/user/systemUser/queryListByPage', this.q).pipe(
             tap((res: any) => {
-                console.log(res)
-                res.data = JSON.parse(res.data); // 先转一下, 晚上修改好接口，在改,把转换去掉即可
+              this.loading = false;
                 return res.data.map(i => {
                     const statusItem = this.status[i.userStatus];
                     i.statusText = statusItem.text;

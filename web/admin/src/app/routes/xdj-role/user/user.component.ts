@@ -71,7 +71,7 @@ export class UserComponent implements OnInit {
         this.http.post(this.baseUrl + '/user/user/queryListByPage', this.q).pipe(
             tap((res: any) => {
                 console.log(res)
-                res.data = JSON.parse(res.data); // 先转一下, 晚上修改好接口，在改,把转换去掉即可
+                this.loading = false;
                 return res.data.map(i => {
 
                 });

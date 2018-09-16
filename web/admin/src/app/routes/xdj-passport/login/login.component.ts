@@ -13,6 +13,7 @@ import {TokenService} from "../../../xdj-core/auth/token.service";
 })
 export class XDJUserLoginComponent {
 
+
     form: FormGroup;
     error = '';
     loading = new Loading();
