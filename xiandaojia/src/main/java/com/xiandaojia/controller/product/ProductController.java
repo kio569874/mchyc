@@ -126,12 +126,27 @@ public class ProductController extends BaseController {
 			logger.error(e.getMessage(), e);
 			return getErrorResultMsg(e.getMessage());
 		}
-
 	}
-
+	
 	@RequestMapping(value = "/productInfo/query", method = RequestMethod.POST)
 	@ResponseBody
 	public String productInfoQuery(@RequestBody String content) {
+		try {
+			JSONObject jsonObj = JSONObject.parseObject(content);
+			int page = jsonObj.getInteger("page");
+			int pageSize = jsonObj.getInteger("pageSize");
+			PaginationDto<ProductInfo> paginationDto = productService.queryProductListByPage(page,
+					pageSize, null);
+			return getSuccessPageResultMsg(paginationDto);
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			return getErrorResultMsg(e.getMessage());
+		}
+	}
+
+	@RequestMapping(value = "/productInfo/detail", method = RequestMethod.POST)
+	@ResponseBody
+	public String productInfoDetail(@RequestBody String content) {
 		try {
 			JSONObject jsonObj = JSONObject.parseObject(content);
 			Map<String, Object> paramMap = jsonObj;
@@ -141,7 +156,6 @@ public class ProductController extends BaseController {
 			logger.error(e.getMessage(), e);
 			return getErrorResultMsg(e.getMessage());
 		}
-
 	}
 
 	@RequestMapping(value = "/productBigTypeInfo/insert", method = RequestMethod.POST)
@@ -200,7 +214,6 @@ public class ProductController extends BaseController {
 			logger.error(e.getMessage(), e);
 			return getErrorResultMsg(e.getMessage());
 		}
-
 	}
 
 	@RequestMapping(value = "/productSmallTypeInfo/insert", method = RequestMethod.POST)
@@ -254,7 +267,7 @@ public class ProductController extends BaseController {
 			int pageSize = jsonObj.getInteger("pageSize");
 			PaginationDto<ProductSmallTypeInfo> paginationDto = productSmallTypeInfoService.queryProductListByPage(page,
 					pageSize, null, null);
-			return getSuccessResultMsg(JSONObject.toJSONString(paginationDto));
+			return getSuccessPageResultMsg(paginationDto);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			return getErrorResultMsg(e.getMessage());
@@ -319,7 +332,7 @@ public class ProductController extends BaseController {
 			int pageSize = jsonObj.getInteger("pageSize");
 			PaginationDto<ProductInformation> paginationDto = productInformationService.queryProductListByPage(page,
 					pageSize, null, null);
-			return getSuccessResultMsg(JSONObject.toJSONString(paginationDto));
+			return getSuccessPageResultMsg(paginationDto);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			return getErrorResultMsg(e.getMessage());

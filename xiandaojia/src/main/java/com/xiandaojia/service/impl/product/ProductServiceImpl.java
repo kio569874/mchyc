@@ -1,23 +1,34 @@
 package com.xiandaojia.service.impl.product;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 
-import com.alibaba.fastjson.JSON;
-import com.xiandaojia.common.domain.*;
-import com.xiandaojia.common.dto.ProductInfoVo;
-import com.xiandaojia.mapper.product.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.xiandaojia.common.domain.PaginationDto;
+import com.xiandaojia.common.domain.ProductBigTypeInfo;
+import com.xiandaojia.common.domain.ProductInfo;
+import com.xiandaojia.common.domain.ProductInformation;
+import com.xiandaojia.common.domain.ProductInformationRelation;
+import com.xiandaojia.common.domain.ProductSmallTypeInfo;
+import com.xiandaojia.common.domain.SmallProductRelation;
+import com.xiandaojia.common.dto.ProductInfoVo;
 import com.xiandaojia.common.exception.SysException;
 import com.xiandaojia.common.utils.PaginationUtil;
+import com.xiandaojia.mapper.product.ProductBigTypeInfoMapper;
+import com.xiandaojia.mapper.product.ProductInfoMapper;
+import com.xiandaojia.mapper.product.ProductInformationMapper;
+import com.xiandaojia.mapper.product.ProductInformationRelationMapper;
+import com.xiandaojia.mapper.product.ProductSmallTypeInfoMapper;
+import com.xiandaojia.mapper.product.SmallProductRelationMapper;
 import com.xiandaojia.service.product.IProductService;
 
 /**
@@ -173,6 +184,24 @@ public class ProductServiceImpl implements IProductService {
 		JSONObject productInfoJson = (JSONObject) JSONObject.toJSON(paginationDto);
 		resJson.put("productInfoList", productInfoJson);
 		return resJson.toJSONString();
+	}
+	
+	@Override
+	public PaginationDto<ProductInfo> queryProductListByPage(int page, int pageSize, Integer totalCount)
+			throws SysException {
+		Map<String,Object> paramMap = new HashMap<>();
+		paramMap.put("offset", (page - 1) * pageSize);
+		paramMap.put("pageSize", pageSize);
+		PaginationUtil.checkPaginationArgs(page, pageSize);
+		PaginationDto<ProductInfo> paginationDto = new PaginationDto<ProductInfo>(page, pageSize);
+		int offset = (page - 1) * pageSize;
+		if (totalCount == null || totalCount <= 0) {
+			totalCount = productInfoMapper.getTotalCount(paramMap);
+		}
+		paginationDto.setTotalCount(totalCount);
+		List<ProductInfo> list = productInfoMapper.queryListByPage(paramMap);
+		paginationDto.setData(list);
+		return paginationDto;
 	}
 
 }
