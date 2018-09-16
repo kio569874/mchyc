@@ -55,6 +55,7 @@ const xdjLogin = r => require.ensure([], () => r(require('../page/xdjLogin/xdjLo
 const xdjRegeist = r => require.ensure([], () => r(require('../page/xdjRegeist/xdjRegeist')), 'xdjRegeist')
 const xdjRegeistSetPwd = r => require.ensure([], () => r(require('../page/xdjRegeist/children/xdjRegeistSetPwd')), 'xdjRegeistSetPwd')
 const xdjProfile = r => require.ensure([], () => r(require('../page/xdjProfile/xdjProfile')), 'xdjProfile')
+const xdjshopCar = r => require.ensure([], () => r(require('../page/xdjshopCar/xdjshopcar')), 'xdjshopcar')
 
 
 export default [{
@@ -298,5 +299,10 @@ export default [{
           path: '/xdjProfile',
           component: xdjProfile
         },
+        // 购物车组件
+        {
+          path: '/xdjshopCar',
+          component: xdjshopCar
+        }
     ]
 }]

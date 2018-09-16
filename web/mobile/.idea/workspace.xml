@@ -14,61 +14,81 @@
       <file leaf-file-name="xdjFlowersList.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/page/xdjHome/children/xdjFlowersList.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="6" column="20" lean-forward="true" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
+            <state relative-caret-position="336">
+              <caret line="57" column="18" lean-forward="true" selection-start-line="53" selection-start-column="6" selection-end-line="57" selection-end-column="18" />
               <folding>
                 <element signature="e#2335#2371#0" expanded="true" />
                 <element signature="e#3548#45833#0" expanded="false" />
-                <element signature="e#46305#46790#0" expanded="false" />
-                <element signature="e#47030#47434#0" expanded="false" />
-                <element signature="n#style#0;n#!!top" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="xdjTypeList.vue" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/page/xdjHome/children/xdjTypeList.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="250">
-              <caret line="67" column="10" lean-forward="false" selection-start-line="67" selection-start-column="10" selection-end-line="67" selection-end-column="10" />
-              <folding>
-                <element signature="e#3050#3730#0" expanded="false" />
-                <element signature="e#3467#3724#0" expanded="false" />
-                <element signature="e#3766#43901#0" expanded="false" />
-                <element signature="n#style#0;n#!!top" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="shopcat.vue" pinned="false" current-in-tab="false">
+      <file leaf-file-name="shopcat.vue" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/common/shopcat.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="838">
-              <caret line="229" column="4" lean-forward="true" selection-start-line="229" selection-start-column="4" selection-end-line="229" selection-end-column="4" />
+            <state relative-caret-position="250">
+              <caret line="196" column="40" lean-forward="true" selection-start-line="196" selection-start-column="40" selection-end-line="196" selection-end-column="40" />
               <folding>
                 <element signature="n#div#1;n#div#0;n#template#0;n#!!top" expanded="false" />
-                <element signature="e#1791#1827#0" expanded="true" />
-                <element signature="e#2247#2502#0" expanded="false" />
-                <element signature="e#2643#2810#0" expanded="false" />
-                <element signature="e#2831#2985#0" expanded="false" />
-                <element signature="e#2911#2953#0" expanded="false" />
-                <element signature="n#style#0;n#!!top" expanded="false" />
-                <element signature="e#11685#12080#0" expanded="false" />
+                <element signature="e#1013#1049#0" expanded="true" />
+                <element signature="e#1129#1424#0" expanded="false" />
+                <element signature="e#1469#1724#0" expanded="false" />
+                <element signature="e#1798#3178#0" expanded="false" />
+                <element signature="e#5185#5219#0" expanded="false" />
+                <element signature="e#9136#9531#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="cartcontrol.vue" pinned="false" current-in-tab="true">
+      <file leaf-file-name="router.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/router/router.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="263">
+              <caret line="303" column="28" lean-forward="false" selection-start-line="303" selection-start-column="18" selection-end-line="303" selection-end-column="28" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="xdjshopcar.vue" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/page/xdjshopCar/xdjshopcar.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="222">
+              <caret line="262" column="8" lean-forward="true" selection-start-line="262" selection-start-column="8" selection-end-line="262" selection-end-column="39" />
+              <folding>
+                <element signature="n#head-top#0;n#div#0;n#template#0;n#!!top" expanded="false" />
+                <element signature="n#div#1;n#div#1;n#div#0;n#template#0;n#!!top" expanded="false" />
+                <element signature="e#2119#2170#0" expanded="true" />
+                <element signature="e#2663#2950#0" expanded="false" />
+                <element signature="e#3040#4435#0" expanded="false" />
+                <element signature="e#3088#4427#0" expanded="false" />
+                <element signature="e#3100#3581#0" expanded="false" />
+                <element signature="e#4453#6085#0" expanded="false" />
+                <element signature="e#4524#4703#0" expanded="false" />
+                <element signature="e#4726#4892#0" expanded="false" />
+                <element signature="e#4810#4856#0" expanded="false" />
+                <element signature="e#8647#8792#0" expanded="false" />
+                <element signature="e#8807#9021#0" expanded="false" />
+                <element signature="e#9035#12060#0" expanded="false" />
+                <element signature="e#12078#13288#0" expanded="false" />
+                <element signature="e#12544#13284#0" expanded="false" />
+                <element signature="e#12949#13156#0" expanded="false" />
+                <element signature="e#13757#14152#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="cartcontrol.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/common/cartcontrol.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="196">
-              <caret line="7" column="17" lean-forward="true" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+            <state relative-caret-position="224">
+              <caret line="29" column="23" lean-forward="false" selection-start-line="29" selection-start-column="23" selection-end-line="29" selection-end-column="23" />
               <folding>
-                <element signature="e#1144#1558#0" expanded="false" />
-                <element signature="e#1598#1993#0" expanded="false" />
+                <element signature="e#1170#1584#0" expanded="false" />
+                <element signature="e#1624#2019#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -84,12 +104,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="mixin.scss" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/style/mixin.scss">
+      <file leaf-file-name="xdjTypeList.vue" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/page/xdjHome/children/xdjTypeList.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2044">
-              <caret line="73" column="11" lean-forward="false" selection-start-line="73" selection-start-column="11" selection-end-line="73" selection-end-column="11" />
-              <folding />
+            <state relative-caret-position="221">
+              <caret line="1247" column="1" lean-forward="false" selection-start-line="1247" selection-start-column="1" selection-end-line="1247" selection-end-column="40" />
+              <folding>
+                <element signature="n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
+                <element signature="e#2434#2485#0" expanded="true" />
+                <element signature="e#3050#3730#0" expanded="false" />
+                <element signature="e#3467#3724#0" expanded="false" />
+                <element signature="e#3766#43901#0" expanded="false" />
+                <element signature="e#45530#45675#0" expanded="false" />
+                <element signature="e#45690#45904#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -105,27 +133,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>homeTitle</find>
-      <find>menuIndex</find>
-      <find>sc</find>
-      <find>bg-image</find>
-      <find>Bus</find>
-      <find>selectMenu</find>
-      <find>nav_product_list</find>
-      <find>deliveryPrice</find>
-      <find>menu-item</find>
       <find>file</find>
       <find>directory</find>
       <find>decreaseCart</find>
       <find>cartcontrol</find>
       <find>head-top</find>
-      <find>home_container</find>
       <find>desc</find>
       <find>mapMutations</find>
       <find>msite-title</find>
       <find>mounted</find>
       <find>currentIndex</find>
+      <find>totalPrice</find>
+      <find>totalCount</find>
+      <find>drop</find>
+      <find>icon-shopping_cart</find>
+      <find>pay</find>
+      <find>geohash</find>
+      <find>listShow</find>
+      <find>home_container</find>
+      <find>selectFoods</find>
+      <find>homeTitle</find>
+      <find>addCart</find>
+      <find>content-left</find>
+      <find>list-header</find>
+      <find>empty</find>
+      <find>transform</find>
       <find>beforeEnter</find>
+      <find>fold</find>
+      <find>listContent</find>
+      <find>去结算</find>
+      <find>shopcart-list</find>
     </findStrings>
   </component>
   <component name="GradleLocalSettings">
@@ -139,8 +176,12 @@
         <option value="$PROJECT_DIR$/src/style/mixin.scss" />
         <option value="$PROJECT_DIR$/src/page/xdjHome/children/xdjFlowersList.vue" />
         <option value="$PROJECT_DIR$/src/page/xdjHome/children/xdjTypeList.vue" />
-        <option value="$PROJECT_DIR$/src/components/common/shopcat.vue" />
+        <option value="$PROJECT_DIR$/src/components/common/comshopIng.vue" />
         <option value="$PROJECT_DIR$/src/components/common/cartcontrol.vue" />
+        <option value="$PROJECT_DIR$/src/router/router.js" />
+        <option value="$PROJECT_DIR$/src/components/footer/xdjFootGuide.vue" />
+        <option value="$PROJECT_DIR$/src/page/xdjshopCar/xdjshopcar.vue" />
+        <option value="$PROJECT_DIR$/src/components/common/shopcat.vue" />
       </list>
     </option>
   </component>
@@ -212,7 +253,34 @@
               <item name="mobile" type="b2602c69:ProjectViewProjectNode" />
               <item name="mobile" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="footer" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mobile" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mobile" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="page" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mobile" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mobile" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="page" type="462c0819:PsiDirectoryNode" />
+              <item name="xdjHome" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mobile" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mobile" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="page" type="462c0819:PsiDirectoryNode" />
+              <item name="xdjshopCar" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mobile" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mobile" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="style" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -344,7 +412,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8849000" />
+    <option name="totallyTimeSpent" value="15230000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="0" width="1932" height="1047" extended-state="0" />
@@ -357,7 +425,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32930845" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25801283" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25801283" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -393,47 +461,11 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="2" />
+      <option name="time" value="10" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/page/balance/children/detail.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="3" column="40" lean-forward="false" selection-start-line="3" selection-start-column="40" selection-end-line="3" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/common/alertTip.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/common/mixin.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="5" column="18" lean-forward="true" selection-start-line="5" selection-start-column="18" selection-end-line="5" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/page/xdjHome/children/xdjProductDetail.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="7" column="32" lean-forward="false" selection-start-line="7" selection-start-column="32" selection-end-line="7" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/page/city/city.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="26" column="11" lean-forward="false" selection-start-line="26" selection-start-column="11" selection-end-line="26" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/footer/footGuide.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="224">
@@ -446,10 +478,13 @@
         <state relative-caret-position="1428">
           <caret line="51" column="34" lean-forward="false" selection-start-line="51" selection-start-column="34" selection-end-line="51" selection-end-column="34" />
           <folding>
+            <element signature="n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
+            <element signature="e#2434#2485#0" expanded="true" />
             <element signature="e#3050#3730#0" expanded="false" />
             <element signature="e#3467#3724#0" expanded="false" />
             <element signature="e#3766#43901#0" expanded="false" />
-            <element signature="n#style#0;n#!!top" expanded="false" />
+            <element signature="e#45530#45675#0" expanded="false" />
+            <element signature="e#45690#45904#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -458,6 +493,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="81">
           <caret line="4" column="19" lean-forward="false" selection-start-line="4" selection-start-column="19" selection-end-line="4" selection-end-column="19" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -497,10 +533,13 @@
         <state relative-caret-position="1400">
           <caret line="511" column="16" lean-forward="false" selection-start-line="511" selection-start-column="6" selection-end-line="511" selection-end-column="16" />
           <folding>
+            <element signature="n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
+            <element signature="e#2434#2485#0" expanded="true" />
             <element signature="e#3050#3730#0" expanded="false" />
             <element signature="e#3467#3724#0" expanded="false" />
             <element signature="e#3766#43901#0" expanded="false" />
-            <element signature="n#style#0;n#!!top" expanded="false" />
+            <element signature="e#45530#45675#0" expanded="false" />
+            <element signature="e#45690#45904#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -575,10 +614,13 @@
         <state relative-caret-position="194">
           <caret line="166" column="27" lean-forward="false" selection-start-line="166" selection-start-column="27" selection-end-line="166" selection-end-column="27" />
           <folding>
+            <element signature="n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
+            <element signature="e#2434#2485#0" expanded="true" />
             <element signature="e#3050#3730#0" expanded="false" />
             <element signature="e#3467#3724#0" expanded="false" />
             <element signature="e#3766#43901#0" expanded="false" />
-            <element signature="n#style#0;n#!!top" expanded="false" />
+            <element signature="e#45530#45675#0" expanded="false" />
+            <element signature="e#45690#45904#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -641,10 +683,13 @@
         <state relative-caret-position="1400">
           <caret line="511" column="16" lean-forward="false" selection-start-line="511" selection-start-column="6" selection-end-line="511" selection-end-column="16" />
           <folding>
+            <element signature="n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
+            <element signature="e#2434#2485#0" expanded="true" />
             <element signature="e#3050#3730#0" expanded="false" />
             <element signature="e#3467#3724#0" expanded="false" />
             <element signature="e#3766#43901#0" expanded="false" />
-            <element signature="n#style#0;n#!!top" expanded="false" />
+            <element signature="e#45530#45675#0" expanded="false" />
+            <element signature="e#45690#45904#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -668,14 +713,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2576">
           <caret line="92" column="19" lean-forward="false" selection-start-line="92" selection-start-column="0" selection-end-line="92" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/router/router.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="52" column="98" lean-forward="false" selection-start-line="52" selection-start-column="98" selection-end-line="52" selection-end-column="98" />
           <folding />
         </state>
       </provider>
@@ -716,24 +753,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/footer/footGuide.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="50" column="0" lean-forward="false" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/images/elmlogo.jpeg">
       <provider selected="true" editor-type-id="images">
         <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/style/mixin.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2044">
-          <caret line="73" column="11" lean-forward="false" selection-start-line="73" selection-start-column="11" selection-end-line="73" selection-end-column="11" />
-          <folding />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/common/buyCart.vue">
@@ -764,60 +786,145 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-504">
           <caret line="6" column="18" lean-forward="true" selection-start-line="6" selection-start-column="18" selection-end-line="6" selection-end-column="18" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/page/xdjHome/children/xdjFlowersList.vue">
+    <entry file="file://$PROJECT_DIR$/src/xdjApi.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="6" column="20" lean-forward="true" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
+        <state relative-caret-position="281">
+          <caret line="21" column="1" lean-forward="true" selection-start-line="21" selection-start-column="1" selection-end-line="21" selection-end-column="1" />
           <folding>
-            <element signature="e#2335#2371#0" expanded="true" />
-            <element signature="e#3548#45833#0" expanded="false" />
-            <element signature="e#46305#46790#0" expanded="false" />
-            <element signature="e#47030#47434#0" expanded="false" />
-            <element signature="n#style#0;n#!!top" expanded="false" />
+            <element signature="e#0#37#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/page/xdjHome/children/xdjTypeList.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="67" column="10" lean-forward="false" selection-start-line="67" selection-start-column="10" selection-end-line="67" selection-end-column="10" />
+        <state relative-caret-position="221">
+          <caret line="1247" column="1" lean-forward="false" selection-start-line="1247" selection-start-column="1" selection-end-line="1247" selection-end-column="40" />
           <folding>
+            <element signature="n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
+            <element signature="e#2434#2485#0" expanded="true" />
             <element signature="e#3050#3730#0" expanded="false" />
             <element signature="e#3467#3724#0" expanded="false" />
             <element signature="e#3766#43901#0" expanded="false" />
-            <element signature="n#style#0;n#!!top" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/common/shopcat.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="838">
-          <caret line="229" column="4" lean-forward="true" selection-start-line="229" selection-start-column="4" selection-end-line="229" selection-end-column="4" />
-          <folding>
-            <element signature="n#div#1;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="e#1791#1827#0" expanded="true" />
-            <element signature="e#2247#2502#0" expanded="false" />
-            <element signature="e#2643#2810#0" expanded="false" />
-            <element signature="e#2831#2985#0" expanded="false" />
-            <element signature="e#2911#2953#0" expanded="false" />
-            <element signature="n#style#0;n#!!top" expanded="false" />
-            <element signature="e#11685#12080#0" expanded="false" />
+            <element signature="e#45530#45675#0" expanded="false" />
+            <element signature="e#45690#45904#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/common/cartcontrol.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="7" column="17" lean-forward="true" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+        <state relative-caret-position="224">
+          <caret line="29" column="23" lean-forward="false" selection-start-line="29" selection-start-column="23" selection-end-line="29" selection-end-column="23" />
           <folding>
-            <element signature="e#1144#1558#0" expanded="false" />
-            <element signature="e#1598#1993#0" expanded="false" />
+            <element signature="e#1170#1584#0" expanded="false" />
+            <element signature="e#1624#2019#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/style/mixin.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="307">
+          <caret line="31" column="37" lean-forward="true" selection-start-line="28" selection-start-column="2" selection-end-line="31" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/common/comshopIng.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="174">
+          <caret line="46" column="12" lean-forward="true" selection-start-line="29" selection-start-column="3" selection-end-line="46" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/page/xdjHome/children/xdjFlowersList.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="57" column="18" lean-forward="true" selection-start-line="53" selection-start-column="6" selection-end-line="57" selection-end-column="18" />
+          <folding>
+            <element signature="e#2335#2371#0" expanded="true" />
+            <element signature="e#3548#45833#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/footer/footGuide.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="50" column="0" lean-forward="false" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/footer/xdjFootGuide.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="379">
+          <caret line="60" column="35" lean-forward="true" selection-start-line="60" selection-start-column="12" selection-end-line="60" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/page/xdjHome/xdjHome.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="552" column="6" lean-forward="false" selection-start-line="552" selection-start-column="6" selection-end-line="552" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/page/xdjshopCar/xdjshopcar.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="222">
+          <caret line="262" column="8" lean-forward="true" selection-start-line="262" selection-start-column="8" selection-end-line="262" selection-end-column="39" />
+          <folding>
+            <element signature="n#head-top#0;n#div#0;n#template#0;n#!!top" expanded="false" />
+            <element signature="n#div#1;n#div#1;n#div#0;n#template#0;n#!!top" expanded="false" />
+            <element signature="e#2119#2170#0" expanded="true" />
+            <element signature="e#2663#2950#0" expanded="false" />
+            <element signature="e#3040#4435#0" expanded="false" />
+            <element signature="e#3088#4427#0" expanded="false" />
+            <element signature="e#3100#3581#0" expanded="false" />
+            <element signature="e#4453#6085#0" expanded="false" />
+            <element signature="e#4524#4703#0" expanded="false" />
+            <element signature="e#4726#4892#0" expanded="false" />
+            <element signature="e#4810#4856#0" expanded="false" />
+            <element signature="e#8647#8792#0" expanded="false" />
+            <element signature="e#8807#9021#0" expanded="false" />
+            <element signature="e#9035#12060#0" expanded="false" />
+            <element signature="e#12078#13288#0" expanded="false" />
+            <element signature="e#12544#13284#0" expanded="false" />
+            <element signature="e#12949#13156#0" expanded="false" />
+            <element signature="e#13757#14152#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/router/router.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="263">
+          <caret line="303" column="28" lean-forward="false" selection-start-line="303" selection-start-column="18" selection-end-line="303" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/common/shopcat.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="196" column="40" lean-forward="true" selection-start-line="196" selection-start-column="40" selection-end-line="196" selection-end-column="40" />
+          <folding>
+            <element signature="n#div#1;n#div#0;n#template#0;n#!!top" expanded="false" />
+            <element signature="e#1013#1049#0" expanded="true" />
+            <element signature="e#1129#1424#0" expanded="false" />
+            <element signature="e#1469#1724#0" expanded="false" />
+            <element signature="e#1798#3178#0" expanded="false" />
+            <element signature="e#5185#5219#0" expanded="false" />
+            <element signature="e#9136#9531#0" expanded="false" />
           </folding>
         </state>
       </provider>

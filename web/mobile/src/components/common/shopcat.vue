@@ -3,13 +3,13 @@
     <div class="content" @click="toggleList">
       <div class="content-left" :class="{'highlight': totalCount > 0}">
         <div class="logo-wrapper">
-          <div class="logo">
+          <div class="logo" @click.stop.prevent="pay">
             <i class="icon-shopping_cart"></i>
           </div>
-          <div class="num" v-show="totalCount > 0">{{ totalCount }}</div>
+          <div class="num" v-show="false">{{ totalCount }}</div>
         </div>
-        <div class="price">￥{{ totalPrice }}</div>
-        <div class="desc">另需配送费￥{{ deliveryPrice }}元</div>
+        <div class="price"></div>
+        <div class="desc"></div>
       </div>
       <div class="content-right" @click.stop.prevent="pay">
         <div class="pay" :class="payClass">{{ payDesc }}</div>
@@ -25,27 +25,6 @@
         </transition>
       </template>
     </div>
-    <transition name="fold">
-      <!--购物车详情-->
-      <div class="shopcart-list" v-show="listShow">
-        <div class="list-header">
-          <h1 class="title">购物车</h1>
-          <span class="empty" @click="empty">清空</span>
-        </div>
-        <div class="list-content" ref="listContent">
-          <ul>
-            <li class="food border-1px" v-for="food in selectFoods">
-              <span class="name">{{ food.name }}</span>
-              <div class="price">￥{{ food.price * food.count }}</div>
-              <div class="cartcontrol-wrapper">
-                <cartcontrol :food="food"
-                             @drop="drop"></cartcontrol>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </transition>
   </div>
 </template>
 
@@ -104,6 +83,7 @@
       },
       totalCount() {  // 计算总数的方法
         let count = 0;
+        console.log(this.selectFoods)
         this.selectFoods.forEach((food) => {
           count += food.count;
         });
@@ -112,12 +92,9 @@
       payDesc() {
         // 描述的状态变化，根据总价是相关的，存在计算关系的
         if (this.totalPrice === 0) { // 如果是等于0的时候，那就直接return
-          return `￥${this.minPrice}元起送`;
-        } else if (this.totalPrice < this.minPrice) {
-          let diff = this.minPrice - this.totalPrice;
-          return `还差￥${diff}元起送`;
-        } else {
-          return '去结算'
+          return '去购物车结算'
+        }  else {
+          return '去购物车结算'
         }
       },
       // 判断描述的条件
@@ -152,7 +129,6 @@
     },
     methods: {
       drop(el) {
-        console.log(el)
         for (let i = 0; i < this.balls.length; i++) {
           let ball = this.balls[i];
           if (!ball.show) {
@@ -217,11 +193,8 @@
       hideList() {
         this.fold = true;
       },
-      pay() {
-        if(this.totalPrice < this.minPrice){
-          return;
-        }
-        window.alert(`支付${this.totalPrice}元`);
+      pay() { // 改为跳转到购物车界面，带入数据
+        this.$router.push('xdjshopCar');
       }
     },
     components: { // 引用子组件
@@ -355,69 +328,6 @@
           transition: all .4s cubic-bezier(.49, -0.29, .75, .41);
           .inner {
             transition: all .4s linear;
-          }
-        }
-      }
-    }
-    .shopcart-list {
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: -1;
-      width: 100%;
-      transform: translate3d(0, -100%, 0);
-      &.fold-enter-active, &.fold-leave-active {
-        transition: all .5s;
-      }
-      &.fold-enter, &.fold-leave-active {
-        transform: translate3d(0, 0, 0);
-      }
-      .list-header {
-        height: 40px;
-        line-height: 40px;
-        padding: 0 18px;
-        background: #f3f5f7;
-        border-bottom: 1px solid rgba(7, 17, 27, .1);
-        .title {
-          float: left;
-          font-size: 14px;
-          color: rgb(7, 17, 27);
-        }
-        .empty {
-          float: right;
-          font-size: 12px;
-          color: rgb(0, 160, 220);
-        }
-      }
-      .list-content {
-        padding: 0 18px;
-        max-height: 217px;
-        background: #fff;
-        overflow: hidden;
-        text-align: left;
-        .food {
-          position: relative;
-          padding: 12px 0;
-          box-sizing: border-box;
-          border-bottom: 1px solid rgba(7, 17, 27, .1);
-          .name {
-            line-height: 24px;
-            font-size: 14px;
-            color: rgb(7, 17, 27);
-          }
-          .price {
-            position: absolute;
-            right: 90px;
-            bottom: 12px;
-            line-height: 24px;
-            font-weight: 700;
-            font-size: 14px;
-            color: rgb(240, 20, 20);
-          }
-          .cartcontrol-wrapper {
-            position: absolute;
-            bottom: 6px;
-            right: 0;
           }
         }
       }

@@ -27,6 +27,7 @@
     },
     methods: {
       addCart(event) {
+        console.log('触发')
         if (!this.food.count) {
           Vue.set(this.food, 'count', 1)
           // this.food.count = 1  vue 检测不到变化，所以要调用vue的观测接口，引入全局的vue
