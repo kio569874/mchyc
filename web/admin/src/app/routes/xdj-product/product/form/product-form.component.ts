@@ -86,17 +86,17 @@ export class ProductProductFormComponent implements OnInit {
         //查询大类
         this.getTypes().subscribe((res:any) =>{
             this.loading = false;
-            this.types = res.data.data;}
+            this.types = res.data;}
         );
         //查询标签
         this.getTags().subscribe((res : any)=>{
             this.loading = false;
-            this.tags = res.data.data;
+            this.tags = res.data;
         });
         //查询介绍
         this.getIntroduces().subscribe((res : any)=>{
             this.loading = false;
-            this.introduces = res.data.data;
+            this.introduces = res.data;
         });
 
         this.form = this.fb.group({

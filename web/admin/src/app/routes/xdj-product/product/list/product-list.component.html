@@ -21,7 +21,7 @@
                 </div>
             </div>
             <div nz-col [nzSpan]="8" class="mb-md">
-                <button nz-button type="submit" [nzType]="'primary'" [nzLoading]="loading" [nzSize]="'large'">查询</button>
+                <button nz-button type="submit" [nzType]="'primary'" [nzLoading]="loading.loading" [nzSize]="'large'">查询</button>
                 <button nz-button type="reset" (click)="getData()" [nzSize]="'large'" class="mx-sm">重置</button>
             </div>
         </div>
@@ -42,7 +42,7 @@
             </span>
         </nz-alert>
     </div>
-    <nz-table #nzTable [nzAjaxData]="data" [nzTotal]="totalCount" [nzPageSize]="q.pageSize" [nzLoading]="loading"
+    <nz-table #nzTable [nzAjaxData]="data" [nzTotal]="totalCount" [nzPageSize]="q.pageSize" [nzLoading]="loading.loading"
               (nzDataChange)="dataChange($event)"
               (nzPageIndexChange)="pageChange($event)">
         <thead nz-thead>

@@ -4,6 +4,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { tap } from 'rxjs/operators';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { environment } from '@env/environment';
+import {HttpSender} from "../../../../xdj-core/net/http.service";
+import {Loading} from "../../../../xdj-core/net/loading.model";
 
 @Component({
     selector: 'product-introduce-list',
@@ -20,7 +22,7 @@ export class ProductIntroduceListComponent implements OnInit {
     };
     totalCount : number = 0;
     data: any[] = [];
-    loading = false;
+    loading = new Loading();
     selectedRows: any[] = [];
     curRows: any[] = [];
     totalCallNo = 0;
@@ -35,9 +37,7 @@ export class ProductIntroduceListComponent implements OnInit {
     informationContent: string;
     informationDesc: string;
 
-    baseUrl : string = environment.XDJ_SERVER_URL;
-
-    constructor(private http: HttpClient, private fb: FormBuilder, public msg: NzMessageService,private modal: NzModalService) {}
+    constructor(private http: HttpSender, private fb: FormBuilder, public msg: NzMessageService,private modal: NzModalService) {}
 
     ngOnInit() {
         this.getData();
@@ -49,16 +49,10 @@ export class ProductIntroduceListComponent implements OnInit {
     }
 
     getData() {
-        this.loading = true;
-        this.http.post(this.baseUrl + '/product/productInformation/query', this.q, {headers: new HttpHeaders({}), withCredentials: true}).pipe(
-            tap((res: any) => {
-            })
-        ).subscribe(res =>{
-            debugger;
-            this.data = res.data.data;
-            this.totalCount = res.data.totalCount;
-            this.loading = false;}
-        );
+        this.http.post('/product/productInformation/query', this.loading, null, this.q.page, this.q.pageSize).then(res => {
+            this.data = res.data;
+            this.totalCount = res.totalCount;
+        });
     }
 
     add() {
@@ -75,7 +69,6 @@ export class ProductIntroduceListComponent implements OnInit {
             this.msg.error('数据填写有误,请仔细检查!');
             return;
         }
-        this.loading = true;
         const body = {
             informationName: this.informationName,
             informationContent: this.informationContent,
@@ -87,7 +80,7 @@ export class ProductIntroduceListComponent implements OnInit {
         }else{
             action = 'insert';
         }
-        this.http.post(this.baseUrl + '/product/productInformation/'+ action, body).subscribe(() => {
+        this.http.post( '/product/productInformation/' + action, this.loading, body).then(() => {
             this.getData();
             setTimeout(() => this.modalVisible = false, 500);
         });
@@ -102,10 +95,6 @@ export class ProductIntroduceListComponent implements OnInit {
     }
 
     deleteAll() {
-        this.http.post(this.baseUrl + '/product/productInformation/delete', { nos: this.selectedRows.map(i => i.no).join(',') }).subscribe(() => {
-            this.getData();
-            this.clear();
-        });
     }
 
     delete(id) {
@@ -115,7 +104,7 @@ export class ProductIntroduceListComponent implements OnInit {
             okText: '确认',
             cancelText: '取消',
             onOk: () => {
-                this.http.post(this.baseUrl + '/product/productInformation/delete', { informationId : id}).subscribe(() => {
+                this.http.post('/product/productInformation/delete', this.loading, { informationId : id}).then(() => {
                     this.getData();
                 });
             },

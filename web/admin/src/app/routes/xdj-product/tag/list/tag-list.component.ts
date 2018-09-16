@@ -4,6 +4,8 @@ import { _HttpClient } from '@delon/theme';
 import { tap } from 'rxjs/operators';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {environment} from "@env/environment";
+import {HttpSender} from "../../../../xdj-core/net/http.service";
+import {Loading} from "../../../../xdj-core/net/loading.model";
 
 @Component({
     selector: 'product-tag-list',
@@ -18,9 +20,9 @@ export class ProductTagListComponent implements OnInit{
         status: null,
         statusList: []
     };
-    totalCount : number = 0;
+    totalCount: number = 0;
     data: any[] = [];
-    loading = false;
+    loading = new Loading();
     selectedRows: any[] = [];
     curRows: any[] = [];
     totalCallNo = 0;
@@ -40,7 +42,7 @@ export class ProductTagListComponent implements OnInit{
 
     baseUrl : string = environment.XDJ_SERVER_URL;
 
-    constructor(private http: _HttpClient, private fb: FormBuilder, public msg: NzMessageService,private modal: NzModalService) {}
+    constructor(private http: HttpSender, private fb: FormBuilder, public msg: NzMessageService, private modal: NzModalService) {}
 
     ngOnInit() {
         this.getData();
@@ -52,24 +54,17 @@ export class ProductTagListComponent implements OnInit{
     }
 
     getData() {
-        this.loading = true;
         this.q.statusList = this.status.map((i, index) => i.value ? index : -1).filter(w => w !== -1);
         if (this.q.status !== null && this.q.status > -1) this.q.statusList.push(this.q.status);
-        this.http.post(this.baseUrl + '/product/productSmallTypeInfo/query', this.q).pipe(
-            tap((res: any) => {
-                debugger;
-                return res.data.data.map(i => {
-                    const statusItem = this.status[i.status];
-                    i.statusText = statusItem.text;
-                    i.statusType = statusItem.type;
-                    return i;
-                });
-            })
-        ).subscribe(res =>{
-            this.data = res.data.data;
-            this.totalCount = res.data.totalCount;
-            this.loading = false;}
-        );
+        this.http.post('/product/productSmallTypeInfo/query', this.loading, null, this.q.page, this.q.pageSize).then(res => {
+            this.data = res.data.map(i => {
+                const statusItem = this.status[i.status];
+                i.statusText = statusItem.text;
+                i.statusType = statusItem.type;
+                return i;
+            });
+            this.totalCount = res.totalCount;
+        });
     }
 
     add() {
@@ -86,7 +81,6 @@ export class ProductTagListComponent implements OnInit{
             this.msg.error('数据填写有误,请仔细检查!');
             return;
         }
-        this.loading = true;
         const body = {
             smalltypeName: this.smalltypeName,
             smallSeqno: this.smallSeqno,
@@ -98,7 +92,7 @@ export class ProductTagListComponent implements OnInit{
         }else{
             action = 'insert';
         }
-        this.http.post(this.baseUrl + '/product/productSmallTypeInfo/'+ action, body).subscribe(() => {
+        this.http.post( '/product/productSmallTypeInfo/' + action, this.loading, body).then(() => {
             this.getData();
             setTimeout(() => this.modalVisible = false, 500);
         });
@@ -113,7 +107,7 @@ export class ProductTagListComponent implements OnInit{
     }
 
     deleteAll() {
-        this.http.post(this.baseUrl + '/product/productSmallTypeInfo/delete', { nos: this.selectedRows.map(i => i.no).join(',') }).subscribe(() => {
+        this.http.post('/product/productSmallTypeInfo/delete', this.loading, { nos: this.selectedRows.map(i => i.no).join(',') }).then(() => {
             this.getData();
             this.clear();
         });
@@ -126,7 +120,7 @@ export class ProductTagListComponent implements OnInit{
             okText: '确认',
             cancelText: '取消',
             onOk: () => {
-                this.http.post(this.baseUrl + '/product/productSmallTypeInfo/delete', { smallTypeId : id}).subscribe(() => {
+                this.http.post('/product/productSmallTypeInfo/delete', this.loading, { smallTypeId : id}).then(() => {
                     this.getData();
                 });
             },
@@ -170,7 +164,7 @@ export class ProductTagListComponent implements OnInit{
         this.refreshStatus();
     }
 
-    pageChange(page: number){
+    pageChange(page: number) {
         this.q.page = page;
         this.getData();
     }
