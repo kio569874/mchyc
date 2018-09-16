@@ -13,7 +13,7 @@
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<Encoding>UTF-8</Encoding>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<FileNamePattern>logs/xiandaojia.out.%d{yyyy-MM-dd}.log
+			<FileNamePattern>/home/xiandaojia/logs/xiandaojia.out.%d{yyyy-MM-dd}.log
 			</FileNamePattern>
 		</rollingPolicy>
 		<layout class="ch.qos.logback.classic.PatternLayout">
@@ -33,7 +33,7 @@
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<Encoding>UTF-8</Encoding>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<FileNamePattern>logs/xiandaojia.err.%d{yyyy-MM-dd}.log
+			<FileNamePattern>/home/xiandaojia/logs/xiandaojia.err.%d{yyyy-MM-dd}.log
 			</FileNamePattern>
 		</rollingPolicy>
 		<layout class="ch.qos.logback.classic.PatternLayout">
