@@ -272,7 +272,7 @@ export default {
         ul{
             .info-data-link{
                 float:left;
-                width:33.33%;
+                width:32.33%;
                 display:inline-block;
                 border-right:1px solid #f1f1f1;
                 span{

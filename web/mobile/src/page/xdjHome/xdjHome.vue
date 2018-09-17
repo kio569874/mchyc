@@ -100,7 +100,7 @@
               </li>
               <li>
                 <section class="menu_detail_list">
-                  <router-link  :to="{path: 'xdj_home/productDetail'}" tag="div" class="menu_detail_link">
+                  <router-link  :to="{path: 'xdj_home/xdjProductDetail'}" tag="div" class="menu_detail_link">
                     <section class="menu_food_img">
                       <img src="../../images/food.jpg">
                     </section>
@@ -133,7 +133,7 @@
               </li>
               <li>
                 <section class="menu_detail_list">
-                  <router-link  :to="{path: 'xdj_home/productDetail'}" tag="div" class="menu_detail_link">
+                  <router-link  :to="{path: 'xdj_home/xdjProductDetail'}" tag="div" class="menu_detail_link">
                     <section class="menu_food_img">
                       <img src="../../images/food.jpg">
                     </section>
@@ -166,7 +166,7 @@
               </li>
               <li>
                 <section class="menu_detail_list">
-                  <router-link  :to="{path: 'xdj_home/productDetail'}" tag="div" class="menu_detail_link">
+                  <router-link  :to="{path: 'xdj_home/xdjProductDetail'}" tag="div" class="menu_detail_link">
                     <section class="menu_food_img">
                       <img src="../../images/food.jpg">
                     </section>
@@ -199,7 +199,7 @@
               </li>
               <li>
                 <section class="menu_detail_list">
-                  <router-link  :to="{path: 'xdj_home/productDetail'}" tag="div" class="menu_detail_link">
+                  <router-link  :to="{path: 'xdj_home/xdjProductDetail'}" tag="div" class="menu_detail_link">
                     <section class="menu_food_img">
                       <img src="../../images/food.jpg">
                     </section>
@@ -232,7 +232,7 @@
               </li>
               <li>
                 <section class="menu_detail_list">
-                  <router-link  :to="{path: 'xdj_home/productDetail'}" tag="div" class="menu_detail_link">
+                  <router-link  :to="{path: 'xdj_home/xdjProductDetail'}" tag="div" class="menu_detail_link">
                     <section class="menu_food_img">
                       <img src="../../images/food.jpg">
                     </section>
@@ -265,7 +265,7 @@
               </li>
               <li>
                 <section class="menu_detail_list">
-                  <router-link  :to="{path: 'xdj_home/productDetail'}" tag="div" class="menu_detail_link">
+                  <router-link  :to="{path: 'xdj_home/xdjProductDetail'}" tag="div" class="menu_detail_link">
                     <section class="menu_food_img">
                       <img src="../../images/food.jpg">
                     </section>
@@ -298,7 +298,7 @@
               </li>
               <li>
                 <section class="menu_detail_list">
-                  <router-link  :to="{path: 'xdj_home/productDetail'}" tag="div" class="menu_detail_link">
+                  <router-link  :to="{path: 'xdj_home/xdjProductDetail'}" tag="div" class="menu_detail_link">
                     <section class="menu_food_img">
                       <img src="../../images/food.jpg">
                     </section>
@@ -331,7 +331,7 @@
               </li>
               <li>
                 <section class="menu_detail_list">
-                  <router-link  :to="{path: 'xdj_home/productDetail'}" tag="div" class="menu_detail_link">
+                  <router-link  :to="{path: 'xdj_home/xdjProductDetail'}" tag="div" class="menu_detail_link">
                     <section class="menu_food_img">
                       <img src="../../images/food.jpg">
                     </section>
@@ -364,7 +364,7 @@
               </li>
               <li>
                 <section class="menu_detail_list">
-                  <router-link  :to="{path: 'xdj_home/productDetail'}" tag="div" class="menu_detail_link">
+                  <router-link  :to="{path: 'xdj_home/xdjProductDetail'}" tag="div" class="menu_detail_link">
                     <section class="menu_food_img">
                       <img src="../../images/food.jpg">
                     </section>
@@ -397,7 +397,7 @@
               </li>
               <li>
                 <section class="menu_detail_list">
-                  <router-link  :to="{path: 'xdj_home/productDetail'}" tag="div" class="menu_detail_link">
+                  <router-link  :to="{path: 'xdj_home/xdjProductDetail'}" tag="div" class="menu_detail_link">
                     <section class="menu_food_img">
                       <img src="../../images/food.jpg">
                     </section>
@@ -430,7 +430,7 @@
               </li>
               <li>
                 <section class="menu_detail_list">
-                  <router-link  :to="{path: 'xdj_home/productDetail'}" tag="div" class="menu_detail_link">
+                  <router-link  :to="{path: 'xdj_home/xdjProductDetail'}" tag="div" class="menu_detail_link">
                     <section class="menu_food_img">
                       <img src="../../images/food.jpg">
                     </section>
@@ -463,7 +463,7 @@
               </li>
               <li>
                 <section class="menu_detail_list">
-                  <router-link  :to="{path: 'xdj_home/productDetail'}" tag="div" class="menu_detail_link">
+                  <router-link  :to="{path: 'xdj_home/xdjProductDetail'}" tag="div" class="menu_detail_link">
                     <section class="menu_food_img">
                       <img src="../../images/food.jpg">
                     </section>
@@ -632,7 +632,7 @@ export default {
     padding-bottom: 2.1rem;
     margin-top: .4rem;
     display: flex;
-    height: 16rem;
+    /*height: 16rem;*/
     flex-direction: row;
 		border-bottom: 0.025rem solid $bc;
     .left_nav{
@@ -642,7 +642,7 @@ export default {
       .menu_left_li{
         padding: .7rem .3rem;
         border-bottom: 0.025rem solid #ededed;
-        box-sizing: border-box;
+        /*box-sizing: border-box;*/
         border-left: 0.15rem solid #f8f8f8;
         position: relative;
         span{

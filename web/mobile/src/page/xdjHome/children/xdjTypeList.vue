@@ -23,7 +23,8 @@
             <li v-for="item in goods" class="food-list food-list-hook">
               <h1 class="title">{{item.name}}</h1>
               <ul>
-                <li v-for="food in item.foods" class="food-item">
+                <router-link  :to="{path: '/xdjProductDetail'}" tag="div" class="menu_detail_link">
+                   <li v-for="food in item.foods" class="food-item">
                   <div class="icon">
                     <img width="57"  height="57" :src="food.icon">
                   </div>
@@ -47,6 +48,7 @@
                     </div>
                   </div>
                 </li>
+                </router-link>
               </ul>
             </li>
           </ul>
