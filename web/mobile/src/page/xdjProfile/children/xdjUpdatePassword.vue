@@ -1,12 +1,15 @@
 <template>
   <div class="restContainer">
-    <head-top head-title="登陆密码设置" goBack="true"></head-top>
+    <head-top head-title="修改登陆密码" goBack="true"></head-top>
     <form class="restForm">
       <section class="input_container">
-        <input type="password" placeholder="请输入密码" name="newPassWord" v-model="newPassWord">
+        <input type="password" placeholder="请输入旧密码" name="oldPassWord" v-model="oldPassWord">
       </section>
       <section class="input_container">
-        <input type="password" placeholder="请确认密码" name="confirmPassWord" v-model="confirmPassWord">
+        <input type="password" placeholder="请输入新密码" name="newPassWord" v-model="newPassWord">
+      </section>
+      <section class="input_container">
+        <input type="password" placeholder="请确认新密码" name="confirmPassWord" v-model="confirmPassWord">
       </section>
       <section class="input_container captcha_code_container">
         <input type="text" placeholder="验证码" name="mobileCode" maxlength="6" v-model="mobileCode">
@@ -19,8 +22,8 @@
         </div>
       </section>
     </form>
-    <div class="login_container" @click="resetButton">创建用户</div>
-    <alert-tip v-if="showAlert" :showHide="showAlert" @closeTip="closeTip" :alertText="alertText" :confirmText="'去登陆'"></alert-tip>
+    <div class="login_container" @click="updateButton">确认修改</div>
+    <alert-tip v-if="showAlert" :showHide="showAlert" @closeTip="closeTip" :alertText="alertText"></alert-tip>
   </div>
 </template>
 
@@ -28,18 +31,18 @@
   import headTop from 'src/components/header/xdjHead'
   import alertTip from 'src/components/common/alertTip'
   import {mobileCode, checkExsis, sendMobile, getcaptchas, changePassword} from 'src/service/getData'
-  import {regeist} from'../../../service/UserService';
+  import {updatePassword} from'../../../service/UserService';
 
   export default {
     data(){
       return {
-        phoneNumber: null, //电话号码
+        oldPassWord: null, //旧密码
         newPassWord: null, //新密码
         confirmPassWord: null, //确认密码
         showAlert: false, //显示提示组件
         alertText: null, //提示的内容
         captchaCodeImg: null,
-        success:false
+        success: false,//修改密码成功
       }
     },
     components: {
@@ -56,8 +59,12 @@
         this.captchaCodeImg = res.code;
       },
       //重置密码
-      async resetButton(){
-        if(!this.newPassWord){
+      async updateButton(){
+        if(!this.oldPassWord){
+          this.showAlert = true;
+          this.alertText = '请输入旧密码';
+          return
+        } else if(!this.newPassWord){
           this.showAlert = true;
           this.alertText = '请输入新密码';
           return
@@ -76,9 +83,9 @@
         }
         // 注册
         try{
-          let res = await regeist(this.phoneNumber, this.newPassWord);
+          let res = await updatePassword(this.oldPassWord, this.newPassWord);
           this.showAlert = true;
-          this.alertText = '注册成功';
+          this.alertText = '密码修改成功';
           this.success = true;
         }catch(e){
           this.showAlert = true;
@@ -87,7 +94,7 @@
       },
       closeTip(){
         if(this.success){
-          this.$router.push('/xdjLogin');
+          this.$router.go(-1);
         }
         this.showAlert = false;
       }

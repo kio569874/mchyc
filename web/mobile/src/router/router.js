@@ -56,6 +56,9 @@ const xdjRegeist = r => require.ensure([], () => r(require('../page/xdjRegeist/x
 const xdjRegeistSetPwd = r => require.ensure([], () => r(require('../page/xdjRegeist/children/xdjRegeistSetPwd')), 'xdjRegeistSetPwd')
 const xdjProfile = r => require.ensure([], () => r(require('../page/xdjProfile/xdjProfile')), 'xdjProfile')
 const xdjshopCar = r => require.ensure([], () => r(require('../page/xdjshopCar/xdjshopcar')), 'xdjshopcar')
+const xdjForget = r => require.ensure([], () => r(require('../page/xdjForget/xdjForget')), 'xdjForget')
+const xdjForgetSetPwd = r => require.ensure([], () => r(require('../page/xdjForget/children/xdjForgetSetPwd')), 'xdjForgetSetPwd')
+const xdjUpdatePassword = r => require.ensure([], () => r(require('../page/xdjProfile/children/xdjUpdatePassword')), 'xdjUpdatePassword')
 
 
 export default [{
@@ -294,10 +297,26 @@ export default [{
           path: '/xdjRegeistSetPwd',
           component: xdjRegeistSetPwd
         },
+        //忘记密码
+        {
+          path: '/xdjForget',
+          component: xdjForget
+        },
+        //忘记密码2
+        {
+          name:'xdjForgetSetPwd',
+          path: '/xdjForgetSetPwd',
+          component: xdjForgetSetPwd
+        },
         //用户中心
         {
           path: '/xdjProfile',
           component: xdjProfile
+        },
+        //修改密码
+        {
+          path: '/xdjUpdatePassword',
+          component: xdjUpdatePassword
         },
         // 购物车组件
         {

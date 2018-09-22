@@ -1,4 +1,4 @@
-export default async(url = '', data = {}, type = 'GET', method = 'fetch') => {
+export default async(url = '', data = {}, headers,type = 'GET', method = 'fetch') => {
 	type = type.toUpperCase();
 	if (type == 'GET') {
 		let dataStr = ''; //数据拼接字符串
@@ -18,7 +18,8 @@ export default async(url = '', data = {}, type = 'GET', method = 'fetch') => {
 			method: type,
 			headers: {
 				'Accept': 'application/json',
-				'Content-Type': 'application/json'
+				'Content-Type': 'application/json',
+        ...headers
 			},
 			mode: "cors",
 			cache: "force-cache"

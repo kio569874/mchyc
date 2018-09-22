@@ -95,7 +95,7 @@
             </section>
             <section class="profile-1reTe">
                 <!-- 服务中心 -->
-                <router-link to='/' class="myorder">
+                <router-link to='/xdjUpdatePassword' class="myorder">
                     <aside>
                         <svg fill="#4aa5f0">
                             <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#service"></use>
@@ -122,6 +122,7 @@ import {imgBaseUrl} from 'src/config/env'
 import {getImgPath} from 'src/components/common/mixin'
 import headTop from 'src/components/header/xdjHead'
 import xdjFootGuide from 'src/components/footer/xdjFootGuide'
+import {getUserFromLocal} from '../../service/UserService'
 
 export default {
     data(){
@@ -134,10 +135,14 @@ export default {
             count : 0,             //优惠券个数
             pointNumber : 0,       //积分数
             avatar: '',             //头像地址
+            xdjUserInfo : null,
             imgBaseUrl,
+
         }
     },
     mounted(){
+        debugger;
+        this.xdjUserInfo = getUserFromLocal();
         this.initData();
     },
     mixins: [getImgPath],
@@ -148,7 +153,7 @@ export default {
 
     computed:{
         ...mapState([
-            'xdjUserInfo',
+            //'xdjUserInfo',
         ]),
         //后台会返回两种头像地址格式，分别处理
         imgpath:function () {

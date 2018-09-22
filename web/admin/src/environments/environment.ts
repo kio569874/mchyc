@@ -6,7 +6,7 @@
 export const environment = {
     chore: false,
     SERVER_URL: `./`,
-    XDJ_SERVER_URL: `http://121.42.54.120:8999/xiandaojia`,
+    XDJ_SERVER_URL: `http://127.0.0.1:8999/xiandaojia`,
     production: false,
     hmr: false,
     useHash: true

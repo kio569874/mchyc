@@ -5,7 +5,7 @@
         </head-top>
         <form class="loginForm" v-if="loginWay">
             <section class="input_container phone_number">
-                <input type="text" placeholder="账号密码随便输入" name="phone" maxlength="11" v-model="phoneNumber">
+                <input type="text" placeholder="手机号" name="phone" maxlength="11" v-model="phoneNumber">
                 <button @click.prevent="getVerifyCode" :class="{right_phone_number:rightPhoneNumber}" v-show="!computedTime">获取验证码</button>
                 <button  @click.prevent v-show="computedTime">已发送({{computedTime}}s)</button>
             </section>
@@ -40,9 +40,9 @@
         <p class="login_tips">
             注册过的用户可凭手机号/密码登录
         </p>
-        <div class="login_container" @click="mobileLogin">登录</div>
+        <div class="login_container" @click="login">登录</div>
         <router-link to="/xdjRegeist" class="to_regeist">新用户注册</router-link>
-        <router-link to="/forget" class="to_forget">忘记密码</router-link>
+        <router-link to="/xdjForget" class="to_forget">忘记密码</router-link>
         <alert-tip v-if="showAlert" :showHide="showAlert" @closeTip="closeTip" :alertText="alertText"></alert-tip>
     </div>
 </template>
@@ -53,7 +53,8 @@
     import {localapi, proapi, imgBaseUrl} from 'src/config/env'
     import {mapState, mapMutations} from 'vuex'
     import {mobileCode, checkExsis, sendLogin, getcaptchas} from '../../service/getData'
-    import {accountLogin} from '../../service/userService'
+    import {accountLogin,mobileLogin,saveUserToLocal} from '../../service/UserService'
+    import {getLoginVerifyCode,verifyCheckCode} from '../../service/SmsService'
 
     export default {
         data(){
@@ -106,37 +107,38 @@
             },
             //获取短信验证码
             async getVerifyCode(){
-                if (this.rightPhoneNumber) {
-                    this.computedTime = 30;
-                    this.timer = setInterval(() => {
-                        this.computedTime --;
-                        if (this.computedTime == 0) {
-                            clearInterval(this.timer)
-                        }
-                    }, 1000)
-                    //判读用户是否存在
-                    let exsis = await checkExsis(this.phoneNumber, 'mobile');
-                    if (exsis.message) {
-                        this.showAlert = true;
-                        this.alertText = exsis.message;
-                        return
-                    }else if(!exsis.is_exists) {
-                        this.showAlert = true;
-                        this.alertText = '您输入的手机号尚未绑定';
-                        return
-                    }
-                    //发送短信验证码
-                    let res = await mobileCode(this.phoneNumber);
-                    if (res.message) {
-                        this.showAlert = true;
-                        this.alertText = res.message;
-                        return
-                    }
-                    this.validate_token = res.validate_token;
+              if (this.rightPhoneNumber) {
+                this.computedTime = 30;
+                this.timer = setInterval(() => {
+                  this.computedTime --;
+                  if (this.computedTime == 0) {
+                    clearInterval(this.timer)
+                  }
+                }, 1000)
+                //判读用户是否存在
+                /*let exsis = await checkExsis(this.phoneNumber, 'mobile');
+                if (exsis.message) {
+                    this.showAlert = true;
+                    this.alertText = exsis.message;
+                    return
+                }else if(!exsis.is_exists) {
+                    this.showAlert = true;
+                    this.alertText = '您输入的手机号尚未绑定';
+                    return
+                }*/
+                //发送短信验证码
+                try{
+                  let res = await getLoginVerifyCode(this.phoneNumber);
+                  this.showAlert = true;
+                  this.alertText = '短信发送成功!';
+                }catch(e){
+                  this.showAlert = true;
+                  this.alertText = e.message;
                 }
+              }
             },
             //发送登录信息
-            async mobileLogin(){
+            async login(){
                 if (this.loginWay) {
                     if (!this.rightPhoneNumber) {
                         this.showAlert = true;
@@ -148,7 +150,17 @@
                         return
                     }
                     //手机号登录
-                    this.userInfo = await sendLogin(this.mobileCode, this.phoneNumber, this.validate_token);
+                    try{
+                      let res1 = await verifyCheckCode(this.phoneNumber,this.mobileCode);
+                      const res = await mobileLogin(this.phoneNumber);
+                      this.userInfo = res.data.user;
+                      this.XDJ_RECORD_USERINFO(this.userInfo);
+                      saveUserToLocal(this.userInfo);
+                      this.$router.push('/xdjHome');
+                    }catch(e){
+                      this.showAlert = true;
+                      this.alertText = e.message;
+                    }
                 }else{
                     if (!this.userAccount) {
                         this.showAlert = true;
@@ -168,7 +180,7 @@
                       const res = await accountLogin(this.userAccount, this.passWord);
                       this.userInfo = res.data.user;
                       this.XDJ_RECORD_USERINFO(this.userInfo);
-                      debugger;
+                      saveUserToLocal(this.userInfo);
                       this.$router.push('/xdjHome');
                     }catch(e){
                       this.showAlert = true;
@@ -230,7 +242,7 @@
                 border-radius: 0.15rem;
             }
             .right_phone_number{
-                background-color: #4cd964;
+                background-color: $blue;
             }
         }
         .phone_number{

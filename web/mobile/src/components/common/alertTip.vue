@@ -6,7 +6,7 @@
                 <span></span>
             </div>
             <p class="tip_text">{{alertText}}</p>
-            <div class="confrim" @click="closeTip">确认</div>
+            <div class="confrim" @click="closeTip">{{confirmText ? confirmText : '确认'}}</div>
         </section>
     </div>
 </template>
@@ -20,9 +20,9 @@
             }
         },
         mounted(){
-      
+
         },
-        props: ['alertText'],
+        props: ['alertText','confirmText'],
         methods: {
             closeTip(){
                 this.$emit('closeTip')
@@ -104,5 +104,5 @@
             border-bottom-right-radius: 0.25rem;
         }
     }
-    
+
 </style>

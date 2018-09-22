@@ -1,6 +1,6 @@
 <template>
   <div class="restContainer">
-    <head-top head-title="登陆密码设置" goBack="true"></head-top>
+    <head-top head-title="密码修改" goBack="true"></head-top>
     <form class="restForm">
       <section class="input_container">
         <input type="password" placeholder="请输入密码" name="newPassWord" v-model="newPassWord">
@@ -19,8 +19,8 @@
         </div>
       </section>
     </form>
-    <div class="login_container" @click="resetButton">创建用户</div>
-    <alert-tip v-if="showAlert" :showHide="showAlert" @closeTip="closeTip" :alertText="alertText" :confirmText="'去登陆'"></alert-tip>
+    <div class="login_container" @click="resetButton">确认修改</div>
+    <alert-tip v-if="showAlert" :showHide="showAlert" @closeTip="closeTip" :alertText="alertText"></alert-tip>
   </div>
 </template>
 
@@ -28,7 +28,7 @@
   import headTop from 'src/components/header/xdjHead'
   import alertTip from 'src/components/common/alertTip'
   import {mobileCode, checkExsis, sendMobile, getcaptchas, changePassword} from 'src/service/getData'
-  import {regeist} from'../../../service/UserService';
+  import {forgetPassword} from'../../../service/UserService';
 
   export default {
     data(){
@@ -39,7 +39,6 @@
         showAlert: false, //显示提示组件
         alertText: null, //提示的内容
         captchaCodeImg: null,
-        success:false
       }
     },
     components: {
@@ -74,21 +73,18 @@
           this.alertText = '请输验证码';
           return
         }
-        // 注册
+        // 确认修改
         try{
-          let res = await regeist(this.phoneNumber, this.newPassWord);
+          let res = await forgetPassword(this.phoneNumber, this.newPassWord);
           this.showAlert = true;
-          this.alertText = '注册成功';
-          this.success = true;
+          this.alertText = '修改成功';
+          this.$router.push('/xdjLogin');
         }catch(e){
           this.showAlert = true;
           this.alertText = e.message;
         }
       },
       closeTip(){
-        if(this.success){
-          this.$router.push('/xdjLogin');
-        }
         this.showAlert = false;
       }
     }

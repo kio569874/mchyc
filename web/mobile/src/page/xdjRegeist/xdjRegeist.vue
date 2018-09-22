@@ -24,7 +24,7 @@
     import headTop from '../../components/header/xdjHead'
     import alertTip from '../../components/common/alertTip'
     import {localapi, proapi, imgBaseUrl} from 'src/config/env'
-    import {getRegeistVerifyCode,verifyRegeistCheckCode} from'../../service/SmsService';
+    import {getRegeistVerifyCode,verifyCheckCode} from'../../service/SmsService';
 
     export default {
         data(){
@@ -92,7 +92,7 @@
           async next(){
             if(this.rightMobileCode){
               try{
-               // let res = await verifyRegeistCheckCode(this.phoneNumber,this.mobileCode);
+                let res = await verifyCheckCode(this.phoneNumber,this.mobileCode);
                 this.$router.push({name:'xdjRegeistSetPwd',params: {mobile:this.phoneNumber}});
               }catch(e){
                 this.showAlert = true;

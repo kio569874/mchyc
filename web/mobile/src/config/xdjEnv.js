@@ -9,7 +9,7 @@ let baseUrl = '';
 let smsAppKey = '1001';
 
 if (process.env.NODE_ENV == 'development') {
-  baseUrl = 'http://192.168.43.195:8999/xiandaojia';
+  baseUrl = 'http://127.0.0.1:8999/xiandaojia';
 }else if(process.env.NODE_ENV == 'production'){
 	baseUrl = 'http://121.42.54.120:8999/xiandaojia';
 }
