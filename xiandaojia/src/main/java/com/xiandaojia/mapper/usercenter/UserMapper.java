@@ -22,4 +22,8 @@ public interface UserMapper {
 	List<User> queryListByPage(int offset, int pageSize);
 
 	User checkUser(String userAccount, String userPassword);
+
+	int updatePassword(String phoneNo, String userPassword);
+
+	User checkUserPhone(String userPhone);
 }

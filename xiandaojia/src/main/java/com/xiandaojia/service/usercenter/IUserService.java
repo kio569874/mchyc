@@ -25,4 +25,10 @@ public interface IUserService extends IBaseService<User> {
 	 * @return
 	 */
 	User checkUser(String userAccount, String userPassword);
+
+	int updatePassword(String phoneNo, String userPassword);
+	
+	User checkUserPhone(String userPhone);
+	
+	User selectByPrimaryKey(Long id);
 }

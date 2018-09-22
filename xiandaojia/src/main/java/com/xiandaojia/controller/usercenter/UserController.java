@@ -339,7 +339,6 @@ public class UserController extends BaseController {
 			}
 			String userAccount = jsonObj.getString("userAccount");
 			String userPassword = jsonObj.getString("userPassword");
-			userPassword = MD5Util.createMD5(userPassword);
 			User user = userService.checkUser(userAccount, userPassword);
 			if (user != null) {
 				user.setLastLoginTime(new Date());
@@ -353,6 +352,30 @@ public class UserController extends BaseController {
 			logger.error(e.getMessage(), e);
 			return getErrorResultMsg(e.getMessage());
 		}
+	}
+	
+	@RequestMapping(value = "/user/mobileLogin", method = RequestMethod.POST)
+	@ResponseBody
+	public String userMobileLogin(@RequestBody String content, HttpServletRequest request) {
+		try {
+			JSONObject jsonObj = getDataJSONObject(content);
+			if (!jsonObj.containsKey("phoneNo") || StringUtils.isEmpty(jsonObj.get("phoneNo"))) {
+				return getErrorResultMsg("用户手机号错误");
+			}
+			String phoneNo = jsonObj.getString("phoneNo");
+			User user = userService.checkUserPhone(phoneNo);
+			if (user != null) {
+				user.setLastLoginTime(new Date());
+				user.setLastLoginIp(getIpAddr(request));
+				userService.update(user);
+				return getSuccessResultMsg(JSONObject.toJSONString(createTokenResult(user)));
+			} else {
+				return getErrorResultMsg("该用户不存在,请注册新用户");
+			}
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			return getErrorResultMsg(e.getMessage());
+		}
 
 	}
 
@@ -361,7 +384,6 @@ public class UserController extends BaseController {
 	public String userInsert(@RequestBody String content) {
 		try {
 			User t = JsonBeanUtil.stringToBean(User.class, getDataJSONObject(content).toJSONString());
-			t.setUserPassword(MD5Util.createMD5(t.getUserPassword()));
 			userService.insert(t);
 			return getSuccessResultMsg();
 		} catch (Exception e) {
@@ -391,6 +413,47 @@ public class UserController extends BaseController {
 		try {
 			User t = JsonBeanUtil.stringToBean(User.class, content);
 			userService.update(t);
+			return getSuccessResultMsg();
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			return getErrorResultMsg(e.getMessage());
+		}
+	}
+	
+	@RequestMapping(value = "/user/forgetPassword", method = RequestMethod.POST)
+	@ResponseBody
+	public String userForgetPassword(@RequestBody String content) {
+		try {
+			
+			JSONObject jsonObj = getDataJSONObject(content);
+			String phoneNo = jsonObj.getString("phoneNo");
+			String userPassword = jsonObj.getString("userPassword");
+			if(userService.updatePassword(phoneNo,userPassword) > 0) {
+				return getSuccessResultMsg();
+			}else {
+				return getErrorResultMsg("用户不存在");
+			}
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			return getErrorResultMsg(e.getMessage());
+		}
+	}
+	
+	@RequestMapping(value = "/user/updatePassword", method = RequestMethod.POST)
+	@ResponseBody
+	public String userUpdatePassword(@RequestBody String content,HttpServletRequest request) {
+		try {
+			
+			JSONObject jsonObj = getDataJSONObject(content);
+			Long userId = getCurrentUserId(request);
+			String oldPassword = jsonObj.getString("oldPassword");
+			String newPassword = jsonObj.getString("newPassword");
+			User user = userService.selectByPrimaryKey(userId);
+			if(!oldPassword.equals(user.getUserPassword())) {
+				return getErrorResultMsg("用户密码错误");
+			}
+			user.setUserPassword(newPassword);
+			userService.update(user);
 			return getSuccessResultMsg();
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);

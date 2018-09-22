@@ -57,5 +57,19 @@ public class UserServiceImpl extends AbstractBaseService implements IUserService
 	public User checkUser(String userAccount, String userPassword) {
 		return userMapper.checkUser(userAccount, userPassword);
 	}
+	@Override
+	public User checkUserPhone(String userPhone) {
+		return userMapper.checkUserPhone(userPhone);
+	}
+
+	@Override
+	public int updatePassword(String phoneNo, String userPassword) {
+		return userMapper.updatePassword(phoneNo, userPassword);
+	}
+
+	@Override
+	public User selectByPrimaryKey(Long id) {
+		return userMapper.selectByPrimaryKey(id);
+	}
 
 }
