@@ -42,7 +42,7 @@ public class BaseController {
 	 * @param json
 	 * @return
 	 */
-	protected String getSuccessResultMsg(String data) {
+	protected String getSuccessResultMsg(Object data) {
 		return getSuccessResultMsg(data, Contants.RET_CODE_SUCCESS, Contants.RET_MSG_SUCCESS);
 
 	}
@@ -55,13 +55,12 @@ public class BaseController {
 	 * @param retMsg
 	 * @return
 	 */
-	protected String getSuccessResultMsg(String data, String retCode, String retMsg) {
+	protected String getSuccessResultMsg(Object data, String retCode, String retMsg) {
 		JSONObject resultJson = new JSONObject();
 		resultJson.put(Contants.RET_CODE, retCode);
 		resultJson.put(Contants.RET_MSG, retMsg);
 		if (data != null) {
-			JSONObject dataJson = JSONObject.parseObject(data);
-			resultJson.put(Contants.DATA, dataJson);
+			resultJson.put(Contants.DATA, data);
 		}
 		return resultJson.toJSONString();
 

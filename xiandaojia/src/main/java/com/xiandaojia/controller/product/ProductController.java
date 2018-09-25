@@ -10,16 +10,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.xiandaojia.common.domain.PaginationDto;
 import com.xiandaojia.common.domain.ProductBigTypeInfo;
 import com.xiandaojia.common.domain.ProductInfo;
 import com.xiandaojia.common.domain.ProductInformation;
+import com.xiandaojia.common.domain.ProductInformationRelation;
 import com.xiandaojia.common.domain.ProductSmallTypeInfo;
+import com.xiandaojia.common.domain.SmallProductRelation;
 import com.xiandaojia.common.dto.ProductDto;
 import com.xiandaojia.common.utils.JsonBeanUtil;
 import com.xiandaojia.controller.BaseController;
+import com.xiandaojia.mapper.product.ProductInformationRelationMapper;
+import com.xiandaojia.mapper.product.SmallProductRelationMapper;
 import com.xiandaojia.service.product.IProductBigTypeInfoService;
 import com.xiandaojia.service.product.IProductInfoService;
 import com.xiandaojia.service.product.IProductInformationService;
@@ -46,6 +51,11 @@ public class ProductController extends BaseController {
 	private IProductSmallTypeInfoService productSmallTypeInfoService;
 	@Autowired
 	private IProductInformationService productInformationService;
+	
+	@Autowired
+	private ProductInformationRelationMapper productInformationRelationMapper;
+	@Autowired
+	private SmallProductRelationMapper smallProductRelationMapper;
 
 	/**
 	 * 移动端产品信息查询
@@ -91,7 +101,7 @@ public class ProductController extends BaseController {
 	@ResponseBody
 	public String productInfoInsert(@RequestBody String content) {
 		try {
-			ProductDto productDto = JsonBeanUtil.stringToBean(ProductDto.class, content);
+			ProductDto productDto = JsonBeanUtil.stringToBean(ProductDto.class, getDataJSONObject(content).toString());
 			productInfoService.insert(productDto);
 			return getSuccessResultMsg();
 		} catch (Exception e) {
@@ -119,7 +129,7 @@ public class ProductController extends BaseController {
 	@ResponseBody
 	public String productInfoUpdate(@RequestBody String content) {
 		try {
-			ProductDto productInfo = JsonBeanUtil.stringToBean(ProductDto.class, content);
+			ProductDto productInfo = JsonBeanUtil.stringToBean(ProductDto.class, getDataJSONObject(content).toString());
 			productInfoService.update(productInfo);
 			return getSuccessResultMsg();
 		} catch (Exception e) {
@@ -151,6 +161,32 @@ public class ProductController extends BaseController {
 			JSONObject jsonObj = JSONObject.parseObject(content);
 			Map<String, Object> paramMap = jsonObj;
 			String result = productService.queryInfo(paramMap);
+			return getSuccessResultMsg(result);
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			return getErrorResultMsg(e.getMessage());
+		}
+	}
+	
+	@RequestMapping(value = "/productInfo/smallRelation", method = RequestMethod.POST)
+	@ResponseBody
+	public String productInfoSmallRelation(@RequestBody String content) {
+		try {
+			JSONObject jsonObj = getDataJSONObject(content);
+			List<SmallProductRelation> result = smallProductRelationMapper.selectByProductId(jsonObj.getLong("productId"));
+			return getSuccessResultMsg(result);
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			return getErrorResultMsg(e.getMessage());
+		}
+	}
+	
+	@RequestMapping(value = "/productInfo/infomationRelation", method = RequestMethod.POST)
+	@ResponseBody
+	public String productInfoInfomationRelation(@RequestBody String content) {
+		try {
+			JSONObject jsonObj = getDataJSONObject(content);
+			List<ProductInformationRelation> result = productInformationRelationMapper.selectByProductId(jsonObj.getLong("productId"));
 			return getSuccessResultMsg(result);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
