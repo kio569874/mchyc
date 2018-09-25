@@ -46,7 +46,6 @@ export class TokenInterceptor implements HttpInterceptor {
         return of(event);
     }
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        debugger;
         if (this.tokenService.exsistToken()){
             req = req.clone({
                 setHeaders: {

@@ -105,6 +105,7 @@ export class ProductProductListComponent implements OnInit {
                 productDiscount_ : product.productDiscount,
                 productDesc_ : product.productDesc,
                 productStatus_ : product.status,
+                productUrl_ : product.productUrl,
             }
         };
         this.modal.open(this.options).subscribe(result => {

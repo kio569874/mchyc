@@ -103,6 +103,27 @@
         </div>
     </div>
     <div nz-form-item nz-row>
+        <div nz-form-label nz-col [nzSm]="4"  nz-col [nzSm]="4"><label for="productImg">产品图片</label></div>
+        <div nz-form-control  nz-col [nzSm]="20">
+            <nz-upload
+                [nzAction]="uploadUrl"
+                nzName="file"
+                nzListType="picture-card"
+                [(nzFileList)]="fileList"
+                (nzChange)="handleChange($event)"
+                [nzShowButton]="fileList.length < 3"
+                [nzPreview]="handlePreview">
+                <i class="anticon anticon-plus"></i>
+                <div class="ant-upload-text">Upload</div>
+            </nz-upload>
+            <nz-modal [nzVisible]="previewVisible" [nzContent]="modalContent" [nzFooter]="null" (nzOnCancel)="previewVisible=false">
+                <ng-template #modalContent>
+                    <img [src]="previewImage" [ngStyle]="{ 'width': '100%' }" />
+                </ng-template>
+            </nz-modal>
+        </div>
+    </div>
+    <div nz-form-item nz-row>
         <div nz-form-label nz-col [nzSm]="4"  nz-col [nzSm]="4"><label for="productDesc">备注</label></div>
         <div nz-form-control  nz-col [nzSm]="20">
             <nz-input [(ngModel)]="productDesc" formControlName="productDesc" [nzType]="'textarea'"></nz-input>

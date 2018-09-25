@@ -1,9 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {NzMessageService, NzModalService, NzModalSubject} from 'ng-zorro-antd';
+import {NzMessageService, NzModalService, NzModalSubject, UploadFile} from 'ng-zorro-antd';
 import { _HttpClient } from '@delon/theme';
-import { tap } from 'rxjs/operators';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {environment} from "@env/environment";
+import {HttpSender} from "../../../../xdj-core/net/http.service";
+import {Loading} from "../../../../xdj-core/net/loading.model";
 
 @Component({
     selector: 'product-product-form',
@@ -15,7 +16,7 @@ export class ProductProductFormComponent implements OnInit {
         page: 1,
         pageSize: 9999
     };
-    loading = false;
+    loading = new Loading();
     status = [
         { text: '启用', value: '0', type: 'success' },
         { text: '停用', value: '1', type: 'error' }
@@ -35,6 +36,7 @@ export class ProductProductFormComponent implements OnInit {
     @Input() productStatus_: string;
     @Input() productDesc_: string;
     @Input() bigtypeId_: string;
+    @Input() productUrl_: string;
 
     action : string;
 
@@ -51,13 +53,38 @@ export class ProductProductFormComponent implements OnInit {
     smallProductRelationList : Array<string>;
     productInformationRelationList : Array<string>;
 
-    types : Array<any>;
-    tags : Array<any>;
-    introduces : Array<any>;
+    types: Array<any>;
+    tags: Array<any>;
+    introduces: Array<any>;
 
-    baseUrl : string = environment.XDJ_SERVER_URL;
+    baseUrl: string = environment.XDJ_SERVER_URL;
 
-    constructor(private http: _HttpClient,
+    uploadUrl: string = this.baseUrl + "/file/upload";
+    showUrl: string = this.baseUrl + "/file/show";
+
+    fileList = [
+    ];
+    previewImage = '';
+    previewVisible = false;
+
+    handleChange({ file, fileList }): void {
+        const status = file.status;
+        if (status === 'done') {
+            const find = fileList.find((f) => {
+                return file.uid === f.uid;
+            });
+            find.url = find.response.data;
+        } else if (status === 'error') {
+            this.msg.error(`${file.name} file upload failed.`);
+        }
+    }
+
+    handlePreview = (file: UploadFile) => {
+        this.previewImage = file.url || file.thumbUrl;
+        this.previewVisible = true;
+    }
+
+    constructor(private http: HttpSender,
                 private fb: FormBuilder,
                 public msg: NzMessageService,
                 private subject: NzModalSubject) {}
@@ -75,6 +102,27 @@ export class ProductProductFormComponent implements OnInit {
             this.productDiscount = this.productDiscount_;
             this.productDesc = this.productDesc_;
             this.productStatus = this.productStatus_;
+            try{
+                this.productUrl_.split(',').forEach((value, index, array) => {
+                    this.fileList.push({
+                        status: 'done',
+                        url: this.showUrl + "?path=" + encodeURI(value)
+                    });
+                });
+            }catch (e) {
+            }
+            this.productInformationRelationList = [];
+            this.smallProductRelationList = [];
+            this.getEditIntroduces().then(res => {
+                res.data.forEach((value)=>{
+                    this.productInformationRelationList.push(value.informationId);
+                });
+            });
+            this.getEditTags().then(res => {
+                res.data.forEach((value)=>{
+                    this.smallProductRelationList.push(value.smalltypeId);
+                });
+            });
         }else{
             this.action = 'insert';
             this.productName = '';
@@ -84,18 +132,15 @@ export class ProductProductFormComponent implements OnInit {
             this.productStatus = this.status[0].value;
         }
         //查询大类
-        this.getTypes().subscribe((res:any) =>{
-            this.loading = false;
+        this.getTypes().then((res:any) =>{
             this.types = res.data;}
         );
         //查询标签
-        this.getTags().subscribe((res : any)=>{
-            this.loading = false;
+        this.getTags().then((res : any)=>{
             this.tags = res.data;
         });
         //查询介绍
-        this.getIntroduces().subscribe((res : any)=>{
-            this.loading = false;
+        this.getIntroduces().then((res : any)=>{
             this.introduces = res.data;
         });
 
@@ -114,16 +159,19 @@ export class ProductProductFormComponent implements OnInit {
         }, );
     }
     getTypes() {
-        this.loading = true;
-        return this.http.post(this.baseUrl + '/product/productBigTypeInfo/query', this.q);
+        return this.http.post('/product/productBigTypeInfo/query', this.loading,null, this.q.page, this.q.pageSize);
     }
     getTags() {
-        this.loading = true;
-        return this.http.post(this.baseUrl + '/product/productSmallTypeInfo/query', this.q);
+        return this.http.post('/product/productSmallTypeInfo/query', this.loading,null, this.q.page, this.q.pageSize);
     }
     getIntroduces() {
-        this.loading = true;
-        return this.http.post(this.baseUrl + '/product/productInformation/query', this.q);
+        return this.http.post('/product/productInformation/query', this.loading,null, this.q.page, this.q.pageSize);
+    }
+    getEditTags() {
+        return this.http.post('/product/productInfo/smallRelation', this.loading,{productId:this.productId});
+    }
+    getEditIntroduces() {
+        return this.http.post('/product/productInfo/infomationRelation', this.loading,{productId:this.productId});
     }
     ok() {
         this.subject.next('0');
@@ -135,29 +183,31 @@ export class ProductProductFormComponent implements OnInit {
     }
 
     save() {
-        debugger;
         if (this.form.invalid) {
             this.msg.error('数据填写有误,请仔细检查!');
             return;
         }
-        this.loading = true;
         //处理标签
-        var submitTags = new Array<any>();
+        const submitTags = new Array<any>();
         this.smallProductRelationList.forEach(value =>{
             submitTags.push({
                 productId : this.productId,
                 smalltypeId : value,
-            })
+            });
         });
         //处理介绍
-        var submitIntroduces = new Array<any>();
+        const submitIntroduces = new Array<any>();
         this.productInformationRelationList.forEach((value,index) =>{
             submitIntroduces.push({
                 productId : this.productId,
                 informationId : value,
                 informationSeqno : index
-            })
+            });
         });
+        //图片处理
+        const productUrl = this.fileList.map((f) => {
+            return f.url;
+        }).join(',');
         const body = {
             productInfo : {
                 productName: this.productName,
@@ -169,16 +219,13 @@ export class ProductProductFormComponent implements OnInit {
                 productDiscount: this.productDiscount,
                 productDesc: this.productDesc,
                 status: this.productStatus,
+                productUrl
             },
             smallProductRelationList : submitTags,
             productInformationRelationList : submitIntroduces
         };
-        this.http.post(this.baseUrl + '/product/productInfo/'+ this.action, body).subscribe((data : any)=>{
-            if(data.retCode === '000000'){
-                setTimeout(() => this.ok(), 500);
-            }else{
-                this.msg.error(`操作发生异常:` + data.retMsg);
-            }
+        this.http.post('/product/productInfo/'+ this.action,this.loading, body).then((data: any) => {
+            setTimeout(() => this.ok(), 500);
         });
     }
 }
