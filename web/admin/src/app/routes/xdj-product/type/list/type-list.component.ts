@@ -97,7 +97,6 @@ export class ProductTypeListComponent implements OnInit {
     }
 
     edit(type){
-        debugger;
         this.modalVisible = true;
         this.bigtypeId = type.bigtypeId;
         this.bigtypeName = type.bigtypeName;

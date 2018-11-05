@@ -27,11 +27,19 @@ export function mobileLoginApi(phoneNo){
 }
 
 export function forgetPasswordApi(phoneNo,userPassword){
-  return sendPost('/user/user/forgetPasswordApi',{phoneNo,userPassword})
+  return sendPost('/user/user/forgetPassword',{phoneNo,userPassword})
 }
 
 export function updatePasswordApi(oldPassword,newPassword){
   return sendPost('/user/user/updatePassword',{oldPassword,newPassword})
+}
+
+export function getProductListApi(bigtypeId){
+  return sendPost('/product/productList/query',{bigtypeId})
+}
+
+export function getProductBigTypeListApi(page,pageSize){
+  return sendPost('/product/productBigTypeInfo/query',null,page,pageSize)
 }
 
 const sendPost = (url,data,page,pageSize)=> {

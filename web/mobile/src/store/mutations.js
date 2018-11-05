@@ -244,7 +244,6 @@ export default {
 
   // 记录用户信息
   [XDJ_RECORD_USERINFO](state, info) {
-	  debugger;
     state.xdjUserInfo = {...info};
     state.login = true;
     setStore('userId', info.userId);

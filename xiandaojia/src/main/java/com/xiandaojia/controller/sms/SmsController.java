@@ -40,7 +40,7 @@ public class SmsController extends BaseController {
 			String result = smsService.getCheckCode(appKey, phoneNo,
 					CheckCodeEnum.valueOf(checkCodeType).getCheckCodeType());
 			if (result != null && !"".equals(result)) {
-				return getSuccessResultMsg(result);
+				return getSuccessResultMsg(JSONObject.parse(result));
 			} else {
 				return getErrorResultMsg("获取验证码失败");
 			}

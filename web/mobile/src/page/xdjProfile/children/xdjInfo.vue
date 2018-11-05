@@ -19,7 +19,7 @@
                     </span>
                 </div>
             </section>
-            <router-link to="/profile/info/setusername" class="info-router">
+            <router-link to="/xdjProfile/xdjInfo/xdjSetusername" class="info-router">
                 <section class="headportrait headportraitwo">
                     <h2>用户名</h2>
                     <div class="headportrait-div">
@@ -32,7 +32,7 @@
                     </div>
                 </section>
             </router-link>
-            <router-link to="/profile/info/address" class="info-router">
+            <router-link to="/xdjProfile/xdjInfo/xdjAddress" class="info-router">
                 <section class="headportrait headportraitwo headportraithree">
                         <h2>收货地址</h2>
                         <div class="headportrait-div">
@@ -110,6 +110,8 @@
     import {getImgPath} from 'src/components/common/mixin'
     import {imgBaseUrl} from 'src/config/env'
     import {removeStore} from 'src/config/mUtils'
+    import {clearUserFromLocal} from '../../../service/UserService'
+    import {clearToken} from '../../../service/TokenService'
 
     export default {
         data(){
@@ -160,12 +162,10 @@
                 },200)
             },
             //退出登录
-            async outLogin(){
-                this.OUT_LOGIN();
-                this.waitingThing();
+            outLogin(){
+                clearUserFromLocal();
+                clearToken();
                 this.$router.go(-1);
-                removeStore('user_id')
-                await signout();
             },
             changePhone(){
                 this.showAlert = true;

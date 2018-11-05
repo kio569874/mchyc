@@ -2,7 +2,7 @@
     <div class="profile_page">
         <section>
             <section class="profile-number">
-                <router-link :to="xdjUserInfo&&xdjUserInfo.userId? '/profile/info' : '/xdjLogin'" class="profile-link">
+                <router-link :to="xdjUserInfo&&xdjUserInfo.userId? '/xdjProfile/xdjInfo' : '/xdjLogin'" class="profile-link">
                     <img :src="imgBaseUrl + xdjUserInfo.avatar" class="privateImage" v-if="xdjUserInfo&&xdjUserInfo.userId">
                     <span class="privateImage" v-else>
                         <svg class="privateImage-svg">
@@ -95,7 +95,7 @@
             </section>
             <section class="profile-1reTe">
                 <!-- 服务中心 -->
-                <router-link to='/xdjUpdatePassword' class="myorder">
+                <router-link to='/xdjProfile/xdjUpdatePassword' class="myorder">
                     <aside>
                         <svg fill="#4aa5f0">
                             <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#service"></use>
@@ -141,7 +141,6 @@ export default {
         }
     },
     mounted(){
-        debugger;
         this.xdjUserInfo = getUserFromLocal();
         this.initData();
     },

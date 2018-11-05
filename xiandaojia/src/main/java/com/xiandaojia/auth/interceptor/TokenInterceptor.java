@@ -11,7 +11,7 @@ import com.xiandaojia.common.utils.JwtUtil;
 
 public class TokenInterceptor implements HandlerInterceptor {
 	//是否关闭token校验
-	public static boolean CLOASE_FLAG = true;
+	public static boolean CLOSE_FLAG = false;
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler,
 			Exception arg3) throws Exception {
 	}
@@ -25,7 +25,7 @@ public class TokenInterceptor implements HandlerInterceptor {
 		if("OPTIONS".equals(request.getMethod())) {
 			return true;
 		}
-		if(CLOASE_FLAG) {
+		if(CLOSE_FLAG) {
 			return true;
 		}
 		response.setCharacterEncoding("utf-8");
@@ -39,14 +39,14 @@ public class TokenInterceptor implements HandlerInterceptor {
 			response.setHeader("Access-Control-Allow-Origin", "*");
 		    response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
 		    response.setHeader("Access-Control-Max-Age", "3600");
-		    response.setHeader("Access-Control-Allow-Headers", "Content-Type, x-requested-with");
+		    response.setHeader("Access-Control-Allow-Headers","Content-Type,Authorization,x-requested-with");
 			response.setStatus(401);
 			return false;
 		} else {
 			response.setHeader("Access-Control-Allow-Origin", "*");
 		    response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
 		    response.setHeader("Access-Control-Max-Age", "3600");
-		    response.setHeader("Access-Control-Allow-Headers", "Content-Type, x-requested-with");
+		    response.setHeader("Access-Control-Allow-Headers","Content-Type,Authorization,x-requested-with");
 		    response.setStatus(401);
 			return false;
 		}

@@ -6,6 +6,7 @@ import {HttpSender} from "../../../xdj-core/net/http.service";
 import {Loading} from "../../../xdj-core/net/loading.model";
 import {Md5} from "ts-md5/dist/md5";
 import {TokenService} from "../../../xdj-core/auth/token.service";
+import {UserService} from "../../../xdj-core/auth/user.service";
 @Component({
     selector: 'passport-login',
     templateUrl: './login.component.html',
@@ -23,6 +24,7 @@ export class XDJUserLoginComponent {
         private http: HttpSender,
         private router: Router,
         private tokenService: TokenService,
+        private userService: UserService,
         public msg: NzMessageService) {
         this.form = fb.group({
             userName: [null, [Validators.required, Validators.minLength(5)]],
@@ -35,7 +37,6 @@ export class XDJUserLoginComponent {
     get password() { return this.form.controls.password; }
 
     submit() {
-        debugger;
         this.error = '';
         this.userName.markAsDirty();
         this.password.markAsDirty();
@@ -46,6 +47,7 @@ export class XDJUserLoginComponent {
         };
         this.http.post('/user/systemUser/login', this.loading, data).then(res => {
             this.tokenService.saveToken(res.data.token);
+            this.userService.saveUser(res.data.user);
             this.router.navigate(['/']);
         }).catch(error => {});
     }

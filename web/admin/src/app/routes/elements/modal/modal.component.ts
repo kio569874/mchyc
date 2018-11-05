@@ -36,7 +36,6 @@ export class ModalComponent {
     }
 
     customCompModel(size: '' | 'lg' | 'sm' = '') {
-        debugger;
         this.options = {
             wrapClassName: size ? 'modal-' + size : '',
             content: ModelCustomComponent,

@@ -1,10 +1,10 @@
 <div class="content__title">
     <h1>
-        Dashboard
-        <small class="text-sm hidden-xs">Welcome !</small>
+        首页
+        <small class="text-sm hidden-xs">欢迎进入鲜到家后台管理系统 !</small>
     </h1>
 </div>
-<div class="quick-menu" [class.show]="quickMenu" (click)="quickMenu=!quickMenu">
+<!--<div class="quick-menu" [class.show]="quickMenu" (click)="quickMenu=!quickMenu">
     <div class="quick-menu-inner">
         <div class="settings-ctrl">
             <i class="anticon anticon-question-circle-o"></i>
@@ -17,13 +17,13 @@
             <a (click)="msg.info('item 5')" class="list-group-item">How do i create account?</a>
         </div>
     </div>
-</div>
+</div>-->
 <div nz-row nzGutter="16">
     <div nz-col nzXs="24" nzSm="12" nzMd="6" class="mb-md">
         <div nz-row nzType="flex" nzAlign="middle" class="bg-primary rounded-md">
             <div nz-col nzSpan="12" class="p-md text-white">
                 <div class="h2 mt0">123,456</div>
-                <p class="text-nowrap">Website Traffics</p>
+                <p class="text-nowrap">今日新增订单量</p>
             </div>
             <div nz-col nzSpan="12">
                 <mini-bar height="35" color="#fff" borderWidth="3" [padding]="[36, 30, 30, 30]" [data]="webSite"></mini-bar>
@@ -34,7 +34,7 @@
         <div nz-row nzType="flex" nzAlign="middle" class="bg-success rounded-md">
             <div nz-col nzSpan="12" class="p-md text-white">
                 <div class="h2 mt0">234,567K</div>
-                <p class="text-nowrap">Website Impressions</p>
+                <p class="text-nowrap">今日新增客户量</p>
             </div>
             <div nz-col nzSpan="12">
                 <mini-bar height="35" color="#fff" borderWidth="3" [padding]="[36, 30, 30, 30]" [data]="webSite"></mini-bar>
@@ -44,8 +44,8 @@
     <div nz-col nzXs="24" nzSm="12" nzMd="6" class="mb-md">
         <div nz-row nzType="flex" nzAlign="middle" class="bg-orange rounded-md">
             <div nz-col nzSpan="12" class="p-md text-white">
-                <div class="h2 mt0">$458,778</div>
-                <p class="text-nowrap">Total Sales</p>
+                <div class="h2 mt0">458,778</div>
+                <p class="text-nowrap">销售总额</p>
             </div>
             <div nz-col nzSpan="12">
                 <mini-bar height="35" color="#fff" borderWidth="3" [padding]="[36, 30, 30, 30]" [data]="webSite"></mini-bar>
@@ -56,7 +56,7 @@
         <div nz-row nzType="flex" nzAlign="middle" class="bg-pink rounded-md">
             <div nz-col nzSpan="12" class="p-md text-white">
                 <div class="h2 mt0">456</div>
-                <p class="text-nowrap">Support Tickets</p>
+                <p class="text-nowrap">产品总数量</p>
             </div>
             <div nz-col nzSpan="12">
                 <mini-bar height="35" color="#fff" borderWidth="3" [padding]="[36, 30, 30, 30]" [data]="webSite"></mini-bar>
@@ -65,7 +65,7 @@
     </div>
 </div>
 <div nz-row nzGutter="16">
-    <div nz-col nzXs="24" nzMd="12">
+    <!--<div nz-col nzXs="24" nzMd="12">
         <nz-card [nzBordered]="false">
             <ng-template #title>
                 Sales Statistics
@@ -85,10 +85,10 @@
             <timeline [data]="offlineChartData" [height]="239" [padding]="[0, 0, 0, 0]"
                       [titleMap]="{ y1: '客流量', y2: '支付笔数' }"></timeline>
         </nz-card>
-    </div>
+    </div>-->
 </div>
 <div nz-row nzGutter="16">
-    <div nz-col nzXs="24" nzMd="12">
+   <!-- <div nz-col nzXs="24" nzMd="12">
         <nz-card [nzBordered]="false" class="ant-card__img">
             <img class="img" src="//os.alipayobjects.com/rmsportal/GhjqstwSgxBXrZS.png">
             <div class="p-md">
@@ -146,5 +146,5 @@
                 </div>
             </div>
         </nz-card>
-    </div>
+    </div>-->
 </div>

@@ -242,8 +242,10 @@
     select
     <include refid="Base_Column_List" />
     from t_product_info
-    where bigtype_id = #{bigtypeId,jdbcType=BIGINT}
-      ORDER BY create_time DESC
+    <if test="bigtypeId != null and bigtypeId != ''" >
+   	 	where bigtype_id = #{bigtypeId,jdbcType=BIGINT}
+    </if>
+    ORDER BY create_time DESC
   </select>
 
   <select id="getTotalCountByBigType" parameterType="java.util.HashMap" resultType="int">

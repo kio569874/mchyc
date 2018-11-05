@@ -45,6 +45,11 @@ public class UserController extends BaseController {
 
 	@Autowired
 	IUserAddressService userAddressService;
+	
+	@RequestMapping(value = "/valid", method = RequestMethod.POST)
+	@ResponseBody
+	public void valid() {
+	}
 
 	@RequestMapping(value = "/systemUser/login", method = RequestMethod.POST)
 	@ResponseBody
@@ -63,7 +68,7 @@ public class UserController extends BaseController {
 				systemUser.setLoginTime(new Date());
 				systemUser.setLoginIp(getIpAddr(request));
 				systemUserService.update(systemUser);
-				return getSuccessResultMsg(JSONObject.toJSONString(createTokenResult(systemUser)));
+				return getSuccessResultMsg(createTokenResult(systemUser));
 			} else {
 				return getErrorResultMsg("用户名或密码错误");
 			}
@@ -344,7 +349,7 @@ public class UserController extends BaseController {
 				user.setLastLoginTime(new Date());
 				user.setLastLoginIp(getIpAddr(request));
 				userService.update(user);
-				return getSuccessResultMsg(JSONObject.toJSONString(createTokenResult(user)));
+				return getSuccessResultMsg(createTokenResult(user));
 			} else {
 				return getErrorResultMsg("用户名或密码错误");
 			}
@@ -368,7 +373,7 @@ public class UserController extends BaseController {
 				user.setLastLoginTime(new Date());
 				user.setLastLoginIp(getIpAddr(request));
 				userService.update(user);
-				return getSuccessResultMsg(JSONObject.toJSONString(createTokenResult(user)));
+				return getSuccessResultMsg(createTokenResult(user));
 			} else {
 				return getErrorResultMsg("该用户不存在,请注册新用户");
 			}

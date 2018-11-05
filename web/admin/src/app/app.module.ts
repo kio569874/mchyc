@@ -29,6 +29,7 @@ import { JsonSchemaModule } from '@shared/json-schema/json-schema.module';
 import {HttpSender} from "./xdj-core/net/http.service";
 import {TokenInterceptor} from "./xdj-core/auth/token.interceptor";
 import {TokenService} from "./xdj-core/auth/token.service";
+import {UserService} from "./xdj-core/auth/user.service";
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -85,6 +86,7 @@ export function StartupServiceFactory(startupService: StartupService): Function 
         StartupService,
         HttpSender,
         TokenService,
+        UserService,
         {
             provide: APP_INITIALIZER,
             useFactory: StartupServiceFactory,

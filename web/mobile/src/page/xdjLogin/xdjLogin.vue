@@ -179,7 +179,7 @@
                     try{
                       const res = await accountLogin(this.userAccount, this.passWord);
                       this.userInfo = res.data.user;
-                      this.XDJ_RECORD_USERINFO(this.userInfo);
+                      //this.XDJ_RECORD_USERINFO(this.userInfo);
                       saveUserToLocal(this.userInfo);
                       this.$router.push('/xdjHome');
                     }catch(e){

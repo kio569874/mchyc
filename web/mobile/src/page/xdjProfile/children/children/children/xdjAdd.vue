@@ -8,7 +8,7 @@
         				<input type="text" placeholder="请填写你的姓名" :class="{verifies:verify}" v-model="message" @input="inputThing">
         				<p v-if="verify">请填写您的姓名</p>
         			</div>
-        			<router-link to='/profile/info/address/add/addDetail' class="add-detail">
+        			<router-link to='/xdjProfile/xdjInfo/xdjAddress/xdjAdd/xdjAddDetail' class="add-detail">
 	        			<div class="input-new">
 	        				<input type="text" placeholder="小区/写字楼/学校等" readonly="readonly" v-model="addAddress" />
 	        			</div>
@@ -60,7 +60,7 @@
     			mesthree:'', //送餐地址
     			telenum:'', //手机号
     			telephone:'', //手机号提示
-    			standbytele:'', //备用手机号提示 
+    			standbytele:'', //备用手机号提示
     			standbytelenum:'', //备用手机号
     			addSearch:false, //添加搜索地址
     			newAddress:{},			//增加数组的元素
@@ -80,7 +80,7 @@
              ...mapState([
                 'userInfo', 'addAddress','removeAddress','newAddress', 'geohash'
             ]),
-            
+
         },
         props:[],
         methods: {
@@ -96,14 +96,14 @@
             	this.verifythree=true;
             	if(this.mesthree.length == 0){
             		this.sendaddress='请详细填写送餐地址';
-            		
+
             	}else if(this.mesthree.length > 0 && this.mesthree.length <= 2){
             		this.sendaddress='送餐地址太短了，不能辨识';
             	}else{
             		this.sendaddress='';
             		this.verifythree=false;
             	}
-            	this.bindThing()	
+            	this.bindThing()
             },
             //输入手机号
             inputThingfour(){
@@ -158,7 +158,7 @@
         }
     }
 </script>
-  
+
 <style lang="scss" scoped>
     @import 'src/style/mixin';
   	.router-slid-enter-active, .router-slid-leave-active {
@@ -209,7 +209,7 @@
 				margin-top:.2rem;
     		}
     	}
-    	
+
     }
     .addbutton{
     	margin:.6rem auto;

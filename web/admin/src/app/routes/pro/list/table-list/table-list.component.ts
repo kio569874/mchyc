@@ -54,7 +54,6 @@ export class ProTableListComponent implements OnInit {
                 })
             ).subscribe(
                 res => {
-                    debugger;
                     this.data = res});
         });
     }
@@ -98,7 +97,6 @@ export class ProTableListComponent implements OnInit {
     }
 
     refreshStatus() {
-        debugger;
         const allChecked = this.curRows.every(value => value.disabled || value.checked);
         const allUnChecked = this.curRows.every(value => value.disabled || !value.checked);
         this.allChecked = allChecked;
@@ -115,7 +113,6 @@ export class ProTableListComponent implements OnInit {
     }
 
     dataChange(res: any) {
-        debugger;
         this.curRows = res;
         this.refreshStatus();
     }

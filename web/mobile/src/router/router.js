@@ -59,6 +59,11 @@ const xdjshopCar = r => require.ensure([], () => r(require('../page/xdjshopCar/x
 const xdjForget = r => require.ensure([], () => r(require('../page/xdjForget/xdjForget')), 'xdjForget')
 const xdjForgetSetPwd = r => require.ensure([], () => r(require('../page/xdjForget/children/xdjForgetSetPwd')), 'xdjForgetSetPwd')
 const xdjUpdatePassword = r => require.ensure([], () => r(require('../page/xdjProfile/children/xdjUpdatePassword')), 'xdjUpdatePassword')
+const xdjInfo = r => require.ensure([], () => r(require('../page/xdjProfile/children/xdjInfo')), 'xdjInfo')
+const xdjSetusername = r => require.ensure([], () => r(require('../page/xdjProfile/children/children/xdjSetusername')), 'xdjSetusername')
+const xdjAddress = r => require.ensure([], () => r(require('../page/xdjProfile/children/children/xdjAddress')), 'xdjAddress')
+const xdjAdd = r => require.ensure([], () => r(require('../page/xdjProfile/children/children/children/xdjAdd')), 'xdjAdd')
+const xdjAddDetail = r => require.ensure([], () => r(require('../page/xdjProfile/children/children/children/children/xdjAddDetail')), 'xdjAddDetail')
 
 
 export default [{
@@ -313,9 +318,34 @@ export default [{
           path: '/xdjProfile',
           component: xdjProfile
         },
-        //修改密码
+        //个人信息
         {
-          path: '/xdjUpdatePassword',
+          path: '/xdjProfile/xdjInfo',
+          component: xdjInfo
+        },
+        //设置用户名
+        {
+          path: '/xdjProfile/xdjInfo/xdjSetusername',
+          component: xdjSetusername
+        },
+        //地址信息
+        {
+          path: '/xdjProfile/xdjInfo/xdjAddress',
+          component: xdjAddress
+        },
+        //新增地址
+        {
+          path: '/xdjProfile/xdjInfo/xdjAddress/xdjAdd',
+          component: xdjAdd
+        },
+        //新增地址明细
+        {
+          path: '/xdjProfile/xdjInfo/xdjAddress/xdjAdd/xdjAddDetail',
+          component: xdjAddDetail
+        },
+        //密码修改
+        {
+          path: '/xdjProfile/xdjUpdatePassword',
           component: xdjUpdatePassword
         },
         // 购物车组件

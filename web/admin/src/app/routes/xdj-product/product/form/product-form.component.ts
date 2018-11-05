@@ -90,6 +90,7 @@ export class ProductProductFormComponent implements OnInit {
                 private subject: NzModalSubject) {}
 
     ngOnInit() {
+        const _ths =this;
         if(this.productId_ !== ''){
             this.action = 'update';
             this.productId = this.productId_;
@@ -106,22 +107,27 @@ export class ProductProductFormComponent implements OnInit {
                 this.productUrl_.split(',').forEach((value, index, array) => {
                     this.fileList.push({
                         status: 'done',
-                        url: this.showUrl + "?path=" + encodeURI(value)
+                        url: this.showUrl + "?path=" + encodeURI(value),
+                        realUrl: value
                     });
                 });
             }catch (e) {
             }
             this.productInformationRelationList = [];
             this.smallProductRelationList = [];
-            this.getEditIntroduces().then(res => {
+            _ths.getEditTags().then(res => {
                 res.data.forEach((value)=>{
-                    this.productInformationRelationList.push(value.informationId);
+                    _ths.smallProductRelationList.push(value.smalltypeId);
                 });
+                //查询标签
+                this.getTags().then((res2 : any)=>{ this.tags = res2.data;});
             });
-            this.getEditTags().then(res => {
+            _ths.getEditIntroduces().then(res => {
                 res.data.forEach((value)=>{
-                    this.smallProductRelationList.push(value.smalltypeId);
+                    _ths.productInformationRelationList.push(value.informationId);
                 });
+                //查询介绍
+                this.getIntroduces().then((res2 : any)=>{  this.introduces = res2.data;});
             });
         }else{
             this.action = 'insert';
@@ -130,19 +136,20 @@ export class ProductProductFormComponent implements OnInit {
             this.isDiscount = this.isDiscounts[0].value;
             this.productDesc = '';
             this.productStatus = this.status[0].value;
+            //查询标签
+            this.getTags().then((res : any)=>{
+                this.tags = res.data;
+            });
+            //查询介绍
+            this.getIntroduces().then((res : any)=>{
+                this.introduces = res.data;
+            });
         }
         //查询大类
         this.getTypes().then((res:any) =>{
             this.types = res.data;}
         );
-        //查询标签
-        this.getTags().then((res : any)=>{
-            this.tags = res.data;
-        });
-        //查询介绍
-        this.getIntroduces().then((res : any)=>{
-            this.introduces = res.data;
-        });
+
 
         this.form = this.fb.group({
             productName: [null, [Validators.required]],
@@ -206,10 +213,14 @@ export class ProductProductFormComponent implements OnInit {
         });
         //图片处理
         const productUrl = this.fileList.map((f) => {
+            if(f.url.indexOf(this.showUrl) > 0){
+                return f.realUrl;
+            }
             return f.url;
         }).join(',');
         const body = {
             productInfo : {
+                productId: this.productId,
                 productName: this.productName,
                 productPrice: this.productPrice,
                 bigtypeId: this.bigtypeId,

@@ -15,7 +15,7 @@
         			</div>
         		</li>
         	</ul>
-			<router-link to='/profile/info/address/add'>
+			<router-link to='/xdjProfile/xdjInfo/xdjAddress/xdjAdd'>
 				<div class="addsite">
 						<span>新增地址</span>
 						<span class="addsvg">
@@ -51,7 +51,7 @@
         },
         mixins: [getImgPath],
         mounted(){
-        	
+
         },
         components: {
             headTop,
@@ -60,7 +60,7 @@
              ...mapState([
                 'userInfo','removeAddress'
             ]),
-             
+
         },
         props:[],
         methods: {
@@ -100,10 +100,10 @@
         }
     }
 </script>
-  
+
 <style lang="scss" scoped>
     @import 'src/style/mixin';
-  
+
     .rating_page{
         position: absolute;
         top: 0;

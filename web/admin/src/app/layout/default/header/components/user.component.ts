@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { SettingsService } from '@delon/theme';
 import {TokenService} from "../../../../xdj-core/auth/token.service";
+import {UserService} from "../../../../xdj-core/auth/user.service";
 
 @Component({
     selector: 'header-user',
@@ -9,7 +10,7 @@ import {TokenService} from "../../../../xdj-core/auth/token.service";
     <nz-dropdown nzPlacement="bottomRight">
         <div class="item d-flex align-items-center px-sm" nz-dropdown>
             <nz-avatar [nzSrc]="settings.user.avatar" nzSize="small" class="mr-sm"></nz-avatar>
-            {{settings.user.name}}
+            {{userService.getUser() == null ? '' : userService.getUser().userName}}
         </div>
         <div nz-menu class="width-sm">
             <div nz-menu-item [nzDisable]="true"><i class="anticon anticon-user mr-sm"></i>个人中心</div>
@@ -23,6 +24,7 @@ import {TokenService} from "../../../../xdj-core/auth/token.service";
 export class HeaderUserComponent implements OnInit {
     constructor(
         public settings: SettingsService,
+        public userService: UserService,
         private router: Router,
         private tokenService: TokenService) {}
 
@@ -31,6 +33,7 @@ export class HeaderUserComponent implements OnInit {
 
     logout() {
         this.tokenService.clearToken();
+        this.userService.clearUser();
         this.router.navigateByUrl(TokenService.login_url);
     }
 }

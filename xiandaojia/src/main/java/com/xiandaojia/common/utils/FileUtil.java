@@ -7,7 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class FileUtil {
 	
-	private static final String basePath = "F:/";
+	private static final String basePath = "/home/xiandaojia/file";
 	
 	public static String upload(MultipartFile file,String path) throws IllegalStateException, IOException{
 		String fileName = file.getOriginalFilename(); 

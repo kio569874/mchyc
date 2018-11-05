@@ -198,7 +198,8 @@ public class ProductController extends BaseController {
 	@ResponseBody
 	public String productBigTypeInfoInsert(@RequestBody String content) {
 		try {
-			ProductBigTypeInfo productBigTypeInfo = JsonBeanUtil.stringToBean(ProductBigTypeInfo.class, content);
+			JSONObject jsonObj = getDataJSONObject(content);
+			ProductBigTypeInfo productBigTypeInfo = JsonBeanUtil.stringToBean(ProductBigTypeInfo.class, jsonObj.toJSONString());
 			productBigTypeInfoService.insert(productBigTypeInfo);
 			return getSuccessResultMsg();
 		} catch (Exception e) {
@@ -212,7 +213,8 @@ public class ProductController extends BaseController {
 	@ResponseBody
 	public String productBigTypeInfoDelete(@RequestBody String content) {
 		try {
-			ProductBigTypeInfo productBigTypeInfo = JsonBeanUtil.stringToBean(ProductBigTypeInfo.class, content);
+			JSONObject jsonObj = getDataJSONObject(content);
+			ProductBigTypeInfo productBigTypeInfo = JsonBeanUtil.stringToBean(ProductBigTypeInfo.class, jsonObj.toJSONString());
 			productBigTypeInfoService.delete(productBigTypeInfo.getBigtypeId());
 			return getSuccessResultMsg();
 		} catch (Exception e) {
@@ -226,7 +228,8 @@ public class ProductController extends BaseController {
 	@ResponseBody
 	public String productBigTypeInfoUpdate(@RequestBody String content) {
 		try {
-			ProductBigTypeInfo productBigTypeInfo = JsonBeanUtil.stringToBean(ProductBigTypeInfo.class, content);
+			JSONObject jsonObj = getDataJSONObject(content);
+			ProductBigTypeInfo productBigTypeInfo = JsonBeanUtil.stringToBean(ProductBigTypeInfo.class, jsonObj.toJSONString());
 			productBigTypeInfoService.update(productBigTypeInfo);
 			return getSuccessResultMsg();
 		} catch (Exception e) {
@@ -256,7 +259,8 @@ public class ProductController extends BaseController {
 	@ResponseBody
 	public String productSmallTypeInfoInsert(@RequestBody String content) {
 		try {
-			ProductSmallTypeInfo productSmallTypeInfo = JsonBeanUtil.stringToBean(ProductSmallTypeInfo.class, content);
+			JSONObject jsonObj = getDataJSONObject(content);
+			ProductSmallTypeInfo productSmallTypeInfo = JsonBeanUtil.stringToBean(ProductSmallTypeInfo.class, jsonObj.toJSONString());
 			productSmallTypeInfoService.insert(productSmallTypeInfo);
 			return getSuccessResultMsg();
 		} catch (Exception e) {
@@ -270,7 +274,8 @@ public class ProductController extends BaseController {
 	@ResponseBody
 	public String productSmallTypeInfoDelete(@RequestBody String content) {
 		try {
-			ProductSmallTypeInfo productSmallTypeInfo = JsonBeanUtil.stringToBean(ProductSmallTypeInfo.class, content);
+			JSONObject jsonObj = getDataJSONObject(content);
+			ProductSmallTypeInfo productSmallTypeInfo = JsonBeanUtil.stringToBean(ProductSmallTypeInfo.class, jsonObj.toJSONString());
 			productSmallTypeInfoService.delete(productSmallTypeInfo.getSmalltypeId());
 			return getSuccessResultMsg();
 		} catch (Exception e) {
@@ -284,7 +289,8 @@ public class ProductController extends BaseController {
 	@ResponseBody
 	public String productSmallTypeInfoUpdate(@RequestBody String content) {
 		try {
-			ProductSmallTypeInfo productSmallTypeInfo = JsonBeanUtil.stringToBean(ProductSmallTypeInfo.class, content);
+			JSONObject jsonObj = getDataJSONObject(content);
+			ProductSmallTypeInfo productSmallTypeInfo = JsonBeanUtil.stringToBean(ProductSmallTypeInfo.class, jsonObj.toJSONString());
 			productSmallTypeInfoService.update(productSmallTypeInfo);
 			return getSuccessResultMsg();
 		} catch (Exception e) {
@@ -315,7 +321,8 @@ public class ProductController extends BaseController {
 	@ResponseBody
 	public String productInformationInsert(@RequestBody String content) {
 		try {
-			ProductInformation productInformation = JsonBeanUtil.stringToBean(ProductInformation.class, content);
+			JSONObject jsonObj = getDataJSONObject(content);
+			ProductInformation productInformation = JsonBeanUtil.stringToBean(ProductInformation.class, jsonObj.toJSONString());
 			productInformationService.insert(productInformation);
 			return getSuccessResultMsg();
 		} catch (Exception e) {
@@ -329,7 +336,8 @@ public class ProductController extends BaseController {
 	@ResponseBody
 	public String productInformationDelete(@RequestBody String content) {
 		try {
-			ProductInformation productInformation = JsonBeanUtil.stringToBean(ProductInformation.class, content);
+			JSONObject jsonObj = getDataJSONObject(content);
+			ProductInformation productInformation = JsonBeanUtil.stringToBean(ProductInformation.class, jsonObj.toJSONString());
 			productInformationService.delete(productInformation.getInformationId());
 			return getSuccessResultMsg();
 		} catch (Exception e) {
@@ -343,7 +351,8 @@ public class ProductController extends BaseController {
 	@ResponseBody
 	public String productInformationUpdate(@RequestBody String content) {
 		try {
-			ProductInformation productInformation = JsonBeanUtil.stringToBean(ProductInformation.class, content);
+			JSONObject jsonObj = getDataJSONObject(content);
+			ProductInformation productInformation = JsonBeanUtil.stringToBean(ProductInformation.class, jsonObj.toJSONString());
 			productInformationService.update(productInformation);
 			return getSuccessResultMsg();
 		} catch (Exception e) {
